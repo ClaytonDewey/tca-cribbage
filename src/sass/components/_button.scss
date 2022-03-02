@@ -1,0 +1,81 @@
+.btn {
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+    padding: 0px 1.5rem;
+    text-decoration: none;
+    cursor: pointer;
+    height: 5rem;
+    width: 100%;
+    font-size: $default-font-size-mobile;
+
+    &:hover {
+        color: currentColor;
+    }
+
+    &-primary {
+        background-color: $primary-color;
+        border-color: $primary-color;
+        color: $white;
+
+        &:hover {
+            background-color: darken($primary-color, 8%);
+            border-color: darken($primary-color, 10%);
+            color: $white;
+        }
+
+        &:active,
+        &:active:hover,
+        &:focus,
+        &:active:focus {
+            background-color: darken($primary-color, 4%);
+            border-color: darken($primary-color, 5%);
+            color: $white;
+        }
+
+        &-outline {
+            background-color: transparent;
+            border-color: $primary-color;
+            color: $primary-color;
+
+            &:hover,
+            &:active,
+            &:active:hover,
+            &:focus,
+            &:active:focus {
+                background-color: $primary-color;
+                color: $white;
+            }
+        }
+    }
+
+    &-success {
+        border-color: $success-color;
+        background-color: $success-color;
+        color: $white;
+
+        &:link,
+        &:visited {
+            color: $white;
+        }
+
+        &:hover,
+        &:active,
+        &:active:hover,
+        &:focus,
+        &:active:focus,
+        &-inverted {
+            background-color: darken($success-color, 8%);
+            border-color: darken($success-color, 10%);
+            color: $white;
+        }
+    }
+
+    @media #{$mq-medium} {
+        height: 3.5rem;
+    }
+}
