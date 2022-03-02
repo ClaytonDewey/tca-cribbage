@@ -8,7 +8,7 @@ export const Home = () => {
         <>
             <h1>Home Page</h1>
             <h2>tca-cribbage-app</h2>
-            <button className="btn mt-2" onClick={() => nav("/stats")}>
+            <button className="btn btn-primary-outline mt-2" onClick={() => nav("/stats")}>
                 Stats
             </button>
         </>
