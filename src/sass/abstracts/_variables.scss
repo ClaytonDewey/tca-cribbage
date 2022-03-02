@@ -1,8 +1,6 @@
 // Breakpoints
 $bp-xsmall: 28.125em; // 450px;
 $bp-small: 48em; // 768px;
-// $bp-menu: 59.6875em; // 955px;
-$bp-menu: 65.375em; // 1046px;
 $bp-medium: 64em; // 1024px;
 $bp-large: 85.375em; // 1366px;
 $bp-xlarge: 120em; // 1920px;
@@ -11,7 +9,6 @@ $bp-xxlarge: 160em; // 2560px;
 // Media Queries
 $mq-xsmall: "screen and (min-width: #{$bp-xsmall})";
 $mq-small: "screen and (min-width: #{$bp-small})";
-$mq-menu: "screen and (min-width: #{$bp-menu})";
 $mq-medium: "screen and (min-width: #{$bp-medium})";
 $mq-large: "screen and (min-width: #{$bp-large})";
 $mq-xlarge: "screen and (min-width: #{$bp-xlarge})";
