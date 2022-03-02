@@ -5,7 +5,7 @@ export const PlayGame = () => {
     const nav = useNavigate();
 
     const endGame = () => {
-        nav("/");
+        nav(-2);
     };
 
     return (
