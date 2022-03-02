@@ -7,7 +7,7 @@ export const Stats = () => {
     return (
         <>
             <h1>Game Stats</h1>
-            <button className="btn btn-success mt-2" onClick={() => nav("/")}>
+            <button className="btn btn-success mt-2" onClick={() => nav(-1)}>
                 Home
             </button>
         </>
