@@ -11,7 +11,7 @@ export const PlayGame = () => {
     return (
         <>
             <h1>Play Game</h1>
-            <button className="btn btn-primary mt-2" onClick={endGame}>
+            <button className="btn btn-success mt-2" onClick={endGame}>
                 Done
             </button>
         </>

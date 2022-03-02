@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     border: 2px solid transparent;
-    border-radius: 4px;
+    border-radius: 50px;
     transition: all 0.2s ease-in-out;
     padding: 0px 1.5rem;
     text-decoration: none;
@@ -76,6 +76,6 @@
     }
 
     @media #{$mq-medium} {
-        height: 3.5rem;
+        // height: 3.5rem;
     }
 }

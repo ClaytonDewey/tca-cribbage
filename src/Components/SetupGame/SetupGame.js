@@ -6,7 +6,7 @@ export const SetupGame = () => {
     return (
         <>
             <h1>Setup Game</h1>
-            <button className="btn btn-primary mt-2" onClick={() => nav("/play")}>
+            <button className="btn btn-success mt-2" onClick={() => nav("/play")}>
                 Start Playing
             </button>
         </>
