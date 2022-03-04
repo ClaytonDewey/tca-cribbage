@@ -43,6 +43,23 @@ export const SetupGame = () => {
                     </label>
                 </li>
             </ul>
+
+            <h2 className="text-center mt-4 mb-2">Who Won the Cut?</h2>
+            <ul className="form-check-control">
+                <li>
+                    <label>
+                        <input type="radio" name="cut" />
+                        Me
+                    </label>
+                </li>
+                <li>
+                    <label>
+                        <input type="radio" name="cut" />
+                        Opponent
+                    </label>
+                </li>
+            </ul>
+
             <button className="btn btn-success mt-4" onClick={() => nav("/play")}>
                 Start Game
             </button>
