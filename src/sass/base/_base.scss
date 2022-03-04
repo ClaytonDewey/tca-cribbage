@@ -6,13 +6,22 @@
     box-sizing: inherit;
 }
 
+html.dark {
+    background-color: $black;
+    color: $light-gray-2;
+}
+
+html {
+    background: $light-gray-2;
+    color: $black;
+    transition: background-color 0.5s ease-in, color 0.5s ease-in;
+}
+
 html,
 body {
     margin: 0px auto;
     width: 100%;
     box-sizing: border-box;
-    background: $light-gray-2;
-    color: $black;
 }
 
 html {
