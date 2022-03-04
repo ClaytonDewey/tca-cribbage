@@ -6,7 +6,7 @@
     border: 2px solid transparent;
     border-radius: 50px;
     transition: all 0.2s ease-in-out;
-    padding: 0px 1.5rem;
+    padding: 0px 3rem;
     text-decoration: none;
     cursor: pointer;
     height: 6rem;
@@ -73,9 +73,64 @@
             border-color: darken($success-color, 10%);
             color: $white;
         }
+
+        &-outline {
+            background-color: transparent;
+            border-color: $success-color;
+            color: $success-color;
+
+            &:hover,
+            &:active,
+            &:active:hover,
+            &:focus,
+            &:active:focus {
+                background-color: $success-color;
+                color: $white;
+            }
+        }
+    }
+
+    &-info {
+        border-color: $info-color;
+        background-color: $info-color;
+        color: $white;
+
+        &:link,
+        &:visited {
+            color: $white;
+        }
+
+        &:hover,
+        &:active,
+        &:active:hover,
+        &:focus,
+        &:active:focus,
+        &-inverted {
+            background-color: darken($info-color, 8%);
+            border-color: darken($info-color, 10%);
+            color: $white;
+        }
+
+        &-outline {
+            background-color: transparent;
+            border-color: $info-color;
+            color: $info-color;
+
+            &:hover,
+            &:active,
+            &:active:hover,
+            &:focus,
+            &:active:focus {
+                background-color: $info-color;
+                color: $white;
+            }
+        }
     }
 
     @media #{$mq-medium} {
         // height: 3.5rem;
+        width: 20rem;
+        display: block;
+        margin: auto;
     }
 }
