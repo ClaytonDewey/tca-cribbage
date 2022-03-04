@@ -3,12 +3,4 @@
 @import "sass/components/forms";
 @import "sass/components/button";
 @import "sass/base/utilities";
-
-.container {
-    padding: 1.5rem;
-
-    @media #{$mq-medium} {
-        max-width: 45rem;
-        margin: 0px auto;
-    }
-}
+@import "sass/layout/container";

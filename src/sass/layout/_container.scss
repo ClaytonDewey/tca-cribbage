@@ -1,0 +1,16 @@
+.container {
+    padding: 1.5rem;
+
+    &-points {
+        display: flex;
+
+        div {
+            margin: 5px;
+        }
+    }
+
+    @media #{$mq-medium} {
+        max-width: 45rem;
+        margin: 0px auto;
+    }
+}
