@@ -1,8 +1,3 @@
-.wi-50 {
-    width: 50%;
-    float: none !important;
-}
-
 // BOOTSTRAP PADDING/MARGIN UTILITIES
 // Spacing
 //
@@ -76,4 +71,8 @@ $spacers: map-merge(
 .mx-auto,
 .mr-auto {
     margin-right: auto !important;
+}
+
+.text-center {
+    text-align: center;
 }

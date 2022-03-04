@@ -27,12 +27,12 @@ body {
     font-family: "Montserrat", Helvetica, Arial, sans-serif;
     font-weight: 400;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    overflow: hidden;
+    // display: flex;
+    // flex-direction: column;
+    // align-items: center;
+    // justify-content: center;
+    // height: 100vh;
+    // overflow: hidden;
     width: 100%;
 
     @media #{$mq-medium} {
