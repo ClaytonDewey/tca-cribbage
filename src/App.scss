@@ -1,4 +1,9 @@
 @import "sass/abstracts/variables";
 @import "sass/base/base";
+@import "sass/components/forms";
 @import "sass/components/button";
 @import "sass/base/utilities";
+
+.container {
+    padding: 1.5rem;
+}
