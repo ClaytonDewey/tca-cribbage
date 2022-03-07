@@ -6,19 +6,20 @@ import { PlayGame } from "./Components/PlayGame/PlayGame";
 import { SetupGame } from "./Components/SetupGame/SetupGame";
 import { Stats } from "./Components/Stats/Stats";
 
-function App() {
-    const toggleMode = () => {
-        const html = document.querySelector("html");
-        const toggleTxt = document.querySelector(".toggle-container span")
-        if (html?.classList.contains("dark")) {
-            html.classList.remove("dark");
-            toggleTxt!.innerHTML = "Light Mode";
-        } else {
-            html?.classList.add("dark");
-            toggleTxt!.innerHTML = "Dark Mode";
-        }
+const toggleMode = () => {
+    const html = document.querySelector("html");
+    const toggleTxt = document.querySelector(".toggle-container span")
+    if (html?.classList.contains("dark")) {
+        html.classList.remove("dark");
+        toggleTxt!.innerHTML = "Light Mode";
+    } else {
+        html?.classList.add("dark");
+        toggleTxt!.innerHTML = "Dark Mode";
     }
+}
 
+
+function App() {
     return (
         <>
             <div className="toggle-container">
