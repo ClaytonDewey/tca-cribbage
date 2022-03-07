@@ -6,28 +6,46 @@
     justify-content: center;
     row-gap: 1.5rem;
     column-gap: 1.5rem;
-    width: 42rem;
+    width: 35rem;
     margin: auto;
 
     .stat {
         background-color: $white;
         color: $black;
         display: flex;
-        flex: 0 0 20rem;
+        flex: 0 0 15rem;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        height: 20rem;
+        height: 15rem;
         text-align: center;
         font-size: 1.4rem;
         box-shadow: 0 2px 10px rgba($white, 0.6);
         border-radius: 10px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
 
         span {
             display: inline-block;
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 700;
             margin-bottom: 3px;
+        }
+    }
+
+    @media #{$mq-medium} {
+        width: 48rem;
+        row-gap: 2.5rem;
+        column-gap: 2.5rem;
+
+        .stat {
+            flex: 0 0 20rem;
+            height: 20rem;
+
+            span {
+                font-size: 5rem;
+            }
         }
     }
 }
