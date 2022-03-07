@@ -1,6 +1,16 @@
 import "./PlayGame.scss";
 import { useNavigate } from "react-router-dom";
 
+const nextTurn = () => {
+    const crib = document.getElementById("crib");
+    const points_hand = document.getElementById("points-hand") as HTMLInputElement;
+    const points_crib = document.getElementById("points-crib") as HTMLInputElement;
+    crib?.classList.toggle("display-n");
+    points_hand?.focus();
+    points_hand.value = "";
+    points_crib.value = "";
+}
+
 export const PlayGame = () => {
     const nav = useNavigate();
 
@@ -8,15 +18,6 @@ export const PlayGame = () => {
         nav(-2);
     };
 
-    const nextTurn = () => {
-        const crib = document.getElementById("crib");
-        const points_hand = document.getElementById("points-hand") as HTMLInputElement;
-        const points_crib = document.getElementById("points-crib") as HTMLInputElement;
-        crib?.classList.toggle("display-n");
-        points_hand?.focus();
-        points_hand.value = "";
-        points_crib.value = "";
-    }
 
     return (
         <div className="container container-play">
