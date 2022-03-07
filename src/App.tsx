@@ -19,7 +19,7 @@ const toggleMode = () => {
 }
 
 
-function App() {
+const App = () => {
     return (
         <>
             <div className="toggle-container">
