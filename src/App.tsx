@@ -7,8 +7,27 @@ import { SetupGame } from "./Components/SetupGame/SetupGame";
 import { Stats } from "./Components/Stats/Stats";
 
 function App() {
+    const toggleMode = () => {
+        const html = document.querySelector("html");
+        const toggleTxt = document.querySelector(".toggle-container span")
+        if (html?.classList.contains("dark")) {
+            html.classList.remove("dark");
+            toggleTxt!.innerHTML = "Light Mode";
+        } else {
+            html?.classList.add("dark");
+            toggleTxt!.innerHTML = "Dark Mode";
+        }
+    }
+
     return (
         <>
+            <div className="toggle-container">
+                <input type="checkbox" id="mode" className="toggle" />
+                <label htmlFor="mode" className="label" onClick={toggleMode}>
+                    <div className="ball"></div>
+                </label>
+                <span>Light Mode</span>
+            </div>
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="setup" element={<SetupGame />} />
