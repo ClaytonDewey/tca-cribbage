@@ -1,7 +1,18 @@
 import { useNavigate } from "react-router-dom";
 
+const addOpponent = () => {
+    // opponent = this?.target.value
+    console.log("Add new opponent...");
+}
+
+
 export const SetupGame = () => {
     const nav = useNavigate();
+    
+    const startGame = () => {
+        console.clear();
+        nav("/play")
+    }
 
     return (
         <div className="container container-setup">
@@ -12,7 +23,7 @@ export const SetupGame = () => {
                 <label>
                     <span>Oppenent Name</span>
                 </label>
-                <button>Add</button>
+                <button id="addOpp" onClick={addOpponent}>Add</button>
             </div>
 
             <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
@@ -59,7 +70,7 @@ export const SetupGame = () => {
                 </li>
             </ul>
 
-            <button className="btn btn-success mt-4" onClick={() => nav("/play")}>
+            <button className="btn btn-success mt-4" onClick={startGame}>
                 Start Game
             </button>
         </div>
