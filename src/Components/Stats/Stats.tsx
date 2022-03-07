@@ -10,46 +10,60 @@ export const Stats = () => {
             {/* <h2>Total Game Stats</h2> */}
             <div className="container-stats">
                 <div className="stat">
-                    Games Played: <span>2162</span>
+                    <span>2162</span>
+                    Games Played
                 </div>
                 <div className="stat">
-                    Win Percentage: <span>97%</span>
+                    <span>97%</span>
+                    Win Percentage
                 </div>
                 <div className="stat">
-                    Wins: <span>2099</span>
+                    <span>2099</span>
+                    Wins
                 </div>
                 <div className="stat">
-                    Losses: <span>63</span>
+                    <span>63</span>
+                    Losses
                 </div>
                 <div className="stat">
-                    Skunks: <span>1175</span>
+                    <span>1175</span>
+                    Skunks
                 </div>
                 <div className="stat">
-                    Dbl Skunks: <span>115</span>
+                    <span>115</span>
+                    Dbl Skunks
                 </div>
                 <div className="stat">
-                    Skunked: <span>2</span>
+                    <span>2</span>
+                    Skunked
                 </div>
                 <div className="stat">
-                    Dbl Skunked: <span>0</span>
+                    <span>0</span>
+                    Dbl Skunked
                 </div>
                 <div className="stat">
-                    High Hand: <span>28</span>
+                    <span>28</span>
+                    High Hand
                 </div>
                 <div className="stat">
-                    High Pegg.: <span>20</span>
+                    <span>20</span>
+                    High Pegg.
                 </div>
                 <div className="stat">
-                    28 Hands: <span>2</span>
+                    <span>2</span>
+                    28 Hands
                 </div>
                 <div className="stat">
-                    29 Hands: <span>0</span>
+                    <span>0</span>
+                    29 Hands
                 </div>
                 <div className="stat">
-                    Toughest Opp.: <span>Dad</span>
+                    <span>Dad</span>
+                    Toughest Opp.
                 </div>
                 <div className="stat">
-                    Easiest Opp.: <span>William</span>
+                    <span>William</span>
+                    Easiest Opp.
                 </div>
             </div>
             <button className="btn btn-success mt-2" onClick={() => nav(-1)}>
