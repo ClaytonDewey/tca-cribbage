@@ -1,4 +1,3 @@
-import "./SetupGame.scss";
 import { useNavigate } from "react-router-dom";
 
 export const SetupGame = () => {
