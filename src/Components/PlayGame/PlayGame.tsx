@@ -10,8 +10,12 @@ export const PlayGame = () => {
 
     const nextTurn = () => {
         const crib = document.getElementById("crib");
+        const points_hand = document.getElementById("points-hand") as HTMLInputElement;
+        const points_crib = document.getElementById("points-crib") as HTMLInputElement;
         crib?.classList.toggle("display-n");
-        document.getElementById("points-hand")?.focus();
+        points_hand?.focus();
+        points_hand.value = "";
+        points_crib.value = "";
     }
 
     return (
