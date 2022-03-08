@@ -14,7 +14,7 @@ export const Stats = ({ gameResults, calcPercentage }) => {
                 </div>
                 <div className="stat">
                     <span>
-                        {calcPercentage}
+                        {calcPercentage}%
                     </span>
                     Win Percentage
                 </div>

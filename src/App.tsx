@@ -57,7 +57,8 @@ let gameResults = [
 
 const calculateWinningPercentage = (results: gameResult[], who: string): number => {
     const percentage: number = results.filter(x => x.winner === who).length / results.filter(x => x.winner !== "None" && x.players.some(y => y.name === who)).length;
-    return +percentage.toFixed(2);
+    
+    return percentage < 1 ? +percentage.toFixed(2) * 100 : percentage * 100;
 };
 
 const toggleMode = () => {
