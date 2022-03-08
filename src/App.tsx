@@ -16,8 +16,10 @@ interface gameResult {
     end: string;
     winner: string;
     players: player[];
-    skunk?: boolean,
-    dblSkunk?: boolean
+    skunk?: boolean;
+    dblSkunk?: boolean;
+    skunked?: boolean;
+    dblSkunked?: boolean
 }
 
 const game1: gameResult = {
@@ -49,10 +51,18 @@ const game3: gameResult = {
     , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
 }
 
+const game4: gameResult = {
+     start: "2022-02-15T22:00:30"
+    , end: "2022-02-15T22:30:30"
+    , winner: "Me"
+    , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+}
+
 let gameResults = [
-    game1,
-    game2,
-    game3
+    game1
+    , game2
+    , game3
+    , game4
 ]
 
 const calculateWinningPercentage = (results: gameResult[], who: string): number => {
@@ -60,6 +70,8 @@ const calculateWinningPercentage = (results: gameResult[], who: string): number 
     
     return percentage < 1 ? +percentage.toFixed(2) * 100 : percentage * 100;
 };
+
+const calculateTotalWins = (results: gameResult[], who: string): number => (results.filter(x => x.winner === who).length);
 
 const toggleMode = () => {
     const html = document.querySelector("html");
@@ -89,7 +101,11 @@ const App = () => {
                 <Route path="setup" element={<SetupGame />} />
                 <Route path="play" element={<PlayGame />} />
                 <Route path="stats" element={
-                    <Stats gameResults={gameResults} calcPercentage={calculateWinningPercentage(gameResults, "Me")} />
+                    <Stats
+                        gameResults={gameResults} 
+                        calcPercentage={calculateWinningPercentage(gameResults, "Me")}
+                        calcWins={calculateTotalWins(gameResults, "Me")}
+                    />
                 } />
             </Routes>
         </>

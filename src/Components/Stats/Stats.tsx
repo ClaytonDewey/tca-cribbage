@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export const Stats = ({ gameResults, calcPercentage }) => {
+export const Stats = ({ gameResults, calcPercentage, calcWins }) => {
     const nav = useNavigate();
 
     return (
@@ -19,15 +19,15 @@ export const Stats = ({ gameResults, calcPercentage }) => {
                     Win Percentage
                 </div>
                 <div className="stat">
-                    <span>2099</span>
+                    <span>{calcWins}</span>
                     Wins
                 </div>
                 <div className="stat">
-                    <span>63</span>
+                    <span>{gameResults.length - calcWins}</span>
                     Losses
                 </div>
                 <div className="stat">
-                    <span>1175</span>
+                    <span>?</span>
                     Skunks
                 </div>
                 <div className="stat">
