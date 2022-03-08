@@ -1,9 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// https://stackoverflow.com/questions/52028418/how-can-i-get-an-inputs-value-on-a-button-click-in-a-stateless-react-component
-
-
 export const SetupGame = ({ getUniquePlayers }) => {
     const nav = useNavigate();
     const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({name: x, checked: false})));
@@ -59,7 +56,12 @@ export const SetupGame = ({ getUniquePlayers }) => {
                 {opponents.map(x => (
                     <li key={x.name}>
                         <label>
-                            <input name={x.name} type="checkbox" checked={x.checked} onChange={() => toggleOpponents(x.name)} />
+                            <input
+                                name={x.name} 
+                                type="checkbox" 
+                                checked={x.checked} 
+                                onChange={() => toggleOpponents(x.name)} 
+                            />
                             {x.name}
                         </label>
                     </li>
