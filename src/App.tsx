@@ -19,7 +19,8 @@ interface gameResult {
     skunk?: boolean;
     dblSkunk?: boolean;
     skunked?: boolean;
-    dblSkunked?: boolean
+    dblSkunked?: boolean;
+    highHand: number
 }
 
 const game1: gameResult = {
@@ -34,6 +35,7 @@ const game1: gameResult = {
             order: 2 }
         ],
     skunk: true
+    , highHand: 16
 }
 
 const game2: gameResult = {
@@ -41,7 +43,8 @@ const game2: gameResult = {
     , end: "2022-02-14T21:30:30"
     , winner: "Dad"
     , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
-    , dblSkunk: true
+    , dblSkunked: true
+    , highHand: 6
 }
 
 const game3: gameResult = {
@@ -49,6 +52,8 @@ const game3: gameResult = {
     , end: "2022-02-14T22:30:30"
     , winner: "Me"
     , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+    , skunk: true
+    , highHand: 24
 }
 
 const game4: gameResult = {
@@ -56,6 +61,7 @@ const game4: gameResult = {
     , end: "2022-02-15T22:30:30"
     , winner: "Me"
     , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+    , highHand: 16
 }
 
 let gameResults = [
@@ -72,6 +78,35 @@ const calculateWinningPercentage = (results: gameResult[], who: string): number 
 };
 
 const calculateTotalWins = (results: gameResult[], who: string): number => (results.filter(x => x.winner === who).length);
+
+const calcSkunks = (results: gameResult[], who: string):number => {
+    let skunks = 0;
+    results.map(x => x.skunk ? skunks++ : skunks)
+    return skunks;
+}
+
+const calcDblSkunks = (results: gameResult[], who: string):number => {
+    let dblSkunks = 0;
+    results.map(x => x.dblSkunk ? dblSkunks++ : dblSkunks)
+    return dblSkunks;
+}
+
+const calcSkunked = (results: gameResult[], who: string):number => {
+    let skunked = 0;
+    results.map(x => x.skunked ? skunked++ : skunked);
+    return skunked;
+}
+
+const calcDblSkunked = (results: gameResult[]):number => {
+    let dblSkunked = 0;
+    results.map(x => x.dblSkunked ? dblSkunked++ : dblSkunked);
+    return dblSkunked;
+}
+
+const highestHand = (results: gameResult[]):number => {
+    let highHand = results.map(x => x.highHand);
+    return Math.max(...highHand);
+}
 
 const toggleMode = () => {
     const html = document.querySelector("html");
@@ -105,6 +140,11 @@ const App = () => {
                         gameResults={gameResults} 
                         calcPercentage={calculateWinningPercentage(gameResults, "Me")}
                         calcWins={calculateTotalWins(gameResults, "Me")}
+                        calcSkunks={calcSkunks(gameResults, "Me")}
+                        calcDblSkunks={calcDblSkunks(gameResults, "Me")}
+                        calcSkunked={calcSkunked(gameResults, "Me")}
+                        calcDblSkunked={calcDblSkunked(gameResults)}
+                        highestHand={highestHand(gameResults)}
                     />
                 } />
             </Routes>
