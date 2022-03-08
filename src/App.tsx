@@ -6,6 +6,51 @@ import { PlayGame } from "./Components/PlayGame/PlayGame";
 import { SetupGame } from "./Components/SetupGame/SetupGame";
 import { Stats } from "./Components/Stats/Stats";
 
+interface player {
+    name: string;
+    order: number;
+}
+
+interface gameResult {
+    start: string;
+    end: string;
+    winner: string;
+    players: player[];
+}
+
+const game1: gameResult = {
+    start: "2022-02-14T15:14:30",
+    end: "2022-02-14T15:20:00",
+    winner: "Me",
+    players: [{ 
+        name: "Me", 
+        order: 1 }, 
+        { 
+            name: "Dad", 
+            order: 2 }
+        ]
+}
+
+const game2: gameResult = {
+     start: "2022-02-14T21:00:30"
+    , end: "2022-02-14T21:30:30"
+    , winner: "Dad"
+    , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+}
+
+const game3: gameResult = {
+     start: "2022-02-14T22:00:30"
+    , end: "2022-02-14T22:30:30"
+    , winner: "Me"
+    , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+}
+
+let gameResults = [
+    game1,
+    game2,
+    game3
+]
+
 const toggleMode = () => {
     const html = document.querySelector("html");
     const toggleTxt = document.querySelector(".toggle-container span")
