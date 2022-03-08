@@ -30,25 +30,25 @@ export const SetupGame = () => {
             <ul className="form-check-control">
                 <li>
                     <label>
-                        <input name="opponent" type="radio" />
+                        <input name="dad" type="checkbox" />
                         Dad
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="opponent" type="radio" />
+                        <input name="michael" type="checkbox" />
                         Michael
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="opponent" type="radio" />
+                        <input name="william" type="checkbox" />
                         William
                     </label>
                 </li>
                 <li>
                     <label>
-                        <input name="opponent" type="radio" />
+                        <input name="mary" type="checkbox" />
                         Mary
                     </label>
                 </li>
