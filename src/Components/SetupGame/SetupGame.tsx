@@ -6,7 +6,7 @@ const addOpponent = () => {
 }
 
 
-export const SetupGame = () => {
+export const SetupGame = ({ getUniquePlayers }) => {
     const nav = useNavigate();
     
     const startGame = () => {
@@ -28,30 +28,22 @@ export const SetupGame = () => {
 
             <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
             <ul className="form-check-control">
-                <li>
+                {/* <li>
                     <label>
                         <input name="dad" type="checkbox" />
                         Dad
                     </label>
-                </li>
-                <li>
-                    <label>
-                        <input name="michael" type="checkbox" />
-                        Michael
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input name="william" type="checkbox" />
-                        William
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input name="mary" type="checkbox" />
-                        Mary
-                    </label>
-                </li>
+                </li> */}
+                {
+                    getUniquePlayers.map(x => 
+                        <li>
+                            <label>
+                                <input name={x} key={x} type="checkbox" />
+                                {x}
+                            </label>
+                        </li>
+                    )
+                }
             </ul>
 
             <h2 className="text-center mt-4 mb-2">Who Won the Cut?</h2>

@@ -15,7 +15,7 @@ interface gameResult {
     start: string;
     end: string;
     winner: string;
-    players: player[];
+    opponents: player[];
     skunk?: boolean;
     dblSkunk?: boolean;
     skunked?: boolean;
@@ -27,13 +27,7 @@ const game1: gameResult = {
     start: "2022-02-14T15:14:30",
     end: "2022-02-14T15:20:00",
     winner: "Me",
-    players: [{ 
-        name: "Me", 
-        order: 1 }, 
-        { 
-            name: "Dad", 
-            order: 2 }
-        ],
+    opponents: [{ name: "Dad", order: 2 } ],
     skunk: true
     , highHand: 16
 }
@@ -42,7 +36,7 @@ const game2: gameResult = {
      start: "2022-02-14T21:00:30"
     , end: "2022-02-14T21:30:30"
     , winner: "Dad"
-    , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+    , opponents: [{ name: "William", order: 1}]
     , dblSkunked: true
     , highHand: 6
 }
@@ -51,7 +45,7 @@ const game3: gameResult = {
      start: "2022-02-14T22:00:30"
     , end: "2022-02-14T22:30:30"
     , winner: "Me"
-    , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+    , opponents: [{ name: "Michael", order: 1}]
     , skunk: true
     , highHand: 24
 }
@@ -60,7 +54,15 @@ const game4: gameResult = {
      start: "2022-02-15T22:00:30"
     , end: "2022-02-15T22:30:30"
     , winner: "Me"
-    , players: [{ name: "Me", order: 2}, { name: "Dad", order: 1}]
+    , opponents: [{ name: "Dad", order: 1}]
+    , highHand: 16
+}
+
+const game5: gameResult = {
+     start: "2022-02-15T22:00:30"
+    , end: "2022-02-15T22:30:30"
+    , winner: "Mary"
+    , opponents: [{ name: "Mary", order: 1}]
     , highHand: 16
 }
 
@@ -69,10 +71,11 @@ let gameResults = [
     , game2
     , game3
     , game4
+    , game5
 ]
 
 const calculateWinningPercentage = (results: gameResult[], who: string): number => {
-    const percentage: number = results.filter(x => x.winner === who).length / results.filter(x => x.winner !== "None" && x.players.some(y => y.name === who)).length;
+    const percentage: number = results.filter(x => x.winner === who).length / results.length;
     
     return percentage < 1 ? +percentage.toFixed(2) * 100 : percentage * 100;
 };
@@ -108,6 +111,10 @@ const highestHand = (results: gameResult[]):number => {
     return Math.max(...highHand);
 }
 
+const getUniquePlayers = (results) => (
+    [... new Set(results.flatMap(x => x.opponents.map(y => y.name)))]
+)
+
 const toggleMode = () => {
     const html = document.querySelector("html");
     const toggleTxt = document.querySelector(".toggle-container span")
@@ -133,7 +140,11 @@ const App = () => {
             </div>
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="setup" element={<SetupGame />} />
+                <Route path="setup" element={
+                    <SetupGame 
+                        getUniquePlayers={getUniquePlayers(gameResults)}
+                    />
+                } />
                 <Route path="play" element={<PlayGame />} />
                 <Route path="stats" element={
                     <Stats
