@@ -1,8 +1,11 @@
+// import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+// const [opponent, setOpponent] = useState();
+
 const addOpponent = () => {
-    // opponent = this?.target.value
-    console.log("Add new opponent...");
+    // const new_opp = document.getElementById("new-opp");
+    // const newPlayer = new_opp.value;
 }
 
 
@@ -10,7 +13,6 @@ export const SetupGame = ({ getUniquePlayers }) => {
     const nav = useNavigate();
     
     const startGame = () => {
-        console.clear();
         nav("/play")
     }
 
@@ -28,17 +30,11 @@ export const SetupGame = ({ getUniquePlayers }) => {
 
             <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
             <ul className="form-check-control">
-                {/* <li>
-                    <label>
-                        <input name="dad" type="checkbox" />
-                        Dad
-                    </label>
-                </li> */}
                 {
                     getUniquePlayers.map(x => 
-                        <li>
+                        <li key={x}>
                             <label>
-                                <input name={x} key={x} type="checkbox" />
+                                <input name={x} type="checkbox" />
                                 {x}
                             </label>
                         </li>
