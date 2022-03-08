@@ -1,17 +1,38 @@
-// import { useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// const [opponent, setOpponent] = useState();
-
-const addOpponent = () => {
-    // const new_opp = document.getElementById("new-opp");
-    // const newPlayer = new_opp.value;
-}
+// https://stackoverflow.com/questions/52028418/how-can-i-get-an-inputs-value-on-a-button-click-in-a-stateless-react-component
 
 
 export const SetupGame = ({ getUniquePlayers }) => {
     const nav = useNavigate();
+    const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({name: x, checked: false})));
+    const [newOpponent, setNewOpponent] = useState("");
     
+    const addPlayer = () => {
+        if(opponents.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
+            return;
+        }
+
+        setOpponents(
+            [
+                ...opponents
+                , {
+                    name: newOpponent
+                    , checked: true
+                }
+            ].sort((a, b) => a.name.localeCompare(b.name))
+        )
+        setNewOpponent("");
+    }
+
+    const toggleOpponents = (key: string) => {
+        setOpponents(opponents.map(x => ({
+            ...x
+            , checked: x.name === key ? !x.checked : x.checked
+        })))
+    }
+
     const startGame = () => {
         nav("/play")
     }
@@ -21,25 +42,28 @@ export const SetupGame = ({ getUniquePlayers }) => {
             <h1 className="text-center my-2">Setup Game</h1>
             <h2 className="text-center my-2">Add New Oppenent</h2>
             <div className="form-control">
-                <input id="new-opp" type="text" required />
+                <input
+                    id="new-opp" 
+                    type="text"
+                    value={newOpponent}
+                    onChange={(e) => setNewOpponent((e.target as any).value)}
+                />
                 <label>
                     <span>Oppenent Name</span>
                 </label>
-                <button id="addOpp" onClick={addOpponent}>Add</button>
+                <button id="addOpp" onClick={addPlayer}>Add</button>
             </div>
 
             <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
             <ul className="form-check-control">
-                {
-                    getUniquePlayers.map(x => 
-                        <li key={x}>
-                            <label>
-                                <input name={x} type="checkbox" />
-                                {x}
-                            </label>
-                        </li>
-                    )
-                }
+                {opponents.map(x => (
+                    <li key={x.name}>
+                        <label>
+                            <input name={x.name} type="checkbox" checked={x.checked} onChange={() => toggleOpponents(x.name)} />
+                            {x.name}
+                        </label>
+                    </li>
+                ))}
             </ul>
 
             <h2 className="text-center mt-4 mb-2">Who Won the Cut?</h2>
