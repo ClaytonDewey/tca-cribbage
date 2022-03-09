@@ -1,7 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export const SetupGame = ({ getUniquePlayers }) => {
+interface SetupGameProps {
+    getUniquePlayers: string[];
+}
+
+export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
     const nav = useNavigate();
     const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({name: x, checked: false})));
     const [newOpponent, setNewOpponent] = useState("");
