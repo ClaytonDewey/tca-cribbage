@@ -46,7 +46,7 @@ const game3: gameResult = {
     , end: "2022-02-14T22:30:30"
     , winner: "Me"
     , opponents: [{ name: "Michael", order: 1}]
-    , skunk: true
+    , dblSkunk: true
     , highHand: 24
 }
 
@@ -64,6 +64,7 @@ const game5: gameResult = {
     , winner: "Mary"
     , opponents: [{ name: "Mary", order: 1}]
     , highHand: 16
+    , skunked: true
 }
 
 let gameResults = [
