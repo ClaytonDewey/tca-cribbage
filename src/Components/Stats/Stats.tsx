@@ -83,23 +83,23 @@ export const Stats = ({ gameResults }) => {
                     High Hand
                 </div>
                 <div className="stat">
-                    <span>20</span>
+                    <span>?</span>
                     High Pegg.
                 </div>
                 <div className="stat">
-                    <span>2</span>
+                    <span>?</span>
                     28 Hands
                 </div>
                 <div className="stat">
-                    <span>0</span>
+                    <span>?</span>
                     29 Hands
                 </div>
                 <div className="stat">
-                    <span>Dad</span>
+                    <span>?</span>
                     Toughest Opp.
                 </div>
                 <div className="stat">
-                    <span>William</span>
+                    <span>?</span>
                     Easiest Opp.
                 </div>
             </div>
