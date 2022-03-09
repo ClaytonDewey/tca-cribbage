@@ -1,16 +1,36 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const addOpponent = () => {
-    // opponent = this?.target.value
-    console.log("Add new opponent...");
-}
-
-
-export const SetupGame = () => {
+export const SetupGame = ({ getUniquePlayers }) => {
     const nav = useNavigate();
+    const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({name: x, checked: false})));
+    const [newOpponent, setNewOpponent] = useState("");
     
+    const addPlayer = () => {
+        if(opponents.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
+            return;
+        }
+
+        setOpponents(
+            [
+                ...opponents
+                , {
+                    name: newOpponent
+                    , checked: true
+                }
+            ].sort((a, b) => a.name.localeCompare(b.name))
+        )
+        setNewOpponent("");
+    }
+
+    const toggleOpponents = (key: string) => {
+        setOpponents(opponents.map(x => ({
+            ...x
+            , checked: x.name === key ? !x.checked : x.checked
+        })))
+    }
+
     const startGame = () => {
-        console.clear();
         nav("/play")
     }
 
@@ -19,39 +39,33 @@ export const SetupGame = () => {
             <h1 className="text-center my-2">Setup Game</h1>
             <h2 className="text-center my-2">Add New Oppenent</h2>
             <div className="form-control">
-                <input id="new-opp" type="text" required />
+                <input
+                    id="new-opp" 
+                    type="text"
+                    value={newOpponent}
+                    onChange={(e) => setNewOpponent((e.target as any).value)}
+                />
                 <label>
                     <span>Oppenent Name</span>
                 </label>
-                <button id="addOpp" onClick={addOpponent}>Add</button>
+                <button id="addOpp" onClick={addPlayer}>Add</button>
             </div>
 
             <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
             <ul className="form-check-control">
-                <li>
-                    <label>
-                        <input name="opponent" type="radio" />
-                        Dad
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input name="opponent" type="radio" />
-                        Michael
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input name="opponent" type="radio" />
-                        William
-                    </label>
-                </li>
-                <li>
-                    <label>
-                        <input name="opponent" type="radio" />
-                        Mary
-                    </label>
-                </li>
+                {opponents.map(x => (
+                    <li key={x.name}>
+                        <label>
+                            <input
+                                name={x.name} 
+                                type="checkbox" 
+                                checked={x.checked} 
+                                onChange={() => toggleOpponents(x.name)} 
+                            />
+                            {x.name}
+                        </label>
+                    </li>
+                ))}
             </ul>
 
             <h2 className="text-center mt-4 mb-2">Who Won the Cut?</h2>

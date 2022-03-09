@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-export const Stats = () => {
+export const Stats = ({ gameResults, calcPercentage, calcWins, calcSkunks, calcDblSkunks, calcSkunked, calcDblSkunked, highestHand }) => {
     const nav = useNavigate();
 
     return (
@@ -9,39 +9,41 @@ export const Stats = () => {
             {/* <h2>Total Game Stats</h2> */}
             <div className="container-stats">
                 <div className="stat">
-                    <span>2162</span>
+                    <span>{gameResults.length}</span>
                     Games Played
                 </div>
                 <div className="stat">
-                    <span>97%</span>
+                    <span>
+                        {calcPercentage}%
+                    </span>
                     Win Percentage
                 </div>
                 <div className="stat">
-                    <span>2099</span>
+                    <span>{calcWins}</span>
                     Wins
                 </div>
                 <div className="stat">
-                    <span>63</span>
+                    <span>{gameResults.length - calcWins}</span>
                     Losses
                 </div>
                 <div className="stat">
-                    <span>1175</span>
+                    <span>{calcSkunks}</span>
                     Skunks
                 </div>
                 <div className="stat">
-                    <span>115</span>
+                    <span>{calcDblSkunks}</span>
                     Dbl Skunks
                 </div>
                 <div className="stat">
-                    <span>2</span>
+                    <span>{calcSkunked}</span>
                     Skunked
                 </div>
                 <div className="stat">
-                    <span>0</span>
+                    <span>{calcDblSkunked}</span>
                     Dbl Skunked
                 </div>
                 <div className="stat">
-                    <span>28</span>
+                    <span>{highestHand}</span>
                     High Hand
                 </div>
                 <div className="stat">
