@@ -74,44 +74,7 @@ let gameResults = [
     , game5
 ]
 
-const calculateWinningPercentage = (results: gameResult[], who: string): number => {
-    const percentage: number = results.filter(x => x.winner === who).length / results.length;
-    
-    return percentage < 1 ? +percentage.toFixed(2) * 100 : percentage * 100;
-};
-
-const calculateTotalWins = (results: gameResult[], who: string): number => (results.filter(x => x.winner === who).length);
-
-const calcSkunks = (results: gameResult[], who: string):number => {
-    let skunks = 0;
-    results.map(x => x.skunk ? skunks++ : skunks)
-    return skunks;
-}
-
-const calcDblSkunks = (results: gameResult[], who: string):number => {
-    let dblSkunks = 0;
-    results.map(x => x.dblSkunk ? dblSkunks++ : dblSkunks)
-    return dblSkunks;
-}
-
-const calcSkunked = (results: gameResult[], who: string):number => {
-    let skunked = 0;
-    results.map(x => x.skunked ? skunked++ : skunked);
-    return skunked;
-}
-
-const calcDblSkunked = (results: gameResult[]):number => {
-    let dblSkunked = 0;
-    results.map(x => x.dblSkunked ? dblSkunked++ : dblSkunked);
-    return dblSkunked;
-}
-
-const highestHand = (results: gameResult[]):number => {
-    let highHand = results.map(x => x.highHand);
-    return Math.max(...highHand);
-}
-
-const getUniquePlayers = (results) => (
+const getUniquePlayers = (results: gameResult[]) => (
     [... new Set(results.flatMap(x => x.opponents.map(y => y.name)))]
 )
 
@@ -149,13 +112,6 @@ const App = () => {
                 <Route path="stats" element={
                     <Stats
                         gameResults={gameResults} 
-                        calcPercentage={calculateWinningPercentage(gameResults, "Me")}
-                        calcWins={calculateTotalWins(gameResults, "Me")}
-                        calcSkunks={calcSkunks(gameResults, "Me")}
-                        calcDblSkunks={calcDblSkunks(gameResults, "Me")}
-                        calcSkunked={calcSkunked(gameResults, "Me")}
-                        calcDblSkunked={calcDblSkunked(gameResults)}
-                        highestHand={highestHand(gameResults)}
                     />
                 } />
             </Routes>
