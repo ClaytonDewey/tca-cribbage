@@ -1,7 +1,43 @@
 import { useNavigate } from "react-router-dom";
 
-export const Stats = ({ gameResults, calcPercentage, calcWins, calcSkunks, calcDblSkunks, calcSkunked, calcDblSkunked, highestHand }) => {
+export const Stats = ({ gameResults }) => {
     const nav = useNavigate();
+
+    const calcPercentage = (results, who: string): number => {
+        const percentage: number = results.filter(x => x.winner === who).length / results.length;
+        
+        return percentage < 1 ? +percentage.toFixed(2) * 100 : percentage * 100;
+    };
+
+    const calculateTotalWins = (results, who: string): number => (results.filter(x => x.winner === who).length);
+
+    const calcSkunks = (results, who: string):number => {
+        let skunks = 0;
+        results.map(x => x.skunk ? skunks++ : skunks)
+        return skunks;
+    }
+
+    const calcDblSkunks = (results, who: string):number => {
+        let dblSkunks = 0;
+        results.map(x => x.dblSkunk ? dblSkunks++ : dblSkunks)
+        return dblSkunks;
+    }
+
+    const calcSkunked = (results, who: string):number => {
+        let skunked = 0;
+        results.map(x => x.skunked ? skunked++ : skunked);
+        return skunked;
+    }
+
+    const calcDblSkunked = (results):number => {
+        let dblSkunked = 0;
+        results.map(x => x.dblSkunked ? dblSkunked++ : dblSkunked);
+        return dblSkunked;
+    }
+    const highestHand = (results):number => {
+        const highHand = results.map(x => x.highHand);
+        return Math.max(...highHand);
+    }
 
     return (
         <div className="container">
@@ -14,36 +50,36 @@ export const Stats = ({ gameResults, calcPercentage, calcWins, calcSkunks, calcD
                 </div>
                 <div className="stat">
                     <span>
-                        {calcPercentage}%
+                        {calcPercentage(gameResults, "Me")}%
                     </span>
                     Win Percentage
                 </div>
                 <div className="stat">
-                    <span>{calcWins}</span>
+                    <span>{calculateTotalWins(gameResults, "Me")}</span>
                     Wins
                 </div>
                 <div className="stat">
-                    <span>{gameResults.length - calcWins}</span>
+                    <span>{gameResults.length - calculateTotalWins(gameResults, "Me")}</span>
                     Losses
                 </div>
                 <div className="stat">
-                    <span>{calcSkunks}</span>
+                    <span>{calcSkunks(gameResults, "Me")}</span>
                     Skunks
                 </div>
                 <div className="stat">
-                    <span>{calcDblSkunks}</span>
+                    <span>{calcDblSkunks(gameResults, "Me")}</span>
                     Dbl Skunks
                 </div>
                 <div className="stat">
-                    <span>{calcSkunked}</span>
+                    <span>{calcSkunked(gameResults, "Me")}</span>
                     Skunked
                 </div>
                 <div className="stat">
-                    <span>{calcDblSkunked}</span>
+                    <span>{calcDblSkunked(gameResults)}</span>
                     Dbl Skunked
                 </div>
                 <div className="stat">
-                    <span>{highestHand}</span>
+                    <span>{highestHand(gameResults)}</span>
                     High Hand
                 </div>
                 <div className="stat">
