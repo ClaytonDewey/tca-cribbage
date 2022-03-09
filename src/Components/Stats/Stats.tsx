@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
+
 const calcPercentage = (results, who: string): number => {
     const percentage: number = results.filter(x => x.winner === who).length / results.length;
-
     return percentage < 1 ? +percentage.toFixed(2) * 100 : percentage * 100;
 };
 
@@ -12,30 +12,6 @@ const calcSkunks = (results, what: string): number => {
     results.map(x => x[what] ? count++ : count)
     return count;
 }
-
-// const calcSkunks = (results, who: string): number => {
-//     let skunks = 0;
-//     results.map(x => x.skunk ? skunks++ : skunks)
-//     return skunks;
-// }
-
-// const calcDblSkunks = (results, who: string): number => {
-//     let dblSkunks = 0;
-//     results.map(x => x.dblSkunk ? dblSkunks++ : dblSkunks)
-//     return dblSkunks;
-// }
-
-// const calcSkunked = (results, who: string): number => {
-//     let skunked = 0;
-//     results.map(x => x.skunked ? skunked++ : skunked);
-//     return skunked;
-// }
-
-// const calcDblSkunked = (results): number => {
-//     let dblSkunked = 0;
-//     results.map(x => x.dblSkunked ? dblSkunked++ : dblSkunked);
-//     return dblSkunked;
-// }
 
 const highestHand = (results): number => {
     const highHand = results.map(x => x.highHand);
@@ -69,11 +45,11 @@ export const Stats = ({ gameResults }) => {
                     Losses
                 </div>
                 <div className="stat">
-                    <span>{calcSkunks(gameResults, "skunks")}</span>
+                    <span>{calcSkunks(gameResults, "skunk")}</span>
                     Skunks
                 </div>
                 <div className="stat">
-                    <span>{calcSkunks(gameResults, "dblSkunks")}</span>
+                    <span>{calcSkunks(gameResults, "dblSkunk")}</span>
                     Dbl Skunks
                 </div>
                 <div className="stat">
