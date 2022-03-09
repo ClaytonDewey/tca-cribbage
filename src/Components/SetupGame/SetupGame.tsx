@@ -7,11 +7,11 @@ interface SetupGameProps {
 
 export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
     const nav = useNavigate();
-    const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({name: x, checked: false})));
+    const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
 
     const addPlayer = () => {
-        if(opponents.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
+        if (opponents.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
             return;
         }
 
@@ -26,16 +26,24 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
         )
         setNewOpponent("");
     }
+
     const toggleOpponents = (key: string) => {
-        setOpponents(opponents.map(x => ({
-            ...x
-            , checked: x.name === key ? !x.checked : x.checked
-        })));
-        
-        console.log(opponents.filter(x => x.checked).length);
-        if(opponents.filter(x => x.checked).length > 2) {
+        const idx = opponents.findIndex(x => {
+            return x.name === key
+        });
+
+        if (opponents.filter(x => x.checked).length > 2 && opponents[idx].checked) {
+            setOpponents(opponents.map(x => ({
+                ...x
+                , checked: x.name === key ? !x.checked : x.checked
+            })));
+        } else if (opponents.filter(x => x.checked).length > 2) {
             showMessage("You can't have more than 3 opponents.");
-            return;
+        } else {
+            setOpponents(opponents.map(x => ({
+                ...x
+                , checked: x.name === key ? !x.checked : x.checked
+            })));
         }
     }
 
@@ -53,7 +61,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
             <h2 className="text-center my-2">Add New Oppenent</h2>
             <div className="form-control">
                 <input
-                    id="new-opp" 
+                    id="new-opp"
                     type="text"
                     value={newOpponent}
                     onChange={(e) => setNewOpponent((e.target as any).value)}
@@ -70,10 +78,10 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
                     <li key={x.name}>
                         <label>
                             <input
-                                name={x.name} 
-                                type="checkbox" 
-                                checked={x.checked} 
-                                onChange={() => toggleOpponents(x.name)} 
+                                name={x.name}
+                                type="checkbox"
+                                checked={x.checked}
+                                onChange={() => toggleOpponents(x.name)}
                             />
                             {x.name}
                         </label>
