@@ -9,7 +9,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
     const nav = useNavigate();
     const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({name: x, checked: false})));
     const [newOpponent, setNewOpponent] = useState("");
-    
+
     const addPlayer = () => {
         if(opponents.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
             return;
@@ -26,12 +26,21 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
         )
         setNewOpponent("");
     }
-
     const toggleOpponents = (key: string) => {
         setOpponents(opponents.map(x => ({
             ...x
             , checked: x.name === key ? !x.checked : x.checked
-        })))
+        })));
+        
+        console.log(opponents.filter(x => x.checked).length);
+        if(opponents.filter(x => x.checked).length > 2) {
+            showMessage("You can't have more than 3 opponents.");
+            return;
+        }
+    }
+
+    const showMessage = (msg) => {
+        alert(msg);
     }
 
     const startGame = () => {
@@ -50,7 +59,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
                     onChange={(e) => setNewOpponent((e.target as any).value)}
                 />
                 <label>
-                    <span>Oppenent Name</span>
+                    <span>Opponent Name</span>
                 </label>
                 <button id="addOpp" onClick={addPlayer}>Add</button>
             </div>
