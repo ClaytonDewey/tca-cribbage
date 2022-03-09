@@ -1,1 +1,2 @@
 # tca-cribbage App
+[![wakatime](https://wakatime.com/badge/user/0f8cda94-4e0e-4d76-96e2-941efa04a6a3/project/b907d94f-bf6b-4af8-8643-008a2dcb7cae.svg)](https://wakatime.com/badge/user/0f8cda94-4e0e-4d76-96e2-941efa04a6a3/project/b907d94f-bf6b-4af8-8643-008a2dcb7cae)
