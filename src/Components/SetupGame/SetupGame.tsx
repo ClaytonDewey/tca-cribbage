@@ -10,25 +10,30 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
     const nav = useNavigate();
     const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
-    const [message, setMessage] = useState({ type: "", msg: "", toggle: false });
+    const [message, setMessage] = useState({ type: "", msg: "" });
 
-    const toggleMsg = () => {
-        setMessage({ type: "", msg: "", toggle: false })
-    }
+    const hideMsg = () => {
+        setTimeout(() => {
+            setMessage({ type: "", msg: "" });
+        }, 2500)
+    };
 
     const addPlayer = () => {
         if (newOpponent === "") {
-            setMessage({ type: "alert alert-danger", msg: "Please enter an opponent name.", toggle: true});
+            setMessage({ type: "alert alert-danger", msg: "Please enter an opponent name." });
+            hideMsg();
             return;
         }
         if (opponents.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
-            setMessage({ type: "alert alert-danger", msg: "There is already an opponent with that name.", toggle: true});
+            setMessage({ type: "alert alert-danger", msg: "There is already an opponent with that name." });
             setNewOpponent("");
+            hideMsg();
             return;
         }
 
         if (opponents.filter(x => x.checked).length > 2) {
-            setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents.", toggle: true});
+            setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents." });
+            hideMsg();
         } else {
             setOpponents(
                 [
@@ -49,20 +54,17 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
                 ...x
                 , checked: x.name === key.name ? !x.checked : x.checked
             })))
-            setMessage({ type: "", msg: "", toggle: false });
+            setMessage({ type: "", msg: "" });
         } else if (opponents.filter(x => x.checked).length > 2) {
-            setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents.", toggle: true});
+            setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents." });
+            hideMsg();
         } else {
             setOpponents(opponents.map(x => ({
                 ...x
-            , checked: x.name === key.name ? !x.checked : x.checked
+                , checked: x.name === key.name ? !x.checked : x.checked
             })))
         }
     }
-
-    // const showMessage = (msg) => {
-    //     alert(msg);
-    // }
 
     const startGame = () => {
         nav("/play")
@@ -70,7 +72,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
 
     return (
         <div className="container container-setup">
-            { message && (<div className={message.type}>{message.msg}{ message.toggle && (<i onClick={toggleMsg} className="close fa fa-times"></i>) }</div>)}
+            {message && (<div className={message.type}>{message.msg}</div>)}
             <h1 className="text-center my-2">Setup Game</h1>
             <h2 className="text-center my-2">Add New Oppenent</h2>
             <div className="form-control">
