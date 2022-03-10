@@ -20,7 +20,8 @@ interface gameResult {
     dblSkunk?: boolean;
     skunked?: boolean;
     dblSkunked?: boolean;
-    highHand: number
+    highHand: number;
+    highPegg: number;
 }
 
 const game1: gameResult = {
@@ -30,6 +31,7 @@ const game1: gameResult = {
     opponents: [{ name: "Dad", order: 2 } ],
     skunk: true
     , highHand: 16
+    , highPegg: 12
 }
 
 const game2: gameResult = {
@@ -39,6 +41,7 @@ const game2: gameResult = {
     , opponents: [{ name: "William", order: 1}]
     , dblSkunked: true
     , highHand: 6
+    , highPegg: 4
 }
 
 const game3: gameResult = {
@@ -48,6 +51,7 @@ const game3: gameResult = {
     , opponents: [{ name: "Michael", order: 1}]
     , dblSkunk: true
     , highHand: 24
+    , highPegg: 5
 }
 
 const game4: gameResult = {
@@ -56,6 +60,7 @@ const game4: gameResult = {
     , winner: "Me"
     , opponents: [{ name: "Dad", order: 1}]
     , highHand: 16
+    , highPegg: 3
 }
 
 const game5: gameResult = {
@@ -65,6 +70,7 @@ const game5: gameResult = {
     , opponents: [{ name: "Mary", order: 1}]
     , highHand: 16
     , skunked: true
+    , highPegg: 12
 }
 
 let gameResults = [
