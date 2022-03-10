@@ -1,0 +1,30 @@
+.alert {
+    border: 1px solid transparent;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-radius: 3px;
+
+    &-danger {
+        background-color: $danger-bg;
+        border-color: darken($danger-bg, 10%);
+        color: $danger;
+    }
+
+    &-success {
+        //
+    }
+
+    &-info {
+        //
+    }
+
+    &-warning {
+        background-color: $warning;
+        color: $black;
+
+        em {
+            color: $warning-em;
+            font-weight: 700;
+        }
+    }
+}
