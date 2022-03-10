@@ -13,9 +13,9 @@ const calcSkunks = (results, what: string): number => {
     return count;
 }
 
-const highestHand = (results): number => {
-    const highHand = results.map(x => x.highHand);
-    return Math.max(...highHand);
+const highPoints = (results, what: string): number => {
+    const highPoint = results.map(x => x[what]);
+    return Math.max(...highPoint);
 }
 
 export const Stats = ({ gameResults }) => {
@@ -61,11 +61,11 @@ export const Stats = ({ gameResults }) => {
                     Dbl Skunked
                 </div>
                 <div className="stat">
-                    <span>{highestHand(gameResults)}</span>
+                    <span>{highPoints(gameResults, "highHand")}</span>
                     High Hand
                 </div>
                 <div className="stat">
-                    <span>?</span>
+                    <span>{highPoints(gameResults, "highPegg")}</span>
                     High Pegg.
                 </div>
                 <div className="stat">
