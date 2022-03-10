@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+// import { Message } from "../Messages/Messages";
 
 interface SetupGameProps {
     getUniquePlayers: string[];
@@ -9,9 +10,12 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
     const nav = useNavigate();
     const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
+    const [message, setMessage] = useState({ type: "", msg: "" });
 
     const addPlayer = () => {
         if (opponents.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
+            setMessage({ type: "alert alert-danger", msg: "There is already an opponent with that name."});
+            setNewOpponent("");
             return;
         }
 
@@ -27,29 +31,26 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
         setNewOpponent("");
     }
 
-    const toggleOpponents = (key: string) => {
-        const idx = opponents.findIndex(x => {
-            return x.name === key
-        });
-
-        if (opponents.filter(x => x.checked).length > 2 && opponents[idx].checked) {
+    const toggleOpponents = (key) => {
+        if (opponents.filter(x => x.checked).length > 2 && key.checked) {
             setOpponents(opponents.map(x => ({
                 ...x
-                , checked: x.name === key ? !x.checked : x.checked
-            })));
+                , checked: x.name === key.name ? !x.checked : x.checked
+            })))
+            setMessage({ type: "", msg: "" });
         } else if (opponents.filter(x => x.checked).length > 2) {
-            showMessage("You can't have more than 3 opponents.");
+            setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents."});
         } else {
             setOpponents(opponents.map(x => ({
                 ...x
-                , checked: x.name === key ? !x.checked : x.checked
-            })));
+            , checked: x.name === key.name ? !x.checked : x.checked
+            })))
         }
     }
 
-    const showMessage = (msg) => {
-        alert(msg);
-    }
+    // const showMessage = (msg) => {
+    //     alert(msg);
+    // }
 
     const startGame = () => {
         nav("/play")
@@ -73,6 +74,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
             </div>
 
             <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
+            { message && (<div className={message.type}>{message.msg}</div>)}
             <ul className="form-check-control">
                 {opponents.map(x => (
                     <li key={x.name}>
@@ -81,7 +83,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
                                 name={x.name}
                                 type="checkbox"
                                 checked={x.checked}
-                                onChange={() => toggleOpponents(x.name)}
+                                onChange={() => toggleOpponents(x)}
                             />
                             {x.name}
                         </label>
