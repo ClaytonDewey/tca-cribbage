@@ -100,7 +100,9 @@ const App = () => {
         <ThemeProvider theme={themeMode}>
             <>
                 <GlobalStyles />
-                <Toggle theme={theme} toggleTheme={themeToggler} />
+                <div className="toggle__btn-container">
+                    <Toggle theme={theme} toggleTheme={themeToggler} />
+                </div>
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="setup" element={
