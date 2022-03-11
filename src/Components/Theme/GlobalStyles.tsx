@@ -15,4 +15,11 @@ body {
 .form-control input[type="number"] {
     color: ${({ theme }) => theme.text }
 }
+
+.stat {
+    background-color: ${({ theme }) => theme.text };
+    color: ${({ theme }) => theme.body};
+    box-shadow: ${({ theme }) => theme.boxShadow };
+}
+
 `
