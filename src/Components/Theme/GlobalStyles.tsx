@@ -13,6 +13,6 @@ body {
 
 .form-control input[type="text"],
 .form-control input[type="number"] {
-    color: ${({ theme }) => theme}
+    color: ${({ theme }) => theme.text }
 }
 `
