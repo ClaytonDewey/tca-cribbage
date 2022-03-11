@@ -1,6 +1,10 @@
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { useDarkMode } from "./Components/Theme/useDarkMode"
+import { GlobalStyles } from "./Components/Theme/GlobalStyles"
+import { lightTheme, darkTheme } from "./Components/Theme/Themes"
+import Toggle from "./Components/Theme/Toggler"
 import { Home } from "./Components/Home/Home";
 import { PlayGame } from "./Components/PlayGame/PlayGame";
 import { SetupGame } from "./Components/SetupGame/SetupGame";
@@ -88,52 +92,33 @@ const getUniquePlayers = (results: gameResult[]) => (
 
 
 const App = () => {
-    const [theme, setTheme] = useState({ mode: "Light", checked: false });
+    const [theme, themeToggler] = useDarkMode();
 
-    const html = document.querySelector("html");
-
-    if (localStorage.getItem("mode") === "dark") {
-        html?.classList.add("dark");
-    } else {
-        html?.classList.remove("dark");
-    }
-
-    const toggleMode = () => {
-        if (theme.mode === "Light") {
-            setTheme({ mode: "Dark", checked: true });
-            html?.classList.add("dark");
-            localStorage.setItem("mode", "dark");
-        } else if (theme.mode === "Dark") {
-            setTheme({ mode: "Light", checked: false });
-            html?.classList.remove("dark");
-            localStorage.setItem("mode", "light");
-        }
-    }
+    const themeMode = theme === "light" ? lightTheme : darkTheme;
 
     return (
-        <>
-            <div className="toggle-container">
-                <input type="checkbox" id="mode" className="toggle" checked={theme.checked} onChange={toggleMode} />
-                <label htmlFor="mode" className="label">
-                    <div className="ball"></div>
-                </label>
-                <span>{theme.mode} Mode</span>
-            </div>
-            <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="setup" element={
-                    <SetupGame
-                        getUniquePlayers={getUniquePlayers(gameResults)}
-                    />
-                } />
-                <Route path="play" element={<PlayGame />} />
-                <Route path="stats" element={
-                    <Stats
-                        gameResults={gameResults}
-                    />
-                } />
-            </Routes>
-        </>
+        <ThemeProvider theme={themeMode}>
+            <>
+                <GlobalStyles />
+                <div className="toggle__btn-container">
+                    <Toggle theme={theme} toggleTheme={themeToggler} />
+                </div>
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="setup" element={
+                        <SetupGame
+                            getUniquePlayers={getUniquePlayers(gameResults)}
+                        />
+                    } />
+                    <Route path="play" element={<PlayGame />} />
+                    <Route path="stats" element={
+                        <Stats
+                            gameResults={gameResults}
+                        />
+                    } />
+                </Routes>
+            </>
+        </ThemeProvider>
     );
 }
 
