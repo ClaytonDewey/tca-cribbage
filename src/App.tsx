@@ -1,10 +1,10 @@
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
-import { useDarkMode } from "./Components/useDarkMode"
-import { GlobalStyles } from "./Components/GlobalStyles"
-import { lightTheme, darkTheme } from "./components/Themes"
-import Toggle from "./components/Toggler"
+import { useDarkMode } from "./Components/Theme/useDarkMode"
+import { GlobalStyles } from "./Components/Theme/GlobalStyles"
+import { lightTheme, darkTheme } from "./Components/Theme/Themes"
+import Toggle from "./Components/Theme/Toggler"
 import { Home } from "./Components/Home/Home";
 import { PlayGame } from "./Components/PlayGame/PlayGame";
 import { SetupGame } from "./Components/SetupGame/SetupGame";
