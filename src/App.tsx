@@ -1,9 +1,10 @@
 import "./App.scss";
 import { Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { GlobalStyles } from "./Components/GlobalStyles";
-import { lightTheme, darkTheme } from "./Components/Themes";
+import { useDarkMode } from "./Components/useDarkMode"
+import { GlobalStyles } from "./Components/GlobalStyles"
+import { lightTheme, darkTheme } from "./components/Themes"
+import Toggle from "./components/Toggler"
 import { Home } from "./Components/Home/Home";
 import { PlayGame } from "./Components/PlayGame/PlayGame";
 import { SetupGame } from "./Components/SetupGame/SetupGame";
@@ -91,16 +92,15 @@ const getUniquePlayers = (results: gameResult[]) => (
 
 
 const App = () => {
-    const [theme, setTheme] = useState('light');
-    const themeToggler = () => {
-        theme === 'light' ? setTheme('dark') : setTheme('light');
-    }
+    const [theme, themeToggler] = useDarkMode();
+
+    const themeMode = theme === "light" ? lightTheme : darkTheme;
 
     return (
-        <ThemeProvider theme={theme === 'light' ? lightTheme : darkTheme}>
+        <ThemeProvider theme={themeMode}>
             <>
                 <GlobalStyles />
-                <button onClick={themeToggler}>Switch Theme</button>
+                <Toggle theme={theme} toggleTheme={themeToggler} />
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="setup" element={
