@@ -90,9 +90,15 @@ const getUniquePlayers = (results: gameResult[]) => (
 const App = () => {
     const [theme, setTheme] = useState({ mode: "Light", checked: false });
 
-    const toggleMode = () => {
-        const html = document.querySelector("html");
+    const html = document.querySelector("html");
 
+    if (localStorage.getItem("mode") === "dark") {
+        html?.classList.add("dark");
+    } else {
+        html?.classList.remove("dark");
+    }
+
+    const toggleMode = () => {
         if (theme.mode === "Light") {
             setTheme({ mode: "Dark", checked: true });
             html?.classList.add("dark");
@@ -103,8 +109,6 @@ const App = () => {
             localStorage.setItem("mode", "light");
         }
     }
-
-
 
     return (
         <>
