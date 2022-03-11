@@ -6,3 +6,14 @@
 @import "sass/base/utilities";
 @import "sass/layout/container";
 @import "sass/pages/stats";
+
+.toggle {
+    &__btn {
+        &-container {
+            margin-top: 2rem;
+            max-width: 50rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}
