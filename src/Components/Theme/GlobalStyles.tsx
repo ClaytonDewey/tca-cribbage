@@ -10,4 +10,9 @@ body {
     background-color: ${({ theme }) => theme.buttonBg };
     color: ${({ theme }) => theme.buttonTxt};
 }
+
+.form-control input[type="text"],
+.form-control input[type="number"] {
+    color: ${({ theme }) => theme}
+}
 `
