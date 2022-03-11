@@ -5,6 +5,7 @@ export const lightTheme = {
     , background: "#3e3e3e"
     , buttonBg: "#0dcaf0"
     , buttonTxt: "#3e3e3e"
+    , boxShadow: "none"
 }
 export const darkTheme = {
     body: "#3e3e3e"
@@ -13,4 +14,5 @@ export const darkTheme = {
     , background: "#3e3e3e"
     , buttonBg: "#5cb85c"
     , buttonTxt: "#e1e1e1"
+    , boxShadow: "0 2px 5px rgba(255,255,255, 0.4)"
 }
