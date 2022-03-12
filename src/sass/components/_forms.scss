@@ -179,11 +179,11 @@ html.dark {
         }
     }
 
-    &:checked + .label {
+    &.dark + .label {
         background-color: $success-color;
     }
 
-    &:checked + .label .ball {
+    &.dark + .label .ball {
         animation: slideOn 0.3s linear forwards;
     }
 }
