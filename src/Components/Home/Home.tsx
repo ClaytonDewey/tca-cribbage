@@ -11,7 +11,7 @@ export const Home = () => {
                 New Game
             </button>
             <button className="btn btn-info mt-2" onClick={() => nav("/stats")}>
-                Stats
+                Stats <i className="fa-solid fa-chart-line"></i>
             </button>
         </div>
     );
