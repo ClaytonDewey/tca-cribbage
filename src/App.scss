@@ -10,10 +10,25 @@
 .toggle {
     &__btn {
         &-container {
+            display: flex;
+            align-items: center;
             margin-top: 2rem;
             max-width: 50rem;
             margin-left: auto;
             margin-right: auto;
+
+            svg {
+                font-size: 1.8rem;
+
+                &.light {
+                    color: yellow;
+                    filter: drop-shadow(0 0 10px yellow);
+                }
+
+                &.dark {
+                    color: white;
+                }
+            }
         }
     }
 }
