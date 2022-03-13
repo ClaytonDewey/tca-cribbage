@@ -122,7 +122,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
             </ul>
 
             <button className="btn btn-success mt-4" onClick={startGame}>
-                Start Game
+                Start Game <i className="fa-solid fa-circle-play"></i>
             </button>
         </div>
     );

@@ -8,7 +8,7 @@ export const Home = () => {
             <h1 className="text-center my-2">Home Page</h1>
             <h2 className="text-center">tca-cribbage-app</h2>
             <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
-                New Game
+                New Game <i className="fa-solid fa-circle-play"></i>
             </button>
             <button className="btn btn-info mt-2" onClick={() => nav("/stats")}>
                 Stats <i className="fa-solid fa-chart-line"></i>

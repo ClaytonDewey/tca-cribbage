@@ -34,11 +34,11 @@ export const PlayGame = () => {
             </div>
 
             <button className="btn btn-info mt-2" onClick={nextTurn}>
-                Next Turn
+                Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
             </button>
 
             <button className="btn btn-success mt-2" onClick={endGame}>
-                Done
+                Done <i className="fa-solid fa-circle-stop"></i>
             </button>
         </div>
     );
