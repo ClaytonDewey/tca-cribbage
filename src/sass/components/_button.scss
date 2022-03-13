@@ -13,6 +13,10 @@
     width: 100%;
     font-size: 2.5rem;
 
+    svg {
+        margin-left: 2rem;
+    }
+
     &:hover {
         color: currentColor;
     }
@@ -127,9 +131,13 @@
         }
     }
 
+    &:active {
+        transform: scale(0.9);
+    }
+
     @media #{$mq-medium} {
         // height: 3.5rem;
-        width: 20rem;
+        width: 25rem;
         display: block;
         margin: auto;
     }
