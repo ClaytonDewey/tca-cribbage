@@ -12,7 +12,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
     const [newOpponent, setNewOpponent] = useState("");
     const [message, setMessage] = useState({ type: "", msg: "" });
     const [players, setPlayers] = useState(0);
-    const [click, setClick] = useState(false);
+    const [clicked, setClicked] = useState(true);
 
     const hideMsg = () => {
         setTimeout(() => {
@@ -47,6 +47,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
                 ].sort((a, b) => a.name.localeCompare(b.name))
             )
             setNewOpponent("");
+            setClicked(false)
         }
     }
 
@@ -55,7 +56,8 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
             setOpponents(opponents.map(x => ({
                 ...x
                 , checked: x.name === key.name ? !x.checked : x.checked
-            })))
+            })));
+            setClicked(false)
             setMessage({ type: "", msg: "" });
         } else if (opponents.filter(x => x.checked).length > 2) {
             setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents." });
@@ -64,7 +66,8 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
             setOpponents(opponents.map(x => ({
                 ...x
                 , checked: x.name === key.name ? !x.checked : x.checked
-            })))
+            })));
+            setClicked(false)
         }
     }
 
@@ -76,7 +79,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
         } else {
             setPlayers(4)
         }
-        setClick(true);
+        setClicked(true);
     }
 
     const startGame = () => {
@@ -193,7 +196,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
                 </>
             }
 
-            { click === false &&
+            { clicked === false &&
                 <button className="btn btn-success mt-4" onClick={selectGameSettings}>
                     Continue <i className="fa-solid fa-circle-play"></i>
                 </button>
