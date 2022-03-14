@@ -10,7 +10,7 @@ const Toggle = ({ theme, toggleTheme }) => {
                 </label>
                 <span>{theme} Mode </span>
             </div>
-            <i className={`fa-solid fa-lightbulb  ${theme}`}></i>
+            {/* <i className={`fa-solid fa-lightbulb  ${theme}`}></i> */}
         </>
     )
 }
