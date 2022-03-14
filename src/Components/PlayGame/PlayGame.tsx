@@ -10,7 +10,7 @@ const nextTurn = () => {
     points_crib.value = "";
 }
 
-export const PlayGame = () => {
+export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
 
     const endGame = () => {

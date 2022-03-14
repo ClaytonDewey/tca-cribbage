@@ -98,7 +98,7 @@ const getUniquePlayers = (results: gameResult[]) => (
 
 
 const App = () => {
-    const [currentGame, setCurrentGame] = useState({
+    const [currentGame, setCurrentGame] = useState<CurrentGame>({
         players: []
         , start: ""
     })
