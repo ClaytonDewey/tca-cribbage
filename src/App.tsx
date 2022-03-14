@@ -1,4 +1,5 @@
 import "./App.scss";
+import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { useDarkMode } from "./Components/Theme/useDarkMode"
@@ -10,16 +11,21 @@ import { PlayGame } from "./Components/PlayGame/PlayGame";
 import { SetupGame } from "./Components/SetupGame/SetupGame";
 import { Stats } from "./Components/Stats/Stats";
 
-interface player {
+export interface Player {
     name: string;
     order: number;
 }
 
-interface gameResult {
+export interface CurrentGame {
+    players: Player[];
+    start: string;
+}
+
+export interface gameResult {
     start: string;
     end: string;
     winner: string;
-    opponents: player[];
+    opponents: Player[];
     skunk?: boolean;
     dblSkunk?: boolean;
     skunked?: boolean;
@@ -92,8 +98,11 @@ const getUniquePlayers = (results: gameResult[]) => (
 
 
 const App = () => {
+    const [currentGame, setCurrentGame] = useState({
+        players: []
+        , start: ""
+    })
     const [theme, themeToggler] = useDarkMode();
-
     const themeMode = theme === "light" ? lightTheme : darkTheme;
 
     return (
@@ -108,9 +117,12 @@ const App = () => {
                     <Route path="setup" element={
                         <SetupGame
                             getUniquePlayers={getUniquePlayers(gameResults)}
+                            setCurrentGame={setCurrentGame}
                         />
                     } />
-                    <Route path="play" element={<PlayGame />} />
+                    <Route path="play" element={<PlayGame
+                            currentGame={currentGame}
+                     />} />
                     <Route path="stats" element={
                         <Stats
                             gameResults={gameResults}
