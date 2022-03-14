@@ -13,6 +13,12 @@ const calcSkunks = (results, what: string): number => {
     return count;
 }
 
+const countHighHand = (results, what: number) => {
+    let count = 0;
+    results.map(x => x["highHand"] === what ? count++ : count);
+    return count;
+}
+
 const highPoints = (results, what: string): number => {
     const highPoint = results.map(x => x[what]);
     return Math.max(...highPoint);
@@ -62,28 +68,28 @@ export const Stats = ({ gameResults }) => {
                 </div>
                 <div className="stat">
                     <span>{highPoints(gameResults, "highHand")}</span>
-                    High Hand
+                    Highest Hand
                 </div>
-                <div className="stat">
+                {/* <div className="stat">
                     <span>{highPoints(gameResults, "highPegg")}</span>
                     High Pegg.
-                </div>
+                </div> */}
                 <div className="stat">
-                    <span>?</span>
+                    <span>{countHighHand(gameResults, 28)}</span>
                     28 Hands
                 </div>
                 <div className="stat">
-                    <span>?</span>
+                    <span>{countHighHand(gameResults, 29)}</span>
                     29 Hands
                 </div>
-                <div className="stat">
+                {/* <div className="stat">
                     <span>?</span>
                     Toughest Opp.
                 </div>
                 <div className="stat">
                     <span>?</span>
                     Easiest Opp.
-                </div>
+                </div> */}
             </div>
             <button className="btn btn-success mt-2" onClick={() => nav(-1)}>
                 Home <i className="fa-solid fa-house"></i>
