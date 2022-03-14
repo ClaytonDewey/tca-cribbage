@@ -1,18 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { CurrentGame } from "../../App";
 // import { Message } from "../Messages/Messages";
 
 interface SetupGameProps {
     getUniquePlayers: string[];
+    setCurrentGame: (g: CurrentGame) => void;
 }
 
-export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
+export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurrentGame }) => {
     const nav = useNavigate();
     const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
     const [message, setMessage] = useState({ type: "", msg: "" });
     const [players, setPlayers] = useState(0);
     const [clicked, setClicked] = useState(true);
+    
 
     const hideMsg = () => {
         setTimeout(() => {
@@ -83,6 +86,17 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers }) => {
     }
 
     const startGame = () => {
+        setCurrentGame(
+            {
+                players: [
+                    ...opponents.filter(x => x.checked).map((x, i) => ({
+                        name: x.name
+                        , order: i
+                    }))
+                ]
+                ,start: (new Date()).toISOString()
+            }
+        )
         nav("/play");
     }
 
