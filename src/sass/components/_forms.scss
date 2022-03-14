@@ -21,8 +21,8 @@
                 outline: 0;
                 box-shadow: 0 0 5px 5px rgba($dark-gray, 0.1);
 
-                &:focus + label span,
-                &:valid + label span {
+                & + label span,
+                & + label span {
                     color: lighten($dark-gray, 4%);
                     transform: translateY(-4.5rem);
                 }
