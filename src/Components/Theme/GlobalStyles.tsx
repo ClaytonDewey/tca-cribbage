@@ -16,6 +16,10 @@ body {
     color: ${({ theme }) => theme.text }
 }
 
+.form-control input:valid + label span {
+    color: ${({ theme }) => theme.text}
+}
+
 .stat {
     background-color: ${({ theme }) => theme.text };
     color: ${({ theme }) => theme.body};
