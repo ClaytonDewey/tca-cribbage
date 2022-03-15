@@ -51,10 +51,20 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
             ...x
             , checked: x.name === key.name ? !x.checked : x.checked
         })));
-        console.log(opponents.filter(x => x.checked));
     }
 
     const startGame = () => {
+        if (opponents.filter(x => x.checked).length === 0) {
+            setMessage({ type: "alert alert-danger", msg: "Please add an opponent." });
+            hideMsg();
+            return;
+        }
+        if (opponents.filter(x => x.checked).length > 3) {
+            setMessage({ type: "alert alert-danger", msg: "You may not have more than three opponents.Please remove one, or more oppenents." });
+            hideMsg();
+            return;
+        }
+        
         setCurrentGame(
             {
                 players: [
