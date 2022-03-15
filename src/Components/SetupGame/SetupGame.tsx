@@ -34,39 +34,24 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
             return;
         }
 
-        if (opponents.filter(x => x.checked).length > 2) {
-            setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents." });
-            hideMsg();
-        } else {
-            setOpponents(
-                [
-                    ...opponents
-                    , {
-                        name: newOpponent
-                        , checked: true
-                    }
-                ].sort((a, b) => a.name.localeCompare(b.name))
-            )
-            setNewOpponent("");
-        }
+        setOpponents(
+            [
+                ...opponents
+                , {
+                    name: newOpponent
+                    , checked: true
+                }
+            ].sort((a, b) => a.name.localeCompare(b.name))
+        )
+        setNewOpponent("");
     }
 
     const toggleOpponents = (key) => {
-        if (opponents.filter(x => x.checked).length > 2 && key.checked) {
-            setOpponents(opponents.map(x => ({
-                ...x
-                , checked: x.name === key.name ? !x.checked : x.checked
-            })));
-            setMessage({ type: "", msg: "" });
-        } else if (opponents.filter(x => x.checked).length > 2) {
-            setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents." });
-            hideMsg();
-        } else {
-            setOpponents(opponents.map(x => ({
-                ...x
-                , checked: x.name === key.name ? !x.checked : x.checked
-            })));
-        }
+        setOpponents(opponents.map(x => ({
+            ...x
+            , checked: x.name === key.name ? !x.checked : x.checked
+        })));
+        console.log(opponents.filter(x => x.checked));
     }
 
     const startGame = () => {
