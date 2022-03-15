@@ -13,8 +13,6 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
     const [opponents, setOpponents] = useState([...getUniquePlayers].sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
     const [message, setMessage] = useState({ type: "", msg: "" });
-    const [players, setPlayers] = useState(0);
-    const [clicked, setClicked] = useState(true);
     
 
     const hideMsg = () => {
@@ -50,7 +48,6 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
                 ].sort((a, b) => a.name.localeCompare(b.name))
             )
             setNewOpponent("");
-            setClicked(false)
         }
     }
 
@@ -60,7 +57,6 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
                 ...x
                 , checked: x.name === key.name ? !x.checked : x.checked
             })));
-            setClicked(false)
             setMessage({ type: "", msg: "" });
         } else if (opponents.filter(x => x.checked).length > 2) {
             setMessage({ type: "alert alert-danger", msg: "You can't have more than 3 opponents." });
@@ -70,7 +66,6 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
                 ...x
                 , checked: x.name === key.name ? !x.checked : x.checked
             })));
-            setClicked(false)
         }
     }
 
