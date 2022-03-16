@@ -92,7 +92,7 @@ let gameResults = [
 ]
 
 const getUniquePlayers = (results: gameResult[]) => (
-    [... new Set(results.flatMap(x => x.players.map(y => y.name)))]
+    [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== "Me")
 )
 
 
