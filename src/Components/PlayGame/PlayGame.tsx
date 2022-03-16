@@ -9,24 +9,40 @@ interface PlayerInGame extends Player {
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
-
+    const [cribHand, setCribHand] = useState(false);
     const [activePlayer, setActivePlayer] = useState<PlayerInGame | undefined>(undefined);
     const [playersInOrder, setPlayersInOrder] = useState<PlayerInGame[]>([]);
     
     const orderPlayers = (player: string) => {
-        
-        const newPlayer = {
-            name: player
-            , order: playersInOrder.length + 1
-            , currentScore: 0
+        if (player === "Me") {
+            setCribHand(true);
+                const newPlayer = {
+                name: player
+                , order: playersInOrder.length + 1
+                , currentScore: 0
+            }
+
+            setActivePlayer(newPlayer);
+
+            setPlayersInOrder([
+                ...playersInOrder
+                , newPlayer
+            ]);
+        } else {
+            setCribHand(false);
+            const newPlayer = {
+                name: player
+                , order: playersInOrder.length + 1
+                , currentScore: 0
+            }
+
+            setActivePlayer(newPlayer);
+
+            setPlayersInOrder([
+                ...playersInOrder
+                , newPlayer
+            ]);
         }
-
-        setActivePlayer(newPlayer);
-
-        setPlayersInOrder([
-            ...playersInOrder
-            , newPlayer
-        ]);
     }
 
     const nextTurn = (player: PlayerInGame) => {
@@ -69,13 +85,17 @@ export const PlayGame = ({ currentGame }) => {
                         <label><span>Hand Points</span></label>
                     </div>
 
-                    <div id="crib" className="form-control">
-                        <input id="points-crib" type="number" required />
-                        <label><span>Crib Points</span></label>
-                    </div>
+                    {
+                        cribHand && (
+                            <div id="crib" className="form-control">
+                                <input id="points-crib" type="number" required />
+                                <label><span>Crib Points</span></label>
+                            </div>
+                        )
+                    }
                 </div>
 
-                <button className="btn btn-info mt-2" onClick={() => nextTurn(activePlayer)}>
+                <button className="btn btn-info mt-2" onClick={() => nextTurn({ name: "Me", order: 1, currentScore: 3})}>
                     Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                 </button>
 
