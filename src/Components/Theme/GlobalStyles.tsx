@@ -23,6 +23,7 @@ body {
 .players-container {
     background-color: ${({ theme }) => theme.body };
     color: ${({ theme }) => theme.text };
+    border-right-color: ${({ theme }) => theme.toggleBorder}
 }
 
 .stat {
