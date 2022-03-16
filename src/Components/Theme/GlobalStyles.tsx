@@ -20,6 +20,11 @@ body {
     color: ${({ theme }) => theme.text}
 }
 
+.players-container {
+    background-color: ${({ theme }) => theme.body };
+    color: ${({ theme }) => theme.text };
+}
+
 .stat {
     background-color: ${({ theme }) => theme.text };
     color: ${({ theme }) => theme.body};

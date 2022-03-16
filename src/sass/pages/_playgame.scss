@@ -1,0 +1,11 @@
+.players {
+    &-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        border-right: 1px solid $warning;
+        width: 85%;
+        z-index: 10;
+    }
+}

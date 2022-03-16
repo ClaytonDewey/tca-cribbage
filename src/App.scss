@@ -6,6 +6,7 @@
 @import "sass/base/utilities";
 @import "sass/layout/container";
 @import "sass/pages/stats";
+@import "sass/pages/playgame";
 
 .toggle {
     &__btn {
@@ -16,19 +17,6 @@
             max-width: 50rem;
             margin-left: auto;
             margin-right: auto;
-
-            svg {
-                font-size: 1.8rem;
-
-                &.light {
-                    color: yellow;
-                    filter: drop-shadow(0 0 10px yellow);
-                }
-
-                &.dark {
-                    color: white;
-                }
-            }
         }
     }
 }
