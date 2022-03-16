@@ -1,21 +1,36 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Player } from "../../App";
 
-const nextTurn = () => {
-    const crib = document.getElementById("crib");
-    const points_hand = document.getElementById("points-hand") as HTMLInputElement;
-    const points_crib = document.getElementById("points-crib") as HTMLInputElement;
-    crib?.classList.toggle("display-n");
-    points_hand?.focus();
-    points_hand.value = "";
-    points_crib.value = "";
+interface PlayerInGame extends Player {
+    currentScore: number;
 }
 
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
-    // const [currentPlayer, setCurrentPlayer] = useState({})
-    console.log(currentGame);
+    console.log(players);
+
+    const [currentPlayer, setCurrentPlayer] = useState([{}]);
+    const [playerOrder, setPlayerOrder] = useState([{}])
+
+    const orderPlayers = (key) => {
+        
+        const newPlayer = {
+            name: key
+            , order: players.length + 1
+        }
+
+        setPlayerOrder([
+            ...players
+            , newPlayer
+        ]);
+    }
+
+    const nextTurn = () => {
+        console.log("clicked!");
+    }
+
     const endGame = () => {
         nav(-2);
     };
@@ -23,11 +38,15 @@ export const PlayGame = ({ currentGame }) => {
 
     return (
         <>
-            <div className="players-container">
+            <div className="players-container open">
                 <h2 className="text-center my-2">Select Current Player</h2>
                 {
                     players.map(x => (
-                        <button key={x.name} id={x.name} className="btn btn-success mb-2">
+                        <button
+                            key={x.name} id={x.name}
+                            className="btn btn-success mb-2"
+                            onClick={() => orderPlayers(x.name)}
+                        >
                             {x.name}
                         </button>
                     ))
