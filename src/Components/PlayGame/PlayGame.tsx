@@ -9,39 +9,48 @@ interface PlayerInGame extends Player {
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
-    console.log(players);
 
-    const [currentPlayer, setCurrentPlayer] = useState([{}]);
-    const [playerOrder, setPlayerOrder] = useState([{}])
-
-    const orderPlayers = (key) => {
+    const [activePlayer, setActivePlayer] = useState<PlayerInGame | undefined>(undefined);
+    const [playersInOrder, setPlayersInOrder] = useState<PlayerInGame[]>([]);
+    
+    const orderPlayers = (player: string) => {
         
         const newPlayer = {
-            name: key
-            , order: players.length + 1
+            name: player
+            , order: playersInOrder.length + 1
+            , currentScore: 0
         }
 
-        setPlayerOrder([
-            ...players
+        setActivePlayer(newPlayer);
+
+        setPlayersInOrder([
+            ...playersInOrder
             , newPlayer
         ]);
     }
 
-    const nextTurn = () => {
-        console.log("clicked!");
+    const nextTurn = (player: PlayerInGame) => {
+        if (playersInOrder.length < currentGame.players.length) {
+            console.log("Active players are NOT yet set...")
+            setActivePlayer(undefined);
+        } else {
+            console.log("Active players ARE set...")
+            const indexOfActivePlayer = playersInOrder.findIndex(x => x === player);
+            setActivePlayer(indexOfActivePlayer + 1 < playersInOrder.length ? playersInOrder[indexOfActivePlayer] : playersInOrder[0]);
+        }
     }
 
     const endGame = () => {
         nav(-2);
     };
 
-
     return (
         <>
-            <div className="players-container open">
-                <h2 className="text-center my-2">Select Current Player</h2>
+            <div className={`players-container ${!activePlayer && playersInOrder.length < currentGame.players.length ? "open" : ""}`}>
+                <h2 className="text-center my-2">{`Choose Player ${playersInOrder.length + 1}`}</h2>
                 {
-                    players.map(x => (
+                    players.filter(x => playersInOrder.findIndex(y => y.name === x.name) === -1)
+                    .map(x => (
                         <button
                             key={x.name} id={x.name}
                             className="btn btn-success mb-2"
@@ -66,7 +75,7 @@ export const PlayGame = ({ currentGame }) => {
                     </div>
                 </div>
 
-                <button className="btn btn-info mt-2" onClick={nextTurn}>
+                <button className="btn btn-info mt-2" onClick={() => nextTurn(activePlayer)}>
                     Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                 </button>
 
