@@ -59,8 +59,8 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
             hideMsg();
             return;
         }
-        if (players.filter(x => x.checked).length > 3) {
-            setMessage({ type: "alert alert-danger", msg: "You may not have more than three opponents.Please remove one, or more oppenents." });
+        if (players.filter(x => x.checked).length > 1) {
+            setMessage({ type: "alert alert-danger", msg: "You may only select one opponent." });
             hideMsg();
             return;
         }
@@ -74,7 +74,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
                     }))
                     , {
                         name: "Me"
-                        , order: 3
+                        , order: 1
                     }
                 ]
                 ,start: (new Date()).toISOString()
