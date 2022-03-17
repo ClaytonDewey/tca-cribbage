@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Player } from "../../App";
 
@@ -10,26 +10,39 @@ export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
     const user = players.filter(x => x.name === "Me");
+    const [cribHand, setCribHand] = useState(false);
     const [activePlayer, setActivePlayer] = useState<PlayerInGame | undefined>(undefined);
     const [playersInOrder, setPlayersInOrder] = useState<PlayerInGame[]>([]);
     
     const orderPlayers = (player: string) => {
-        const nextPlayer = {
-            name: player
-            , order: playersInOrder.length + 1
-            , currentScore: 0
-        }
+            const newPlayer = {
+                name: player
+                , order: playersInOrder.length + 1
+                , currentScore: 0
+            }
 
-        setActivePlayer(nextPlayer);
+            setActivePlayer(newPlayer);
 
-        setPlayersInOrder([
-            ...playersInOrder
-            , nextPlayer
-        ]);
+            setPlayersInOrder([
+                ...playersInOrder
+                , newPlayer
+            ]);
     }
     
     const nextTurn = () => {
-        console.log("Clicked")
+        console.log(cribHand);
+
+        // Trigger choose player number if not all chosen.
+        if (playersInOrder.length < players.length) {
+            setActivePlayer(undefined);
+        }
+
+        // Otherwise, next player until game ends.
+        else {
+            const indexOfActivePlayer = playersInOrder.findIndex(x => x !== user);
+            cribHand ? setCribHand(false) : setCribHand(true)
+            setActivePlayer(indexOfActivePlayer + 1 < playersInOrder.length ? playersInOrder[indexOfActivePlayer + 1] : playersInOrder[0]);
+        }
     }
 
     const endGame = () => {
@@ -39,7 +52,7 @@ export const PlayGame = ({ currentGame }) => {
     return (
         <>
             <div className={`players-container ${!activePlayer && playersInOrder.length < currentGame.players.length ? "open" : ""}`}>
-                <h2 className="text-center my-2">{`Choose Player ${playersInOrder.length + 1}`}</h2>
+                <h2 className="text-center my-2">Who Won the Crib?</h2>
                 {
                     players.filter(x => playersInOrder.findIndex(y => y.name === x.name) === -1)
                     .map(x => (
@@ -62,20 +75,12 @@ export const PlayGame = ({ currentGame }) => {
                         <label><span>Hand Points</span></label>
                     </div>
 
-                    {
-                        playersInOrder.map(x => (
-                            <>
-                                {
-                                    activePlayer === user && (
-                                        <div id="crib" className="form-control">
-                                            <input id="points-crib" type="number" required />
-                                            <label><span>Crib Points</span></label>
-                                        </div>
-                                    )
-                                }
-                            </>
-                        ))
-                    }
+                    { cribHand && (
+                        <div id="crib" className="form-control">
+                            <input id="points-crib" type="number" required />
+                            <label><span>Crib Points</span></label>
+                        </div>
+                    )}
                 </div>
 
                 <button className="btn btn-info mt-2" onClick={nextTurn}>
