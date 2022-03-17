@@ -1,48 +1,22 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Player } from "../../App";
-
-interface PlayerInGame extends Player {
-    currentScore: number;
-}
 
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
     const user = players.filter(x => x.name === "Me");
-    const [cribHand, setCribHand] = useState(false);
-    const [activePlayer, setActivePlayer] = useState<PlayerInGame | undefined>(undefined);
-    const [playersInOrder, setPlayersInOrder] = useState<PlayerInGame[]>([]);
+    const [cut, setCut] = useState(false)
+    const [cribHand, setCribHand] = useState(true);
     
     const orderPlayers = (player: string) => {
-            const newPlayer = {
-                name: player
-                , order: playersInOrder.length + 1
-                , currentScore: 0
-            }
-
-            setActivePlayer(newPlayer);
-
-            setPlayersInOrder([
-                ...playersInOrder
-                , newPlayer
-            ]);
+        setCut(true);
+        player === user ? setCribHand(false) : setCribHand(true);
+        console.log(cribHand)
     }
     
     const nextTurn = () => {
-        console.log(cribHand);
-
-        // Trigger choose player number if not all chosen.
-        if (playersInOrder.length < players.length) {
-            setActivePlayer(undefined);
-        }
-
-        // Otherwise, next player until game ends.
-        else {
-            const indexOfActivePlayer = playersInOrder.findIndex(x => x !== user);
-            cribHand ? setCribHand(false) : setCribHand(true)
-            setActivePlayer(indexOfActivePlayer + 1 < playersInOrder.length ? playersInOrder[indexOfActivePlayer + 1] : playersInOrder[0]);
-        }
+        cribHand ? setCribHand(false) : setCribHand(true);
     }
 
     const endGame = () => {
@@ -51,11 +25,10 @@ export const PlayGame = ({ currentGame }) => {
 
     return (
         <>
-            <div className={`players-container ${!activePlayer && playersInOrder.length < currentGame.players.length ? "open" : ""}`}>
+            <div className={`players-container ${!cut ? "open" : ""}`}>
                 <h2 className="text-center my-2">Who Won the Crib?</h2>
                 {
-                    players.filter(x => playersInOrder.findIndex(y => y.name === x.name) === -1)
-                    .map(x => (
+                    players.map(x => (
                         <button
                             key={x.name} id={x.name}
                             className="btn btn-success mb-2"
