@@ -9,30 +9,35 @@ interface PlayerInGame extends Player {
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
-    const [currentPlayer, setCurrentPlayer] = useState<PlayerInGame | undefined>(undefined);
-    const [playerOrder, setPlayerOrder] = useState<PlayerInGame[]>([]);
+    const [activePlayer, setActivePlayer] = useState<PlayerInGame | undefined>(undefined);
+    const [playersInOrder, setPlayersInOrder] = useState<PlayerInGame[]>([]);
     
     const orderPlayers = (player: string) => {
         const nextPlayer = {
             name: player
-            , order: playerOrder.length + 1
+            , order: playersInOrder.length + 1
             , currentScore: 0
         }
 
-        setCurrentPlayer(nextPlayer);
+        setActivePlayer(nextPlayer);
 
-        setPlayerOrder([
-            ...playerOrder
+        setPlayersInOrder([
+            ...playersInOrder
             , nextPlayer
         ]);
     }
     
     const nextTurn = (player: PlayerInGame) => {
-        if(playerOrder.length < players.length) {
-            setCurrentPlayer(undefined);
-        } else {
-            const indexOfCurrentPlayer = playerOrder.findIndex(x => x === player);
-            setCurrentPlayer(indexOfCurrentPlayer + 1 < playerOrder.length ? playerOrder[indexOfCurrentPlayer] : playerOrder[0]);
+
+        // Trigger choose player number if not all chosen
+        if(playersInOrder.length < players.length) {
+            setActivePlayer(undefined);
+        }
+        
+        // Otherwise, next player until game ends.
+        else {
+            const indexOfActivePlayer = playersInOrder.findIndex(x => x === player);
+            setActivePlayer(indexOfActivePlayer + 1 < playersInOrder.length ? playersInOrder[indexOfActivePlayer + 1] : playersInOrder[0]);
         }
     }
 
@@ -42,10 +47,10 @@ export const PlayGame = ({ currentGame }) => {
 
     return (
         <>
-            <div className={`players-container ${!currentPlayer && playerOrder.length < currentGame.players.length ? "open" : ""}`}>
-                <h2 className="text-center my-2">{`Choose Player ${playerOrder.length + 1}`}</h2>
+            <div className={`players-container ${!activePlayer && playersInOrder.length < currentGame.players.length ? "open" : ""}`}>
+                <h2 className="text-center my-2">{`Choose Player ${playersInOrder.length + 1}`}</h2>
                 {
-                    players.filter(x => playerOrder.findIndex(y => y.name === x.name) === -1)
+                    players.filter(x => playersInOrder.findIndex(y => y.name === x.name) === -1)
                     .map(x => (
                         <button
                             key={x.name} id={x.name}
@@ -61,22 +66,28 @@ export const PlayGame = ({ currentGame }) => {
                 <h1 className="text-center my-2">Play Game</h1>
 
                 {
-                    playerOrder.map(x => (
+                    playersInOrder.map(x => (
                         <div key={x.name}>
+                            <h2>{x.name}</h2>
+                            <p className="mb-0">Score: {x.currentScore}</p>
                             <div className="container-points">
                                 <div className="form-control">
                                     <input id="points-hand" type="number" autoFocus required />
                                     <label><span>Hand Points</span></label>
                                 </div>
 
-                                <div id="crib" className="form-control">
-                                    <input id="points-crib" type="number" required />
-                                    <label><span>Crib Points</span></label>
-                                </div>
+                                {
+                                    activePlayer === x && (
+                                        <div id="crib" className="form-control">
+                                        <input id="points-crib" type="number" required />
+                                        <label><span>Crib Points</span></label>
+                                    </div>
+                                    )
+                                }
                             </div>
 
                             {
-                                currentPlayer === x && (
+                                activePlayer === x && (
                                     <button className="btn btn-info mt-2" onClick={() => nextTurn(x)}>
                                         Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                                     </button>
