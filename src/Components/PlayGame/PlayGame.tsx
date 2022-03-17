@@ -9,6 +9,7 @@ interface PlayerInGame extends Player {
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
+    const user = players.filter(x => x.name === "Me");
     const [activePlayer, setActivePlayer] = useState<PlayerInGame | undefined>(undefined);
     const [playersInOrder, setPlayersInOrder] = useState<PlayerInGame[]>([]);
     
@@ -27,18 +28,8 @@ export const PlayGame = ({ currentGame }) => {
         ]);
     }
     
-    const nextTurn = (player: PlayerInGame) => {
-
-        // Trigger choose player number if not all chosen
-        if(playersInOrder.length < players.length) {
-            setActivePlayer(undefined);
-        }
-        
-        // Otherwise, next player until game ends.
-        else {
-            const indexOfActivePlayer = playersInOrder.findIndex(x => x === player);
-            setActivePlayer(indexOfActivePlayer + 1 < playersInOrder.length ? playersInOrder[indexOfActivePlayer + 1] : playersInOrder[0]);
-        }
+    const nextTurn = () => {
+        console.log("Clicked")
     }
 
     const endGame = () => {
@@ -65,40 +56,31 @@ export const PlayGame = ({ currentGame }) => {
             <div className="container container-play">
                 <h1 className="text-center my-2">Play Game</h1>
 
-                {
-                    playersInOrder.map(x => (
-                        <div key={x.name}>
-                            <h2>{x.name}</h2>
-                            <p className="mb-0">Score: {x.currentScore}</p>
-                            <div className="container-points">
-                                <div className="form-control">
-                                    <input id="points-hand" type="number" autoFocus required />
-                                    <label><span>Hand Points</span></label>
-                                </div>
+                <div className="container-points">
+                    <div className="form-control">
+                        <input id="points-hand" type="number" autoFocus required />
+                        <label><span>Hand Points</span></label>
+                    </div>
 
+                    {
+                        playersInOrder.map(x => (
+                            <>
                                 {
-                                    activePlayer === x && (
+                                    activePlayer === user && (
                                         <div id="crib" className="form-control">
-                                        <input id="points-crib" type="number" required />
-                                        <label><span>Crib Points</span></label>
-                                    </div>
+                                            <input id="points-crib" type="number" required />
+                                            <label><span>Crib Points</span></label>
+                                        </div>
                                     )
                                 }
-                            </div>
+                            </>
+                        ))
+                    }
+                </div>
 
-                            {
-                                activePlayer === x && (
-                                    <button className="btn btn-info mt-2" onClick={() => nextTurn(x)}>
-                                        Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
-                                    </button>
-                                )
-                            }
-                        </div>
-                    ))
-                }
-
-                {/*  */}
-
+                <button className="btn btn-info mt-2" onClick={nextTurn}>
+                    Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
+                </button>
                 <button className="btn btn-success mt-2" onClick={endGame}>
                     Done <i className="fa-solid fa-circle-stop"></i>
                 </button>
