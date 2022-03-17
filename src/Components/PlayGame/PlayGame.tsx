@@ -26,7 +26,7 @@ export const PlayGame = ({ currentGame }) => {
             , nextPlayer
         ]);
     }
-
+    
     const nextTurn = (player: PlayerInGame) => {
         if(playerOrder.length < players.length) {
             setCurrentPlayer(undefined);
@@ -59,22 +59,34 @@ export const PlayGame = ({ currentGame }) => {
             </div>
             <div className="container container-play">
                 <h1 className="text-center my-2">Play Game</h1>
-                {/* <h2 className="text-center my-2">{currentPlayer}</h2> */}
-                <div className="container-points">
-                    <div className="form-control">
-                        <input id="points-hand" type="number" autoFocus required />
-                        <label><span>Hand Points</span></label>
-                    </div>
 
-                    <div id="crib" className="form-control">
-                        <input id="points-crib" type="number" required />
-                        <label><span>Crib Points</span></label>
-                    </div>
-                </div>
+                {
+                    playerOrder.map(x => (
+                        <div key={x.name}>
+                            <div className="container-points">
+                                <div className="form-control">
+                                    <input id="points-hand" type="number" autoFocus required />
+                                    <label><span>Hand Points</span></label>
+                                </div>
 
-                <button className="btn btn-info mt-2" onClick={() => nextTurn({ name: currentPlayer?.name, order: currentPlayer?.order, currentScore: 2})}>
-                    Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
-                </button>
+                                <div id="crib" className="form-control">
+                                    <input id="points-crib" type="number" required />
+                                    <label><span>Crib Points</span></label>
+                                </div>
+                            </div>
+
+                            {
+                                currentPlayer === x && (
+                                    <button className="btn btn-info mt-2" onClick={() => nextTurn(x)}>
+                                        Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
+                                    </button>
+                                )
+                            }
+                        </div>
+                    ))
+                }
+
+                {/*  */}
 
                 <button className="btn btn-success mt-2" onClick={endGame}>
                     Done <i className="fa-solid fa-circle-stop"></i>
