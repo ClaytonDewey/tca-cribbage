@@ -38,7 +38,7 @@ export const PlayGame = ({ currentGame }) => {
     return (
         <>
             <div className={`players-container ${!cut ? "open" : ""}`}>
-                <h2 className="text-center my-2">Who Won the Crib?</h2>
+                <h2 className="text-center my-2">Who Won the Cut?</h2>
                 {
                     players.map(x => (
                         <button
