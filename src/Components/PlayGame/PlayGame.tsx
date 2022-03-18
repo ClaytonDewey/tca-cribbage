@@ -1,24 +1,37 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "../../App";
+import { gameResult, User } from "../../App";
 
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
     const [cut, setCut] = useState(false)
-    const [cribHand, setCribHand] = useState(false);
+    const [isCrib, setIsCrib] = useState(false);
+    const [hand, setHand] = useState(0);
+    const [crib, setCrib] = useState(0);
+    const [highHand, setHighHand] = useState(0);
+    const [highCrib, setHighCrib] = useState(0);
+    const [score, setScore] = useState(0);
     
     const orderPlayers = (player: string) => {
         setCut(true);
-        player === User ? setCribHand(false) : setCribHand(true);
+        player === User ? setIsCrib(false) : setIsCrib(true);
     }
-    
+        
     const nextTurn = () => {
-        cribHand ? setCribHand(false) : setCribHand(true);
-        console.log(cribHand)
+        setScore(score + hand + crib);
+        if (hand > highHand) setHighHand(hand);
+        if (crib > highCrib) setHighCrib(crib);
+        isCrib ? setIsCrib(false) : setIsCrib(true);
     }
 
     const endGame = () => {
+        setScore(score + hand + crib);
+        if (hand > highHand) setHighHand(hand);
+        if (crib > highCrib) setHighCrib(crib);
+        console.log(`Current Score: ${score}`);
+        console.log(`High Hand: ${highHand}`);
+        console.log(`High Crib: ${highCrib}`);
         nav(-2);
     };
 
@@ -43,13 +56,13 @@ export const PlayGame = ({ currentGame }) => {
 
                 <div className="container-points">
                     <div className="form-control">
-                        <input id="points-hand" type="number" autoFocus required />
+                        <input id="points-hand" type="text" autoFocus required onChange={e => setHand(+e.target.value)} />
                         <label><span>Hand Points</span></label>
                     </div>
 
-                    { !cribHand && (
+                    { !isCrib && (
                         <div id="crib" className="form-control">
-                            <input id="points-crib" type="number" required />
+                            <input id="points-crib" type="number" required onChange={e => setCrib(+e.target.value)} />
                             <label><span>Crib Points</span></label>
                         </div>
                     )}
