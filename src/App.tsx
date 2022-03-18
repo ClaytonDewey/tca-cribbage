@@ -34,13 +34,13 @@ export interface gameResult {
     highPegg: number;
 }
 
-const user = "Me"
+export const User = "Me"
 
 const game1: gameResult = {
     start: "2022-02-14T15:14:30",
     end: "2022-02-14T15:20:00",
-    winner: user,
-    players: [{ name: "Dad", order: 1 }, { name: user, order: 2 }],
+    winner: User,
+    players: [{ name: "Dad", order: 1 }, { name: User, order: 2 }],
     skunk: true
     , highHand: 16
     , highPegg: 12
@@ -50,7 +50,7 @@ const game2: gameResult = {
     start: "2022-02-14T21:00:30"
     , end: "2022-02-14T21:30:30"
     , winner: "William"
-    , players: [{ name: "William", order: 1 }, { name: user, order: 2 }]
+    , players: [{ name: "William", order: 1 }, { name: User, order: 2 }]
     , dblSkunked: true
     , highHand: 6
     , highPegg: 4
@@ -62,7 +62,7 @@ let gameResults = [
 ]
 
 const getUniquePlayers = (results: gameResult[]) => (
-    [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== user)
+    [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
 )
 
 
