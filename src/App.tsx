@@ -34,11 +34,13 @@ export interface gameResult {
     highPegg: number;
 }
 
+const user = "Me"
+
 const game1: gameResult = {
     start: "2022-02-14T15:14:30",
     end: "2022-02-14T15:20:00",
-    winner: "Me",
-    players: [{ name: "Dad", order: 1 }, { name: "Me", order: 2 }],
+    winner: user,
+    players: [{ name: "Dad", order: 1 }, { name: user, order: 2 }],
     skunk: true
     , highHand: 16
     , highPegg: 12
@@ -47,52 +49,20 @@ const game1: gameResult = {
 const game2: gameResult = {
     start: "2022-02-14T21:00:30"
     , end: "2022-02-14T21:30:30"
-    , winner: "Dad"
-    , players: [{ name: "William", order: 1 }, { name: "Me", order: 2 }]
+    , winner: "William"
+    , players: [{ name: "William", order: 1 }, { name: user, order: 2 }]
     , dblSkunked: true
     , highHand: 6
     , highPegg: 4
 }
 
-const game3: gameResult = {
-    start: "2022-02-14T22:00:30"
-    , end: "2022-02-14T22:30:30"
-    , winner: "Me"
-    , players: [{ name: "Michael", order: 1 }, { name: "Me", order: 2 }]
-    , dblSkunk: true
-    , highHand: 24
-    , highPegg: 5
-}
-
-const game4: gameResult = {
-    start: "2022-02-15T22:00:30"
-    , end: "2022-02-15T22:30:30"
-    , winner: "Me"
-    , players: [{ name: "Me", order: 1 }, { name: "Dad", order: 2 }]
-    , highHand: 16
-    , highPegg: 3
-}
-
-const game5: gameResult = {
-    start: "2022-02-15T22:00:30"
-    , end: "2022-02-15T22:30:30"
-    , winner: "Mary"
-    , players: [{ name: "Me", order: 1 }, { name: "Mary", order: 2 }]
-    , highHand: 16
-    , skunked: true
-    , highPegg: 12
-}
-
 let gameResults = [
     game1
     , game2
-    , game3
-    , game4
-    , game5
 ]
 
 const getUniquePlayers = (results: gameResult[]) => (
-    [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== "Me")
+    [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== user)
 )
 
 
