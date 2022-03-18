@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CurrentGame } from "../../App";
+import { CurrentGame, User } from "../../App";
 // import { Message } from "../Messages/Messages";
 
 interface SetupGameProps {
@@ -73,7 +73,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
                         , order: i
                     }))
                     , {
-                        name: "Me"
+                        name: User
                         , order: 1
                     }
                 ]
