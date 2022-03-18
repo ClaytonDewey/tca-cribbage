@@ -1,22 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Player } from "../../App";
+import { User } from "../../App";
 
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
     const { players } = currentGame;
-    const user = players.filter(x => x.name === "Me");
     const [cut, setCut] = useState(false)
-    const [cribHand, setCribHand] = useState(true);
+    const [cribHand, setCribHand] = useState(false);
     
     const orderPlayers = (player: string) => {
         setCut(true);
-        player === user ? setCribHand(false) : setCribHand(true);
-        console.log(cribHand)
+        player === User ? setCribHand(false) : setCribHand(true);
     }
     
     const nextTurn = () => {
         cribHand ? setCribHand(false) : setCribHand(true);
+        console.log(cribHand)
     }
 
     const endGame = () => {
@@ -48,7 +47,7 @@ export const PlayGame = ({ currentGame }) => {
                         <label><span>Hand Points</span></label>
                     </div>
 
-                    { cribHand && (
+                    { !cribHand && (
                         <div id="crib" className="form-control">
                             <input id="points-crib" type="number" required />
                             <label><span>Crib Points</span></label>
