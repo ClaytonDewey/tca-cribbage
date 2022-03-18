@@ -21,8 +21,7 @@ body {
 }
 
 .players-container {
-    background-color: ${({ theme }) => theme.body };
-    color: ${({ theme }) => theme.text };
+    background-color: ${({ theme }) => theme.flyoutBg };
     border-right-color: ${({ theme }) => theme.toggleBorder}
 }
 
