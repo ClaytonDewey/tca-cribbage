@@ -12,12 +12,13 @@ export const PlayGame = ({ currentGame }) => {
     const [highHand, setHighHand] = useState(0);
     const [highCrib, setHighCrib] = useState(0);
     const [score, setScore] = useState(0);
-    
+    const [gameOver, setGameOver] = useState(false);
+
     const orderPlayers = (player: string) => {
         setCut(true);
         player === User ? setIsCrib(false) : setIsCrib(true);
     }
-        
+
     const nextTurn = () => {
         setScore(score + hand + crib);
         if (hand > highHand) setHighHand(hand);
@@ -25,15 +26,19 @@ export const PlayGame = ({ currentGame }) => {
         isCrib ? setIsCrib(false) : setIsCrib(true);
     }
 
-    const endGame = () => {
+    const lastTurn = () => {
         setScore(score + hand + crib);
         if (hand > highHand) setHighHand(hand);
         if (crib > highCrib) setHighCrib(crib);
         console.log(`Current Score: ${score}`);
         console.log(`High Hand: ${highHand}`);
         console.log(`High Crib: ${highCrib}`);
-        nav(-2);
+        setGameOver(true);
     };
+
+    const endGame = () => {
+        nav(-2);
+    }
 
     return (
         <>
@@ -60,7 +65,7 @@ export const PlayGame = ({ currentGame }) => {
                         <label><span>Hand Points</span></label>
                     </div>
 
-                    { !isCrib && (
+                    {!isCrib && (
                         <div id="crib" className="form-control">
                             <input id="points-crib" type="number" required onChange={e => setCrib(+e.target.value)} />
                             <label><span>Crib Points</span></label>
@@ -68,12 +73,22 @@ export const PlayGame = ({ currentGame }) => {
                     )}
                 </div>
 
-                <button className="btn btn-info mt-2" onClick={nextTurn}>
-                    Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
-                </button>
-                <button className="btn btn-success mt-2" onClick={endGame}>
-                    Done <i className="fa-solid fa-circle-stop"></i>
-                </button>
+                {!gameOver && (
+                    <>
+                        <button className="btn btn-info mt-2" onClick={nextTurn}>
+                            Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
+                        </button>
+                        <button className="btn btn-success mt-2" onClick={lastTurn}>
+                            Done <i className="fa-solid fa-circle-stop"></i>
+                        </button>
+                    </>
+                )}
+
+                {gameOver && (
+                    <button className="btn btn-success mt-2" onClick={endGame}>
+                        Done <i className="fa-solid fa-circle-stop"></i>
+                    </button>
+                )}
             </div>
         </>
     );
