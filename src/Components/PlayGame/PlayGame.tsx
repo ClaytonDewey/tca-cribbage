@@ -4,7 +4,19 @@ import { gameResult, User } from "../../App";
 
 export const PlayGame = ({ currentGame }) => {
     const nav = useNavigate();
-    const { players } = currentGame;
+    const { players, start } = currentGame;
+    const [gameResult, setGameResult] = useState<gameResult>({
+        start: start,
+        end: "",
+        winner: "",
+        players: [],
+        skunk: false,
+        dblSkunk: false,
+        skunked: false,
+        dblSkunked: false,
+        highHand: 0,
+        highPegg: 0
+    });
     const [cut, setCut] = useState(false)
     const [isCrib, setIsCrib] = useState(false);
     const [hand, setHand] = useState(0);
@@ -37,6 +49,15 @@ export const PlayGame = ({ currentGame }) => {
     };
 
     const endGame = () => {
+        setGameResult({
+            start: start,
+            end: (new Date()).toISOString(),
+            winner: User,
+            players: [{ name: User, order: 1 }, { name: "Dad", order: 2 }],
+            highHand: highHand,
+            highPegg: highCrib,
+        })
+
         nav(-2);
     }
 
@@ -85,9 +106,21 @@ export const PlayGame = ({ currentGame }) => {
                 )}
 
                 {gameOver && (
-                    <button className="btn btn-success mt-2" onClick={endGame}>
-                        Done <i className="fa-solid fa-circle-stop"></i>
-                    </button>
+                    <>
+                        <ul className="form-check-control">
+                            {players.map(x => (
+                                <li key={x.name}>
+                                    <label>
+                                        <input name="winner" type="radio" />
+                                        {x.name}
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                        <button className="btn btn-success mt-2" onClick={endGame}>
+                            Done <i className="fa-solid fa-circle-stop"></i>
+                        </button>
+                    </>
                 )}
             </div>
         </>
