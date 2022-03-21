@@ -38,6 +38,23 @@ const reducer = (state, action) => {
                 ...state
                 , isCrib: action.isCrib
             }
+        case "setHandPoints":
+            return {
+                ...state
+                , handPoints: action.handPoints
+            }
+        case "setCribPoints":
+            return {
+                ...state
+                , cribPoints: action.cribPoints
+            }
+        case "setScore":
+            return {
+                ...state
+                , score: action.score
+            }
+        default:
+            return state;
     }
 }
 
@@ -57,6 +74,37 @@ export const PlayGame = ({ currentGame }) => {
                 , isCrib: true
             })
         }
+    }
+
+    const handleHandChange = (e) => {
+        dispatch({
+            type: "setHandPoints"
+            , handPoints: +e.target.value
+        })
+        console.log(state.handPoints)
+    }
+
+    const handleCribChange = (e) => {
+        dispatch({
+            type: "setCribPoints"
+            , cribPoints: +e.target.value
+        })
+        console.log(state.cribPoints)
+    }
+
+    const nextTurn = () => {
+
+        dispatch({
+            type: "setScore"
+            , score: +state.handPoints + +state.cribPoints
+        })
+
+        dispatch({
+            type: "isCrib"
+            , isCrib: this === true ? false : true
+        })
+        console.log(state.isCrib);
+        console.log(state.score);
     }
 
     return (
@@ -80,21 +128,21 @@ export const PlayGame = ({ currentGame }) => {
 
                 <div className="container-points">
                     <div className="form-control">
-                        <input id="points-hand" type="text" autoFocus required />
+                        <input id="points-hand" type="text" autoFocus required onChange={handleHandChange} />
                         <label><span>Hand Points</span></label>
                     </div>
 
                     {
                         state.isCrib && (
                             <div id="crib" className="form-control">
-                                <input id="points-crib" type="number" required />
+                                <input id="points-crib" type="number" required onChange={handleCribChange} />
                                 <label><span>Crib Points</span></label>
                             </div>
                         )
                     }
                 </div>
 
-                <button className="btn btn-info mt-2">
+                <button className="btn btn-info mt-2" onClick={nextTurn}>
                     Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                 </button>
                 <button className="btn btn-success mt-2">
