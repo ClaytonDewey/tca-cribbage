@@ -5,8 +5,8 @@ import { gameResult, User } from "../../App";
 const initialState = {
     cut: false
     , isCrib: false
-    , handPoints: 0
-    , cribPoints: 0
+    , handPoints: ""
+    , cribPoints: ""
     , highHand: 0
     , highCrib: 0
     , score: 0
@@ -96,12 +96,12 @@ export const PlayGame = ({ currentGame }) => {
 
         dispatch({
             type: "setScore"
-            , score: +state.handPoints + +state.cribPoints
+            , score: state.handPoints + state.cribPoints
         })
 
         dispatch({
             type: "isCrib"
-            , isCrib: this === true ? false : true
+            , isCrib: true ? false : true
         })
         console.log(state.isCrib);
         console.log(state.score);
@@ -128,14 +128,25 @@ export const PlayGame = ({ currentGame }) => {
 
                 <div className="container-points">
                     <div className="form-control">
-                        <input id="points-hand" type="text" autoFocus required onChange={handleHandChange} />
+                        <input
+                            id="points-hand"
+                            type="number"
+                            value={state.handPoints}
+                            onChange={handleHandChange}
+                            autoFocus
+                            required />
                         <label><span>Hand Points</span></label>
                     </div>
 
                     {
                         state.isCrib && (
                             <div id="crib" className="form-control">
-                                <input id="points-crib" type="number" required onChange={handleCribChange} />
+                                <input
+                                    id="points-crib"
+                                    type="number"
+                                    value={state.cribPoints}
+                                    onChange={handleCribChange}
+                                    required />
                                 <label><span>Crib Points</span></label>
                             </div>
                         )
