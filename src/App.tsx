@@ -31,7 +31,7 @@ export interface gameResult {
     skunked?: boolean;
     dblSkunked?: boolean;
     highHand: number;
-    highPegg: number;
+    highCrib: number;
 }
 
 export const User = "Me"
@@ -43,7 +43,7 @@ const game1: gameResult = {
     players: [{ name: "Dad", order: 1 }, { name: User, order: 2 }],
     skunk: true
     , highHand: 16
-    , highPegg: 12
+    , highCrib: 12
 }
 
 const game2: gameResult = {
@@ -53,7 +53,7 @@ const game2: gameResult = {
     , players: [{ name: "William", order: 1 }, { name: User, order: 2 }]
     , dblSkunked: true
     , highHand: 6
-    , highPegg: 4
+    , highCrib: 4
 }
 
 let gameResults = [
