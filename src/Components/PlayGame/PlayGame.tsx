@@ -32,7 +32,10 @@ export const PlayGame = ({ currentGame }) => {
     }
 
     const nextTurn = () => {
-        setScore(score + hand + crib);
+        const s = score + hand + crib;
+        console.log(s);
+        setScore(s);
+        console.log(score);
         if (hand > highHand) setHighHand(hand);
         if (crib > highCrib) setHighCrib(crib);
         isCrib ? setIsCrib(false) : setIsCrib(true);
@@ -82,13 +85,13 @@ export const PlayGame = ({ currentGame }) => {
 
                 <div className="container-points">
                     <div className="form-control">
-                        <input id="points-hand" type="text" autoFocus required onChange={e => setHand(+e.target.value)} />
+                        <input id="points-hand" type="text" value={hand} autoFocus required onChange={e => setHand(+e.target.value)} />
                         <label><span>Hand Points</span></label>
                     </div>
 
                     {!isCrib && (
                         <div id="crib" className="form-control">
-                            <input id="points-crib" type="number" required onChange={e => setCrib(+e.target.value)} />
+                            <input id="points-crib" type="number" value={crib} required onChange={e => setCrib(+e.target.value)} />
                             <label><span>Crib Points</span></label>
                         </div>
                     )}
