@@ -15,7 +15,7 @@ export const PlayGame = ({ currentGame }) => {
         skunked: false,
         dblSkunked: false,
         highHand: 0,
-        highPegg: 0
+        highCrib: 0
     });
     const [cut, setCut] = useState(false)
     const [isCrib, setIsCrib] = useState(false);
@@ -25,42 +25,73 @@ export const PlayGame = ({ currentGame }) => {
     const [highCrib, setHighCrib] = useState(0);
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
+    const [winner, setWinner] = useState("");
 
     const orderPlayers = (player: string) => {
         setCut(true);
-        player === User ? setIsCrib(false) : setIsCrib(true);
+        player === User ? setIsCrib(true) : setIsCrib(false);
     }
 
     const nextTurn = () => {
-        const s = score + hand + crib;
-        console.log(s);
-        setScore(s);
-        console.log(score);
-        if (hand > highHand) setHighHand(hand);
-        if (crib > highCrib) setHighCrib(crib);
-        isCrib ? setIsCrib(false) : setIsCrib(true);
+        if (isCrib) {
+            const s = score + hand + crib;
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+            if (crib > highCrib) setHighCrib(crib);
+            console.log({
+                hand
+                , crib
+                , score
+            });
+
+            // Reset state values
+            setHand(0);
+            setCrib(0);
+            setIsCrib(false);
+        } else {
+            const s = score + hand;
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+            console.log({
+                hand
+                , score
+            });
+            // Reset state values
+            setHand(0);
+            setIsCrib(true);
+        }
     }
 
     const lastTurn = () => {
-        setScore(score + hand + crib);
-        if (hand > highHand) setHighHand(hand);
-        if (crib > highCrib) setHighCrib(crib);
-        console.log(`Current Score: ${score}`);
-        console.log(`High Hand: ${highHand}`);
-        console.log(`High Crib: ${highCrib}`);
-        setGameOver(true);
+        if (isCrib) {
+            const s = score + hand + crib;
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+            if (crib > highCrib) setHighCrib(crib);
+            setGameOver(true);
+        } else {
+            const s = score + hand;
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+            setGameOver(true);
+        }
+        console.log({score});
     };
+
+    const whoWon = (player: string) => {
+        setWinner(player);
+    }
 
     const endGame = () => {
         setGameResult({
             start: start,
             end: (new Date()).toISOString(),
-            winner: User,
+            winner: winner,
             players: [{ name: User, order: 1 }, { name: "Dad", order: 2 }],
             highHand: highHand,
-            highPegg: highCrib,
-        })
-
+            highCrib: highCrib,
+        });
+        console.log(gameResult)
         nav(-2);
     }
 
@@ -89,7 +120,7 @@ export const PlayGame = ({ currentGame }) => {
                         <label><span>Hand Points</span></label>
                     </div>
 
-                    {!isCrib && (
+                    {isCrib && (
                         <div id="crib" className="form-control">
                             <input id="points-crib" type="number" value={crib} required onChange={e => setCrib(+e.target.value)} />
                             <label><span>Crib Points</span></label>
@@ -103,23 +134,36 @@ export const PlayGame = ({ currentGame }) => {
                             Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                         </button>
                         <button className="btn btn-success mt-2" onClick={lastTurn}>
-                            Done <i className="fa-solid fa-circle-stop"></i>
+                            Game Over <i className="fa-solid fa-circle-stop"></i>
                         </button>
                     </>
                 )}
 
                 {gameOver && (
                     <>
-                        <ul className="form-check-control">
-                            {players.map(x => (
-                                <li key={x.name}>
-                                    <label>
-                                        <input name="winner" type="radio" />
-                                        {x.name}
-                                    </label>
-                                </li>
-                            ))}
-                        </ul>
+                        {
+                            players.map(x => (
+                                <button
+                                    key={x.name} id={x.name}
+                                    className="btn btn-info mb-2"
+                                    onClick={() => whoWon(x.name)}
+                                >
+                                    {x.name}
+                                </button>
+                            ))
+                        }
+
+                        {
+                            winner === User && (
+                                <h2 className="text-center">You won!</h2>
+                            )
+                        }
+
+                        {
+                            winner !== User && (
+                                <h2 className="text-center">You lost.</h2>
+                            )
+                        }
                         <button className="btn btn-success mt-2" onClick={endGame}>
                             Done <i className="fa-solid fa-circle-stop"></i>
                         </button>
