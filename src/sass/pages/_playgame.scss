@@ -1,8 +1,9 @@
 .players {
     &-container {
         position: fixed;
+        padding: 0px 1.5rem;
         top: 0;
-        left: -95%;
+        left: -100%;
         bottom: 0;
         transition: all 0.6s ease;
         color: $white;
@@ -10,8 +11,16 @@
         &.open {
             left: 0;
             border-right: 1px solid;
-            width: 95%;
+            width: 100%;
             z-index: 10;
+        }
+
+        @media #{$mq-medium} {
+            left: -500px;
+
+            &.open {
+                width: 500px;
+            }
         }
     }
 }
