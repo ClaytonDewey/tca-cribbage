@@ -78,10 +78,10 @@ export const Stats = ({ gameResults }) => {
                     <span>{highPoints(gameResults, "highHand")}</span>
                     Highest Hand
                 </div>
-                {/* <div className="stat">
-                    <span>{highPoints(gameResults, "highPegg")}</span>
-                    High Pegg.
-                </div> */}
+                <div className="stat">
+                    <span>{highPoints(gameResults, "highCrib")}</span>
+                    Highest Crib
+                </div>
                 <div className="stat">
                     <span>{countHighHand(gameResults, 28)}</span>
                     28 Hands
