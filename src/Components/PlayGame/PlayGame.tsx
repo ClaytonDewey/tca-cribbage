@@ -27,6 +27,11 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     const [score, setScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
     const [winner, setWinner] = useState("");
+    const [skunk, setSkunk] = useState(false);
+    const [dblSkunk, setDblSkunk] = useState(false);
+    const [skunked, setSkunked] = useState(false);
+    const [dblSkunked, setDblSkunked] = useState(false);
+    const [skunkSettings, setSkunkSettings] = useState(false);
 
     const orderPlayers = (player: string) => {
         setCut(true);
@@ -48,6 +53,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             const s = score + hand;
             setScore(s);
             if (hand > highHand) setHighHand(hand);
+
             // Reset state values
             setHand(0);
             setIsCrib(true);
@@ -71,6 +77,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
 
     const whoWon = (player: string) => {
         setWinner(player);
+        player === User ? setSkunkSettings(true) : setSkunkSettings(false);
     }
 
     const endGame = () => {
@@ -79,10 +86,10 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             end: (new Date()).toISOString(),
             winner: winner,
             players: players,
-            skunk: false,
-            dblSkunk: false,
-            skunked: false,
-            dblSkunked: false,
+            skunk: skunk,
+            dblSkunk: dblSkunk,
+            skunked: skunked,
+            dblSkunked: dblSkunked,
             highHand: highHand,
             highCrib: highCrib
         });
@@ -153,6 +160,15 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                                 </button>
                             ))
                         }
+
+                        {skunkSettings && (
+                            <p>You Won!</p>
+                        )}
+
+                        {!skunkSettings && (
+                            <p>You lost</p>
+                        )}
+
                         {
                             JSON.stringify(gameResults)
                         }
