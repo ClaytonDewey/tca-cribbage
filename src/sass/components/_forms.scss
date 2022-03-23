@@ -12,7 +12,8 @@
             display: block;
             width: 100%;
             padding: 1.5rem 0;
-            font-size: 1.8rem;
+            font-size: 3rem;
+            text-align: center;
             color: $black;
             height: 6rem;
 
@@ -122,6 +123,11 @@
                             }
                         }
                     }
+                }
+
+                input,
+                label {
+                    cursor: pointer;
                 }
             }
         }

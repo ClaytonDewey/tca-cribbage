@@ -26,8 +26,8 @@ body {
 }
 
 .stat {
-    background-color: ${({ theme }) => theme.text };
-    color: ${({ theme }) => theme.body};
+    background-color: ${({ theme }) => theme.body };
+    color: ${({ theme }) => theme.text};
     box-shadow: ${({ theme }) => theme.boxShadow };
 }
 

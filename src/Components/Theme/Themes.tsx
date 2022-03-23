@@ -5,7 +5,7 @@ export const lightTheme = {
     , background: "#3e3e3e"
     , buttonBg: "#0dcaf0"
     , buttonTxt: "#3e3e3e"
-    , boxShadow: "none"
+    , boxShadow: "0 2px 5px rgba(0,0,0, 0.4)"
     , flyoutBg: "#5b7292"
 }
 export const darkTheme = {
