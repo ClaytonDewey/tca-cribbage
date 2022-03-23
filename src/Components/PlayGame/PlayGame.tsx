@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { gameResult, User } from "../../App";
 
-export const PlayGame = ({ currentGame }) => {
+export const PlayGame = ({ currentGame, gameResults }) => {
+
     const nav = useNavigate();
     const { players, start } = currentGame;
     const [gameResult, setGameResult] = useState<gameResult>({
@@ -38,11 +39,6 @@ export const PlayGame = ({ currentGame }) => {
             setScore(s);
             if (hand > highHand) setHighHand(hand);
             if (crib > highCrib) setHighCrib(crib);
-            console.log({
-                hand
-                , crib
-                , score
-            });
 
             // Reset state values
             setHand(0);
@@ -52,10 +48,6 @@ export const PlayGame = ({ currentGame }) => {
             const s = score + hand;
             setScore(s);
             if (hand > highHand) setHighHand(hand);
-            console.log({
-                hand
-                , score
-            });
             // Reset state values
             setHand(0);
             setIsCrib(true);
@@ -75,7 +67,6 @@ export const PlayGame = ({ currentGame }) => {
             if (hand > highHand) setHighHand(hand);
             setGameOver(true);
         }
-        console.log({score});
     };
 
     const whoWon = (player: string) => {
@@ -87,11 +78,19 @@ export const PlayGame = ({ currentGame }) => {
             start: start,
             end: (new Date()).toISOString(),
             winner: winner,
-            players: [{ name: User, order: 1 }, { name: "Dad", order: 2 }],
+            players: players,
+            skunk: false,
+            dblSkunk: false,
+            skunked: false,
+            dblSkunked: false,
             highHand: highHand,
-            highCrib: highCrib,
+            highCrib: highCrib
         });
-        console.log(gameResult)
+
+        gameResults = [
+            ...gameResults
+            , gameResult
+        ]
         nav(-2);
     }
 
@@ -153,6 +152,9 @@ export const PlayGame = ({ currentGame }) => {
                                     {x.name}
                                 </button>
                             ))
+                        }
+                        {
+                            JSON.stringify(gameResults)
                         }
                         <button className="btn btn-success mt-2" onClick={endGame}>
                             Done <i className="fa-solid fa-circle-stop"></i>
