@@ -24,6 +24,14 @@ const highPoints = (results, what: string): number => {
     return Math.max(...highPoint);
 }
 
+const calculateShortestGame = (results) => (
+    Math.min(...results.map(x => Date.parse(x.end) - Date.parse(x.start)))
+)
+
+const calculateLongestGame = (results) => (
+    Math.max(...results.map(x => Date.parse(x.end) - Date.parse(x.start)))
+)
+
 export const Stats = ({ gameResults }) => {
     const nav = useNavigate();
 
@@ -82,14 +90,14 @@ export const Stats = ({ gameResults }) => {
                     <span>{countHighHand(gameResults, 29)}</span>
                     29 Hands
                 </div>
-                {/* <div className="stat">
-                    <span>?</span>
-                    Toughest Opp.
+                <div className="stat">
+                    <span>{calculateLongestGame(gameResults) / 1000 / 60}m</span>
+                    Longest Game
                 </div>
                 <div className="stat">
-                    <span>?</span>
-                    Easiest Opp.
-                </div> */}
+                    <span>{calculateShortestGame(gameResults) / 1000 / 60}m</span>
+                    Shortest Game
+                </div>
             </div>
             <button className="btn btn-success mt-2" onClick={() => nav(-1)}>
                 Home <i className="fa-solid fa-house"></i>
