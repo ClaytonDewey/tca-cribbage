@@ -124,7 +124,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                 <p className="text-center">High Crib: {highCrib}</p>
                 <div className="container-points">
                     <div className="form-control">
-                        <input id="points-hand" type="text" value={hand} autoFocus required onChange={e => setHand(+e.target.value)} />
+                        <input id="points-hand" type="number" value={hand} autoFocus required onChange={e => setHand(+e.target.value)} />
                         <label><span>Hand Points</span></label>
                     </div>
 
