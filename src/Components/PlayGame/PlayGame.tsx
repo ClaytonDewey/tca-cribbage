@@ -113,6 +113,7 @@ export const PlayGame = ({ currentGame }) => {
             </div>
             <div className="container container-play">
                 <h1 className="text-center my-2">Play Game</h1>
+                <h4 className="text-center my-2">My Score: {score}</h4>
 
                 <div className="container-points">
                     <div className="form-control">
