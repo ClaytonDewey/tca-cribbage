@@ -113,7 +113,9 @@ export const PlayGame = ({ currentGame }) => {
             </div>
             <div className="container container-play">
                 <h1 className="text-center my-2">Play Game</h1>
-
+                <p className="text-center">Score: {score}</p>
+                <p className="text-center">High Hand: {highHand}</p>
+                <p className="text-center">High Crib: {highCrib}</p>
                 <div className="container-points">
                     <div className="form-control">
                         <input id="points-hand" type="text" value={hand} autoFocus required onChange={e => setHand(+e.target.value)} />
@@ -151,18 +153,6 @@ export const PlayGame = ({ currentGame }) => {
                                     {x.name}
                                 </button>
                             ))
-                        }
-
-                        {
-                            winner === User && (
-                                <h2 className="text-center">You won!</h2>
-                            )
-                        }
-
-                        {
-                            winner !== User && (
-                                <h2 className="text-center">You lost.</h2>
-                            )
                         }
                         <button className="btn btn-success mt-2" onClick={endGame}>
                             Done <i className="fa-solid fa-circle-stop"></i>
