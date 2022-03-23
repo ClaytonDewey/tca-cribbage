@@ -65,8 +65,6 @@ const getUniquePlayers = (results: gameResult[]) => (
     [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
 )
 
-
-
 const App = () => {
     const [currentGame, setCurrentGame] = useState<CurrentGame>({
         players: []
@@ -92,6 +90,7 @@ const App = () => {
                     } />
                     <Route path="play" element={<PlayGame
                             currentGame={currentGame}
+                            gameResults={gameResults}
                      />} />
                     <Route path="stats" element={
                         <Stats
