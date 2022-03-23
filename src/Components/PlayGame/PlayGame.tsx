@@ -98,7 +98,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             ...gameResults
             , gameResult
         ]
-        nav(-2);
+        // nav(-2);
     }
 
     return (
