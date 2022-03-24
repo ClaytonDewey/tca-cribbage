@@ -103,6 +103,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
 
     return (
         <>
+            <div className={`players-container-overlay ${!cut ? "open" : ""}`}></div>
             <div className={`players-container ${!cut ? "open" : ""}`}>
                 <h2 className="text-center my-2">Who Won the Cut?</h2>
                 {
