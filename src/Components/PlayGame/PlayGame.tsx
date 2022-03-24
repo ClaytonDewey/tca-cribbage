@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { gameResult, User } from "../../App";
+import { GameResult, User } from "../../App";
 
 export const PlayGame = ({ currentGame, gameResults }) => {
 
     const nav = useNavigate();
     const { players, start } = currentGame;
-    const [gameResult, setGameResult] = useState<gameResult>({
+    const [gameResult, setGameResult] = useState<GameResult>({
         start: start,
         end: "",
         winner: "",

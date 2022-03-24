@@ -21,7 +21,7 @@ export interface CurrentGame {
     start: string;
 }
 
-export interface gameResult {
+export interface GameResult {
     start: string;
     end: string;
     winner: string;
@@ -36,7 +36,7 @@ export interface gameResult {
 
 export const User = "Me"
 
-const game1: gameResult = {
+const game1: GameResult = {
     start: "2022-02-14T15:14:30",
     end: "2022-02-14T15:20:00",
     winner: User,
@@ -46,7 +46,7 @@ const game1: gameResult = {
     , highCrib: 12
 }
 
-const game2: gameResult = {
+const game2: GameResult = {
     start: "2022-02-14T21:00:30"
     , end: "2022-02-14T21:30:30"
     , winner: "William"
@@ -61,11 +61,12 @@ let gameResults = [
     , game2
 ]
 
-const getUniquePlayers = (results: gameResult[]) => (
+const getUniquePlayers = (results: GameResult[]) => (
     [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
 )
 
 const App = () => {
+    const [results, setResults] = useState<GameResult[]>(gameResults)
     const [currentGame, setCurrentGame] = useState<CurrentGame>({
         players: []
         , start: ""
@@ -90,11 +91,11 @@ const App = () => {
                     } />
                     <Route path="play" element={<PlayGame
                             currentGame={currentGame}
-                            gameResults={gameResults}
+                            gameResults={results}
                      />} />
                     <Route path="stats" element={
                         <Stats
-                            gameResults={gameResults}
+                            gameResults={results}
                         />
                     } />
                 </Routes>
