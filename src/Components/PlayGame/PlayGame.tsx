@@ -33,6 +33,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     const [skunked, setSkunked] = useState(false);
     const [dblSkunked, setDblSkunked] = useState(false);
     const [won, setWon] = useState(false);
+    const [over, setOver] = useState(false);
 
     const orderPlayers = (player: string) => {
         setCut(true);
@@ -81,6 +82,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     const selectWinner = (player: string) => {
         setWinner(player);
         player === User ? setWon(true) : setWon(false);
+        setOver(true);
     }
 
     const finishGame = () => {
@@ -166,17 +168,21 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                             ))
                         }
 
-                        {won && (
-                            <p>You Won!</p>
+                        {over && (
+                            <>
+                                {won && (
+                                    <p className="text-center">YOU WON! 🏆</p>
+                                )}
+
+                                {!won && (
+                                    <p className="text-center">You lost. 😢</p>
+                                )}
+                            </>
                         )}
 
-                        {!won && (
-                            <p>You lost</p>
-                        )}
-
-                        {
+                        {/* {
                             JSON.stringify(gameResults)
-                        }
+                        } */}
                         <button className="btn btn-success mt-2" onClick={finishGame}>
                             Done <i className="fa-solid fa-circle-stop"></i>
                         </button>
