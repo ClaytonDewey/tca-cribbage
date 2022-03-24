@@ -20,7 +20,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     });
     const [cut, setCut] = useState(false)
     const [isCrib, setIsCrib] = useState(false);
-    const [opponents, setOpponents] = useState({name: "", order: 0});
+    const [opponents, setOpponents] = useState({ name: "", order: 0 });
     const [hand, setHand] = useState(0);
     const [crib, setCrib] = useState(0);
     const [highHand, setHighHand] = useState(0);
@@ -171,11 +171,61 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                         {over && (
                             <>
                                 {won && (
-                                    <p className="text-center">YOU WON! 🏆</p>
+                                    <>
+                                        <h2 className="text-center">YOU WON! 🏆</h2>
+                                        <p className="text-center my-2">Did you skunk your opponent?</p>
+                                        <ul className="form-check-control">
+                                            <li>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="skunk"
+                                                        onChange={() => !skunk ? setSkunk(true) : setSkunk(false)}
+                                                    />
+                                                    Skunk
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="skunk"
+                                                        onChange={() => !dblSkunk ? setDblSkunk(true) : setDblSkunk(false)}
+                                                    />
+                                                    Double Skunk
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </>
                                 )}
 
                                 {!won && (
-                                    <p className="text-center">You lost. 😢</p>
+                                    <>
+                                        <h2 className="text-center">You lost. 😢</h2>
+                                        <p className="text-center my-2">Were you skunked?</p>
+                                        <ul className="form-check-control">
+                                            <li>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="skunked"
+                                                        onChange={() => !skunked ? setSkunked(true) : setSkunked(false)}
+                                                    />
+                                                    Skunked
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="skunked"
+                                                        onChange={() => !dblSkunked ? setDblSkunked(true) : setDblSkunked(true)}
+                                                    />
+                                                    Double Skunked
+                                                </label>
+                                            </li>
+                                        </ul>
+                                    </>
                                 )}
                             </>
                         )}
