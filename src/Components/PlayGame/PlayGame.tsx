@@ -1,3 +1,4 @@
+import { JS } from "aws-amplify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GameResult, User } from "../../App";
@@ -20,6 +21,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     });
     const [cut, setCut] = useState(false)
     const [isCrib, setIsCrib] = useState(false);
+    const [opponents, setOpponents] = useState({name: "", order: 0});
     const [hand, setHand] = useState(0);
     const [crib, setCrib] = useState(0);
     const [highHand, setHighHand] = useState(0);
@@ -36,6 +38,8 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     const orderPlayers = (player: string) => {
         setCut(true);
         player === User ? setIsCrib(true) : setIsCrib(false);
+        const opponent = players.find(x => x.name !== User);
+        setOpponents(opponent);
     }
 
     const nextTurn = () => {
@@ -120,6 +124,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             </div>
             <div className="container container-play">
                 <h1 className="text-center my-2">Play Game</h1>
+                <p className="text-center">Opponent: {opponents.name}</p>
                 <p className="text-center">Score: {score}</p>
                 <p className="text-center">High Hand: {highHand}</p>
                 <p className="text-center">High Crib: {highCrib}</p>
