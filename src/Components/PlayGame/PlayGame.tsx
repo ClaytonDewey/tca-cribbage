@@ -1,4 +1,3 @@
-import { JS } from "aws-amplify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GameResult, User } from "../../App";
@@ -27,13 +26,13 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     const [highHand, setHighHand] = useState(0);
     const [highCrib, setHighCrib] = useState(0);
     const [score, setScore] = useState(0);
-    const [gameOver, setGameOver] = useState(false);
+    const [endGame, setEndGame] = useState(false);
     const [winner, setWinner] = useState("");
     const [skunk, setSkunk] = useState(false);
     const [dblSkunk, setDblSkunk] = useState(false);
     const [skunked, setSkunked] = useState(false);
     const [dblSkunked, setDblSkunked] = useState(false);
-    const [skunkSettings, setSkunkSettings] = useState(false);
+    const [won, setWon] = useState(false);
 
     const orderPlayers = (player: string) => {
         setCut(true);
@@ -70,21 +69,21 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             setScore(s);
             if (hand > highHand) setHighHand(hand);
             if (crib > highCrib) setHighCrib(crib);
-            setGameOver(true);
+            setEndGame(true);
         } else {
             const s = score + hand;
             setScore(s);
             if (hand > highHand) setHighHand(hand);
-            setGameOver(true);
+            setEndGame(true);
         }
     };
 
-    const whoWon = (player: string) => {
+    const selectWinner = (player: string) => {
         setWinner(player);
-        player === User ? setSkunkSettings(true) : setSkunkSettings(false);
+        player === User ? setWon(true) : setWon(false);
     }
 
-    const endGame = () => {
+    const finishGame = () => {
         setGameResult({
             start: start,
             end: (new Date()).toISOString(),
@@ -142,43 +141,43 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                     )}
                 </div>
 
-                {!gameOver && (
+                {!endGame && (
                     <>
                         <button className="btn btn-info mt-2" onClick={nextTurn}>
                             Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                         </button>
                         <button className="btn btn-success mt-2" onClick={lastTurn}>
-                            Game Over <i className="fa-solid fa-circle-stop"></i>
+                            End Game <i className="fa-solid fa-circle-stop"></i>
                         </button>
                     </>
                 )}
 
-                {gameOver && (
+                {endGame && (
                     <>
                         {
                             players.map(x => (
                                 <button
                                     key={x.name} id={x.name}
                                     className="btn btn-info mb-2"
-                                    onClick={() => whoWon(x.name)}
+                                    onClick={() => selectWinner(x.name)}
                                 >
                                     {x.name}
                                 </button>
                             ))
                         }
 
-                        {skunkSettings && (
+                        {won && (
                             <p>You Won!</p>
                         )}
 
-                        {!skunkSettings && (
+                        {!won && (
                             <p>You lost</p>
                         )}
 
                         {
                             JSON.stringify(gameResults)
                         }
-                        <button className="btn btn-success mt-2" onClick={endGame}>
+                        <button className="btn btn-success mt-2" onClick={finishGame}>
                             Done <i className="fa-solid fa-circle-stop"></i>
                         </button>
                     </>
