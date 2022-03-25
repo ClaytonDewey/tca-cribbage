@@ -34,6 +34,11 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     const [dblSkunked, setDblSkunked] = useState(false);
     const [won, setWon] = useState(false);
     const [over, setOver] = useState(false);
+    const [gameOver, setGameOver] = useState(gameResults)
+
+
+    const [test, setTest] = useState(false);
+
 
     const orderPlayers = (player: string) => {
         setCut(true);
@@ -99,10 +104,8 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             highCrib: highCrib
         });
 
-        gameResults = [
-            ...gameResults
-            , gameResult
-        ]
+        
+        setTest(true);
         // nav(-2);
     }
 
@@ -124,27 +127,37 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                 }
             </div>
             <div className="container container-play">
+                        {
+                            test && (
+                                <>
+                                    {
+                                        JSON.stringify(gameOver)
+                                    }
+                                </>
+                            )
+                        }
                 <h1 className="text-center my-2">Play Game</h1>
                 <p className="text-center">Opponent: {opponents.name}</p>
                 <p className="text-center">Score: {score}</p>
                 <p className="text-center">High Hand: {highHand}</p>
                 <p className="text-center">High Crib: {highCrib}</p>
-                <div className="container-points">
-                    <div className="form-control">
-                        <input id="points-hand" type="number" value={hand} autoFocus required onChange={e => setHand(+e.target.value)} />
-                        <label><span>Hand Points</span></label>
-                    </div>
-
-                    {isCrib && (
-                        <div id="crib" className="form-control">
-                            <input id="points-crib" type="number" value={crib} required onChange={e => setCrib(+e.target.value)} />
-                            <label><span>Crib Points</span></label>
-                        </div>
-                    )}
-                </div>
+                
 
                 {!endGame && (
                     <>
+                        <div className="container-points">
+                            <div className="form-control">
+                                <input id="points-hand" type="number" value={hand} autoFocus required onChange={e => setHand(+e.target.value)} />
+                                <label><span>Hand Points</span></label>
+                            </div>
+
+                            {isCrib && (
+                                <div id="crib" className="form-control">
+                                    <input id="points-crib" type="number" value={crib} required onChange={e => setCrib(+e.target.value)} />
+                                    <label><span>Crib Points</span></label>
+                                </div>
+                            )}
+                        </div>
                         <button className="btn btn-info mt-2" onClick={nextTurn}>
                             Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                         </button>
@@ -156,6 +169,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
 
                 {endGame && (
                     <>
+                        <h2 className="text-center mb-2">Who Won?</h2>
                         {
                             players.map(x => (
                                 <button
@@ -230,11 +244,12 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                             </>
                         )}
 
-                        {/* {
-                            JSON.stringify(gameResults)
-                        } */}
                         <button className="btn btn-success mt-2" onClick={finishGame}>
                             Done <i className="fa-solid fa-circle-stop"></i>
+                        </button>
+
+                        <button className="btn btn-primary my-2" onClick={() => setGameOver([ ...gameResults , gameResult ])}>
+                            HOME
                         </button>
                     </>
                 )}
