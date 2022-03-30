@@ -12,23 +12,23 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
     const nav = useNavigate();
     const [players, setPlayers] = useState([...getUniquePlayers].sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
-    const [message, setMessage] = useState({ type: "", msg: "" });
+    const [message, setMessage] = useState({ type: "", msg: "", show: false });
 
 
     const hideMsg = () => {
         setTimeout(() => {
-            setMessage({ type: "", msg: "" });
+            setMessage({ type: "", msg: "", show: false });
         }, 2500)
     };
 
     const addPlayer = () => {
         if (newOpponent === "") {
-            setMessage({ type: "danger", msg: "Please enter an opponent name." });
+            setMessage({ type: "danger", msg: "Please enter an opponent name.", show: true });
             hideMsg();
             return;
         }
         if (players.some(x => x.name.toUpperCase().localeCompare(newOpponent.toUpperCase()) === 0)) {
-            setMessage({ type: "danger", msg: "There is already an opponent with that name." });
+            setMessage({ type: "danger", msg: "There is already an opponent with that name.", show: true });
             setNewOpponent("");
             hideMsg();
             return;
@@ -55,12 +55,12 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
 
     const startGame = () => {
         if (players.filter(x => x.checked).length === 0) {
-            setMessage({ type: "danger", msg: "Please add an opponent." });
+            setMessage({ type: "danger", msg: "Please add an opponent.", show: true });
             hideMsg();
             return;
         }
         if (players.filter(x => x.checked).length > 1) {
-            setMessage({ type: "danger", msg: "You may only select one opponent." });
+            setMessage({ type: "danger", msg: "You may only select one opponent.", show: true });
             hideMsg();
             return;
         }
@@ -85,7 +85,7 @@ export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurre
 
     return (
         <div className="container container-setup">
-            {message && (<div className={`alert alert-${message.type}`}>{message.msg}</div>)}
+            {message.show && (<div className={`alert alert-${message.type}`}>{message.msg}</div>)}
             <h1 className="text-center my-2">Setup Game</h1>
             <h2 className="text-center my-2">Add New Oppenent</h2>
             <div className="form-control">
