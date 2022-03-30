@@ -37,10 +37,6 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     const [over, setOver] = useState(false);
     const [gameOver, setGameOver] = useState(gameResults)
 
-
-    const [test, setTest] = useState(false);
-
-
     const orderPlayers = (player: string) => {
         setCut(true);
         player === User ? setIsCrib(true) : setIsCrib(false);
@@ -129,7 +125,6 @@ export const PlayGame = ({ currentGame, gameResults }) => {
         });
 
         setGameOver([ ...gameResults , gameResult ]);
-        setTest(true);
         // nav(-2);
     }
 
@@ -152,17 +147,8 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             </div>
             {message.show && (<div className={`alert alert-${message.type}`}>{message.msg}</div>)}
             <div className="container container-play">
-                        {
-                            test && (
-                                <>
-                                    {
-                                        JSON.stringify(gameOver)
-                                    }
-                                </>
-                            )
-                        }
                 <h1 className="text-center my-2">Play Game</h1>
-                {/* <p className="text-center">Opponent: {opponents.name}</p> */}
+                <p className="text-center">Opponent: {opponents.name}</p>
                 <p className="text-center">Score: {score}</p>
                 {/* <p className="text-center">High Hand: {highHand}</p>
                 <p className="text-center">High Crib: {highCrib}</p> */}
