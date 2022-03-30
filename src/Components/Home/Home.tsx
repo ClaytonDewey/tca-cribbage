@@ -40,8 +40,7 @@ export const Home = ({ gameResults }) => {
     return (
         <>
                 <div className="container container-home">
-                    <h1 className="text-center my-2">Home Page</h1>
-                    <h2 className="text-center">tca-cribbage-app</h2>
+                    <h1 className="text-center my-2">Cribbage <img src="../../sass/img/cards.png" alt="" /></h1>
                     <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                         New Game <i className="fa-solid fa-circle-play"></i>
                     </button>
