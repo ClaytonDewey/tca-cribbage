@@ -39,22 +39,19 @@ export const Home = ({ gameResults }) => {
 
     return (
         <>
-            {!displayStats && (
                 <div className="container container-home">
                     <h1 className="text-center my-2">Home Page</h1>
                     <h2 className="text-center">tca-cribbage-app</h2>
                     <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                         New Game <i className="fa-solid fa-circle-play"></i>
                     </button>
-                    <button className="btn btn-info mt-2" onClick={() => setDisplayStats(true)}>
+                    {/* <button className="btn btn-info mt-2" onClick={() => setDisplayStats(true)}>
                         Stats <i className="fa-solid fa-chart-line"></i>
-                    </button>
+                    </button> */}
                 </div>
-            )}
 
-            {displayStats && (
                 <div className="container">
-                    <h1 className="text-center my-2">Game Stats</h1>
+                    <h1 className="text-center my-2">Game Stats <i className="fa-solid fa-chart-line"></i></h1>
                     {/* <h2>Total Game Stats</h2> */}
                     <div className="container-stats">
                         <div className="stat">
@@ -116,11 +113,10 @@ export const Home = ({ gameResults }) => {
                             Shortest Game
                         </div>
                     </div>
-                    <button className="btn btn-success mt-2" onClick={() => setDisplayStats(false)}>
+                    {/* <button className="btn btn-success mt-2" onClick={() => setDisplayStats(false)}>
                         Home <i className="fa-solid fa-house"></i>
-                    </button>
+                    </button> */}
                 </div>
-            )}
         </>
     );
 };
