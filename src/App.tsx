@@ -82,7 +82,11 @@ const App = () => {
             </div>
             <main>
                 <Routes>
-                    <Route path="/" element={<Home />} />
+                    <Route path="/" element={
+                        <Home
+                            gameResults={results}
+                        />
+                    } />
                     <Route path="setup" element={
                         <SetupGame
                             getUniquePlayers={getUniquePlayers(gameResults)}
