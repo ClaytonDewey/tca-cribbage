@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const Home = ({ gameResults }) => {
     const nav = useNavigate();
-    const [displayStats, setDisplayStats] = useState(false);
 
     const calcPercentage = (results, who: string): number => {
         const percentage: number = results.filter(x => x.winner === who).length / results.length;
