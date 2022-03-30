@@ -5,6 +5,7 @@ import { GameResult, User } from "../../App";
 export const PlayGame = ({ currentGame, gameResults }) => {
 
     const nav = useNavigate();
+    const [message, setMessage] = useState({ type: "", msg: "" });
     const { players, start } = currentGame;
     const [gameResult, setGameResult] = useState<GameResult>({
         start: start,
@@ -47,25 +48,43 @@ export const PlayGame = ({ currentGame, gameResults }) => {
         setOpponents(opponent);
     }
 
+    const hideMsg = () => {
+        setTimeout(() => {
+            setMessage({ type: "", msg: "" });
+        }, 2500)
+    };
+
+
     const nextTurn = () => {
         if (isCrib) {
             const s = score + hand + crib;
-            setScore(s);
-            if (hand > highHand) setHighHand(hand);
-            if (crib > highCrib) setHighCrib(crib);
+            if (hand === 19 || hand >= 30 || crib === 19 || crib >= 30) {
+                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29." });
+                hideMsg();
+            } else {
+                setScore(s);
+                if (hand > highHand) setHighHand(hand);
+                if (crib > highCrib) setHighCrib(crib);
 
-            // Reset state values
-            setHand(0);
-            setCrib(0);
-            setIsCrib(false);
+                // Reset state values
+                setHand(0);
+                setCrib(0);
+                setIsCrib(false);
+            }
+
         } else {
             const s = score + hand;
-            setScore(s);
-            if (hand > highHand) setHighHand(hand);
-
-            // Reset state values
-            setHand(0);
-            setIsCrib(true);
+            if (hand === 19 || hand >= 30) {
+                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29." });
+                hideMsg();
+            } else {
+                setScore(s);
+                if (hand > highHand) setHighHand(hand);
+    
+                // Reset state values
+                setHand(0);
+                setIsCrib(true);
+            }
         }
     }
 
@@ -126,6 +145,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                     ))
                 }
             </div>
+            {message && (<div className={`alert alert-${message.type}`}>{message.msg}</div>)}
             <div className="container container-play">
                         {
                             test && (
