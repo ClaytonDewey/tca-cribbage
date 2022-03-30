@@ -125,7 +125,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
         });
 
         setGameOver([ ...gameResults , gameResult ]);
-        // nav(-2);
+        nav(-2);
     }
 
     return (
@@ -259,9 +259,9 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                             Done <i className="fa-solid fa-circle-stop"></i>
                         </button>
 
-                        <button className="btn btn-primary my-2" onClick={() => nav(-2)}>
+                        {/* <button className="btn btn-primary my-2" onClick={() => nav(-2)}>
                             HOME
-                        </button>
+                        </button> */}
                     </>
                 )}
             </div>
