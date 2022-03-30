@@ -55,9 +55,20 @@ const game2: GameResult = {
     , highCrib: 4
 }
 
+const game3: GameResult = {
+    start: "2022-02-14T21:00:30"
+    , end: "2022-02-14T21:30:30"
+    , winner: User
+    , players: [{ name: "Michael", order: 1 }, { name: User, order: 2 }]
+    , dblSkunked: true
+    , highHand: 6
+    , highCrib: 4
+}
+
 let gameResults = [
     game1
     , game2
+    , game3
 ]
 
 const getUniquePlayers = (results: GameResult[]) => (
