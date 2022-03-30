@@ -38,7 +38,7 @@ export const Home = ({ gameResults }) => {
     return (
         <>
                 <div className="container container-home">
-                    <h1 className="text-center my-2">Cribbage <img src="../../images/cards.png" alt="playing cards" /></h1>
+                    <h1 className="text-center my-2">Cribbage <img src="https://www.dryadmedia.com/images/cards.png" alt="playing cards" /></h1>
                     <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                         New Game <i className="fa-solid fa-circle-play"></i>
                     </button>
@@ -48,7 +48,7 @@ export const Home = ({ gameResults }) => {
                 </div>
 
                 <div className="container">
-                    <h1 className="text-center my-2">Game Stats <i className="fa-solid fa-chart-line"></i></h1>
+                    <h2 className="text-center my-2">Game Stats <i className="fa-solid fa-chart-line"></i></h2>
                     {/* <h2>Total Game Stats</h2> */}
                     <div className="container-stats">
                         <div className="stat">
