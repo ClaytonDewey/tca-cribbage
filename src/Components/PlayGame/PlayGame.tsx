@@ -54,37 +54,42 @@ export const PlayGame = ({ currentGame, gameResults }) => {
         }, 2500)
     };
 
+    const scoreIsValid = (type, num) => {
+        if (num === 19 || num >= 30) {
+            setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29.", show: true });
+            hideMsg();
+        } else {
+            switch(type) {
+                case "crib":
+                    setCrib(num);
+                    break;
+                default:
+                    setHand(num)
+                    break;
+            }
+        }
+    }
 
     const nextTurn = () => {
         if (isCrib) {
             const s = score + hand + crib;
-            if (hand === 19 || hand >= 30 || crib === 19 || crib >= 30) {
-                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29.", show: true });
-                hideMsg();
-            } else {
-                setScore(s);
-                if (hand > highHand) setHighHand(hand);
-                if (crib > highCrib) setHighCrib(crib);
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+            if (crib > highCrib) setHighCrib(crib);
 
-                // Reset state values
-                setHand(0);
-                setCrib(0);
-                setIsCrib(false);
-            }
+            // Reset state values
+            setHand(0);
+            setCrib(0);
+            setIsCrib(false);
 
         } else {
             const s = score + hand;
-            if (hand === 19 || hand >= 30) {
-                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29.", show: true });
-                hideMsg();
-            } else {
-                setScore(s);
-                if (hand > highHand) setHighHand(hand);
-    
-                // Reset state values
-                setHand(0);
-                setIsCrib(true);
-            }
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+
+            // Reset state values
+            setHand(0);
+            setIsCrib(true);
         }
     }
 
@@ -167,13 +172,13 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                     <>
                         <div className="container-points">
                             <div className="form-control">
-                                <input id="points-hand" type="number" value={hand} autoFocus required onChange={e => setHand(+e.target.value)} />
+                                <input id="points-hand" type="number" value={hand} autoFocus required onChange={e => scoreIsValid("hand", +e.target.value)} />
                                 <label><span>Hand Points</span></label>
                             </div>
 
                             {isCrib && (
                                 <div id="crib" className="form-control">
-                                    <input id="points-crib" type="number" value={crib} required onChange={e => setCrib(+e.target.value)} />
+                                    <input id="points-crib" type="number" value={crib} required onChange={e => scoreIsValid("crib", +e.target.value)} />
                                     <label><span>Crib Points</span></label>
                                 </div>
                             )}
