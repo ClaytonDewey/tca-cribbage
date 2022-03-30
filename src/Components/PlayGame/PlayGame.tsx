@@ -5,7 +5,7 @@ import { GameResult, User } from "../../App";
 export const PlayGame = ({ currentGame, gameResults }) => {
 
     const nav = useNavigate();
-    const [message, setMessage] = useState({ type: "", msg: "" });
+    const [message, setMessage] = useState({ type: "", msg: "", show: false });
     const { players, start } = currentGame;
     const [gameResult, setGameResult] = useState<GameResult>({
         start: start,
@@ -50,7 +50,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
 
     const hideMsg = () => {
         setTimeout(() => {
-            setMessage({ type: "", msg: "" });
+            setMessage({ type: "", msg: "", show: false });
         }, 2500)
     };
 
@@ -59,7 +59,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
         if (isCrib) {
             const s = score + hand + crib;
             if (hand === 19 || hand >= 30 || crib === 19 || crib >= 30) {
-                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29." });
+                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29.", show: true });
                 hideMsg();
             } else {
                 setScore(s);
@@ -75,7 +75,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
         } else {
             const s = score + hand;
             if (hand === 19 || hand >= 30) {
-                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29." });
+                setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29.", show: true });
                 hideMsg();
             } else {
                 setScore(s);
@@ -123,7 +123,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             highCrib: highCrib
         });
 
-        
+        setGameOver([ ...gameResults , gameResult ]);
         setTest(true);
         // nav(-2);
     }
@@ -145,7 +145,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                     ))
                 }
             </div>
-            {message && (<div className={`alert alert-${message.type}`}>{message.msg}</div>)}
+            {message.show && (<div className={`alert alert-${message.type}`}>{message.msg}</div>)}
             <div className="container container-play">
                         {
                             test && (
@@ -157,10 +157,10 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                             )
                         }
                 <h1 className="text-center my-2">Play Game</h1>
-                <p className="text-center">Opponent: {opponents.name}</p>
+                {/* <p className="text-center">Opponent: {opponents.name}</p> */}
                 <p className="text-center">Score: {score}</p>
-                <p className="text-center">High Hand: {highHand}</p>
-                <p className="text-center">High Crib: {highCrib}</p>
+                {/* <p className="text-center">High Hand: {highHand}</p>
+                <p className="text-center">High Crib: {highCrib}</p> */}
                 
 
                 {!endGame && (
@@ -268,7 +268,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                             Done <i className="fa-solid fa-circle-stop"></i>
                         </button>
 
-                        <button className="btn btn-primary my-2" onClick={() => setGameOver([ ...gameResults , gameResult ])}>
+                        <button className="btn btn-primary my-2" onClick={() => nav(-2)}>
                             HOME
                         </button>
                     </>
