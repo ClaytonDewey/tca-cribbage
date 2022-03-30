@@ -9,7 +9,6 @@ import Toggle from "./Components/Theme/Toggler"
 import { Home } from "./Components/Home/Home";
 import { PlayGame } from "./Components/PlayGame/PlayGame";
 import { SetupGame } from "./Components/SetupGame/SetupGame";
-import { Stats } from "./Components/Stats/Stats";
 
 export interface Player {
     name: string;
@@ -97,11 +96,6 @@ const App = () => {
                             currentGame={currentGame}
                             gameResults={results}
                      />} />
-                    <Route path="stats" element={
-                        <Stats
-                            gameResults={results}
-                        />
-                    } />
                 </Routes>
             </main>
         </ThemeProvider>
