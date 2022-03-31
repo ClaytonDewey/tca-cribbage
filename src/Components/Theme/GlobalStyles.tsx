@@ -31,4 +31,7 @@ body {
     box-shadow: ${({ theme }) => theme.boxShadow };
 }
 
+h1 svg {
+    fill: ${({ theme }) => theme.text }
+}
 `
