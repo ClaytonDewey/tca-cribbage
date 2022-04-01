@@ -51,8 +51,8 @@ export const PlayGame = ({ currentGame, gameResults }) => {
     };
 
     const scoreIsValid = (type, num) => {
-        if (num === 19 || num >= 30) {
-            setMessage({ type: "danger", msg: "Hand/Crib points may not be 19, or greater than 29.", show: true });
+        if (num === 19 || num >= 30 || num < 0) {
+            setMessage({ type: "danger", msg: "Invalid score entered.", show: true });
             hideMsg();
         } else {
             switch(type) {
@@ -158,13 +158,13 @@ export const PlayGame = ({ currentGame, gameResults }) => {
                     <>
                         <div className="container-points">
                             <div className="form-control">
-                                <input id="points-hand" type="number" value={hand} autoFocus required onChange={e => scoreIsValid("hand", +e.target.value)} />
+                                <input id="points-hand" type="number" autoFocus required onChange={e => scoreIsValid("hand", +e.target.value)} />
                                 <label><span>Hand Points</span></label>
                             </div>
 
                             {isCrib && (
                                 <div id="crib" className="form-control">
-                                    <input id="points-crib" type="number" value={crib} required onChange={e => scoreIsValid("crib", +e.target.value)} />
+                                    <input id="points-crib" type="number" required onChange={e => scoreIsValid("crib", +e.target.value)} />
                                     <label><span>Crib Points</span></label>
                                 </div>
                             )}
