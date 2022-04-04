@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GameResult, User } from "../../App";
 
-export const PlayGame = ({ currentGame, gameResults }) => {
+export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
 
     const nav = useNavigate();
     const [message, setMessage] = useState({ type: "", msg: "", show: false });
@@ -124,7 +124,7 @@ export const PlayGame = ({ currentGame, gameResults }) => {
             highCrib: highCrib
         });
 
-        setGameOver([ ...gameResults , gameResult ]);
+        setGameOver(addGameResult(gameResult));
         nav(-2);
     }
 
