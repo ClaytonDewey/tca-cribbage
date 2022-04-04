@@ -71,17 +71,8 @@ let gameResults = [
     , game3
 ]
 
-const addGameResult = (r: GameResult) => {
-
-gameResults = [
-   ...gameResults
-    , r
-];
-
-};
-
 const getUniquePlayers = (results: GameResult[]) => (
-    [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
+    [...new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
 )
 
 const App = () => {
@@ -90,6 +81,16 @@ const App = () => {
         players: []
         , start: ""
     })
+
+    const addGameResult = (r: GameResult) => {
+
+        gameResults = [
+        ...gameResults
+            , r
+        ];
+
+    };
+
     const [theme, themeToggler] = useDarkMode();
     const themeMode = theme === "light" ? lightTheme : darkTheme;
 
