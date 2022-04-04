@@ -158,13 +158,13 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
                     <>
                         <div className="container-points">
                             <div className="form-control">
-                                <input id="points-hand" type="number" autoFocus required onChange={e => scoreIsValid("hand", +e.target.value)} />
+                                <input id="points-hand" type="number" value={hand} ref={(element) => element?.focus?.()} required onChange={e => scoreIsValid("hand", +e.target.value)} />
                                 <label><span>Hand Points</span></label>
                             </div>
 
                             {isCrib && (
                                 <div id="crib" className="form-control">
-                                    <input id="points-crib" type="number" required onChange={e => scoreIsValid("crib", +e.target.value)} />
+                                    <input id="points-crib" type="number" value={crib} required onChange={e => scoreIsValid("crib", +e.target.value)} />
                                     <label><span>Crib Points</span></label>
                                 </div>
                             )}
@@ -205,6 +205,16 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
                                                     <input
                                                         type="radio"
                                                         name="skunk"
+                                                        onChange={() => skunk || dblSkunk ? setSkunk(false) : setSkunk(false)}
+                                                    />
+                                                    No
+                                                </label>
+                                            </li>
+                                            <li>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="skunk"
                                                         onChange={() => !skunk ? setSkunk(true) : setSkunk(false)}
                                                     />
                                                     Skunk
@@ -229,6 +239,16 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
                                         <h2 className="text-center">You lost. 😢</h2>
                                         <p className="text-center my-2">Were you skunked?</p>
                                         <ul className="form-check-control">
+                                            <li>
+                                                <label>
+                                                    <input
+                                                        type="radio"
+                                                        name="skunked"
+                                                        onChange={() => skunked || dblSkunked ? setSkunked(false) : setSkunked(false)}
+                                                    />
+                                                    No
+                                                </label>
+                                            </li>
                                             <li>
                                                 <label>
                                                     <input
