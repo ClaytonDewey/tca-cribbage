@@ -1,24 +1,15 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GameResult, User } from "../../App";
+import { User } from "../../App";
 
-export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
+export const PlayGame = ({ 
+    addGameResult,
+    currentGame
+}) => {
 
     const nav = useNavigate();
     const [message, setMessage] = useState({ type: "", msg: "", show: false });
     const { players, start } = currentGame;
-    const [gameResult, setGameResult] = useState<GameResult>({
-        start: start,
-        end: "",
-        winner: "",
-        players: [],
-        skunk: false,
-        dblSkunk: false,
-        skunked: false,
-        dblSkunked: false,
-        highHand: 0,
-        highCrib: 0
-    });
     const [cut, setCut] = useState(false)
     const [isCrib, setIsCrib] = useState(false);
     const [opponents, setOpponents] = useState({ name: "", order: 0 });
@@ -35,7 +26,8 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
     const [dblSkunked, setDblSkunked] = useState(false);
     const [won, setWon] = useState(false);
     const [over, setOver] = useState(false);
-    const [gameOver, setGameOver] = useState(gameResults)
+
+
 
     const orderPlayers = (player: string) => {
         setCut(true);
@@ -110,11 +102,12 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
         setOver(true);
     }
 
-    const finishGame = () => {
-        setGameResult({
+    const finishGame = (name: string) => {
+
+        addGameResult({
             start: start,
             end: (new Date()).toISOString(),
-            winner: winner,
+            winner: name,
             players: players,
             skunk: skunk,
             dblSkunk: dblSkunk,
@@ -122,9 +115,8 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
             dblSkunked: dblSkunked,
             highHand: highHand,
             highCrib: highCrib
-        });
+        })
 
-        setGameOver(addGameResult(gameResult));
         nav(-2);
     }
 
@@ -150,15 +142,17 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
                 <h1 className="text-center my-2">Play Game</h1>
                 <p className="text-center">Opponent: {opponents.name}</p>
                 <p className="text-center">Score: {score}</p>
-                {/* <p className="text-center">High Hand: {highHand}</p>
-                <p className="text-center">High Crib: {highCrib}</p> */}
+                <p className="text-center">High Hand: {highHand}</p>
+                <p className="text-center">High Crib: {highCrib}</p>
+                <p className="text-center">Winner: {winner}</p>
+                <p className="text-center">skunk: {skunk}</p>
                 
 
                 {!endGame && (
                     <>
                         <div className="container-points">
                             <div className="form-control">
-                                <input id="points-hand" type="number" value={hand} ref={(element) => element?.focus?.()} required onChange={e => scoreIsValid("hand", +e.target.value)} />
+                                <input id="points-hand" type="number" value={hand} required onChange={e => scoreIsValid("hand", +e.target.value)} />
                                 <label><span>Hand Points</span></label>
                             </div>
 
@@ -275,7 +269,7 @@ export const PlayGame = ({ currentGame, gameResults, addGameResult }) => {
                             </>
                         )}
 
-                        <button className="btn btn-success mt-2" onClick={finishGame}>
+                        <button className="btn btn-success mt-2" onClick={() => finishGame(winner)}>
                             Done <i className="fa-solid fa-circle-stop"></i>
                         </button>
 
