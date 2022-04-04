@@ -114,7 +114,6 @@ const App = () => {
                     } />
                     <Route path="play" element={<PlayGame
                             currentGame={currentGame}
-                            gameResults={results}
                             addGameResult={addGameResult}
                      />} />
                 </Routes>
