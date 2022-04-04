@@ -60,7 +60,7 @@ const game3: GameResult = {
     , end: "2022-02-14T21:30:30"
     , winner: User
     , players: [{ name: "Michael", order: 1 }, { name: User, order: 2 }]
-    , dblSkunked: true
+    , dblSkunk: true
     , highHand: 6
     , highCrib: 4
 }
@@ -70,6 +70,15 @@ let gameResults = [
     , game2
     , game3
 ]
+
+const addGameResult = (r: GameResult) => {
+
+gameResults = [
+   ...gameResults
+    , r
+];
+
+};
 
 const getUniquePlayers = (results: GameResult[]) => (
     [... new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
@@ -106,6 +115,7 @@ const App = () => {
                     <Route path="play" element={<PlayGame
                             currentGame={currentGame}
                             gameResults={results}
+                            addGameResult={addGameResult}
                      />} />
                 </Routes>
             </main>
