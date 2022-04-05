@@ -92,7 +92,9 @@ const App = () => {
             <main>
                 <Routes>
                     <Route path="/" element={
-                        <Home />
+                        <Home
+                            gameResults={results}
+                         />
                     } />
                     <Route path="setup" element={
                         <SetupGame
