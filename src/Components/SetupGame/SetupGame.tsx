@@ -4,13 +4,13 @@ import { CurrentGame, User } from "../../App";
 // import { Message } from "../Messages/Messages";
 
 interface SetupGameProps {
-    getUniquePlayers: string[];
+    uniquePreviousPlayers;
     setCurrentGame: (g: CurrentGame) => void;
 }
 
-export const SetupGame: React.FC<SetupGameProps> = ({ getUniquePlayers, setCurrentGame }) => {
+export const SetupGame: React.FC<SetupGameProps> = ({ uniquePreviousPlayers, setCurrentGame }) => {
     const nav = useNavigate();
-    const [players, setPlayers] = useState([...getUniquePlayers].sort().map(x => ({ name: x, checked: false })));
+    const [players, setPlayers] = useState([...uniquePreviousPlayers].sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
     const [message, setMessage] = useState({ type: "", msg: "", show: false });
 

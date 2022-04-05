@@ -55,40 +55,30 @@ const game2: GameResult = {
     , highCrib: 4
 }
 
-const game3: GameResult = {
-    start: "2022-02-14T21:00:30"
-    , end: "2022-02-14T21:30:30"
-    , winner: User
-    , players: [{ name: "Michael", order: 1 }, { name: User, order: 2 }]
-    , dblSkunk: true
-    , highHand: 6
-    , highCrib: 4
-}
+const gameResults = [
+  game1
+  , game2
+];
 
-let gameResults = [
-    game1
-    , game2
-    , game3
-]
-
-const getUniquePlayers = (results: GameResult[]) => (
+const getUniquePlayers = (results) => (
     [...new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
-)
+);
 
 const App = () => {
+
     const [results, setResults] = useState<GameResult[]>(gameResults)
     const [currentGame, setCurrentGame] = useState<CurrentGame>({
         players: []
         , start: ""
     })
 
-    const addGameResult = (r: GameResult) => {
-
-        gameResults = [
-        ...gameResults
-            , r
-        ];
-
+    const addGameResult = (gameResult) => {
+        setResults(
+            [
+                ...results
+                , gameResult
+            ]
+        );
     };
 
     const [theme, themeToggler] = useDarkMode();
@@ -109,7 +99,7 @@ const App = () => {
                     } />
                     <Route path="setup" element={
                         <SetupGame
-                            getUniquePlayers={getUniquePlayers(gameResults)}
+                            uniquePreviousPlayers={getUniquePlayers(results)}
                             setCurrentGame={setCurrentGame}
                         />
                     } />
