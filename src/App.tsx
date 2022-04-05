@@ -10,6 +10,7 @@ import { Home } from "./Components/Home";
 import { PlayGame } from "./Components/PlayGame";
 import { SetupGame } from "./Components/SetupGame";
 import { Stats } from "./Components/Stats";
+import { Leaderboard } from "./Components/Leaderboard";
 
 export interface Player {
     name: string;
@@ -105,6 +106,10 @@ const App = () => {
                      />} />
                     <Route path="stats" element={
                         <Stats
+                            gameResults={results}
+                        /> } />
+                    <Route path="leaderboard" element={
+                        <Leaderboard
                             gameResults={results}
                         /> } />
                 </Routes>
