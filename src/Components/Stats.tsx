@@ -37,7 +37,7 @@ export const Stats = ({ gameResults }) => {
 
 
     return (
-                        <div className="container">
+                <div className="container">
                     <h2 className="text-center my-2">Game Stats <i className="fa-solid fa-chart-line"></i></h2>
                     {/* <h2>Total Game Stats</h2> */}
                     <div className="container-stats">
