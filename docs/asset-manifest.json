@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/tca-cribbage/static/css/main.84d49bf1.css",
-    "main.js": "/tca-cribbage/static/js/main.ba4f6ef4.js",
+    "main.js": "/tca-cribbage/static/js/main.a1d3354a.js",
     "static/js/787.56c43390.chunk.js": "/tca-cribbage/static/js/787.56c43390.chunk.js",
     "index.html": "/tca-cribbage/index.html",
     "main.84d49bf1.css.map": "/tca-cribbage/static/css/main.84d49bf1.css.map",
-    "main.ba4f6ef4.js.map": "/tca-cribbage/static/js/main.ba4f6ef4.js.map",
+    "main.a1d3354a.js.map": "/tca-cribbage/static/js/main.a1d3354a.js.map",
     "787.56c43390.chunk.js.map": "/tca-cribbage/static/js/787.56c43390.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.84d49bf1.css",
-    "static/js/main.ba4f6ef4.js"
+    "static/js/main.a1d3354a.js"
   ]
 }
