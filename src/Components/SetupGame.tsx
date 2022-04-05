@@ -10,7 +10,7 @@ interface SetupGameProps {
 
 export const SetupGame: React.FC<SetupGameProps> = ({ uniquePreviousPlayers, setCurrentGame }) => {
     const nav = useNavigate();
-    const [players, setPlayers] = useState([...uniquePreviousPlayers].sort().map(x => ({ name: x, checked: false })));
+    const [players, setPlayers] = useState([...uniquePreviousPlayers].filter(x => x !== User).sort().map(x => ({ name: x, checked: false })));
     const [newOpponent, setNewOpponent] = useState("");
     const [message, setMessage] = useState({ type: "", msg: "", show: false });
 
