@@ -85,6 +85,7 @@ export const Home = ({ gameResults }) => {
     const countHighHand = (results, what: number) => {
         let count = 0;
         results.map(x => x["highHand"] === what ? count++ : count);
+        results.map(x => x["highCrib"] === what ? count++ : count);
         return count;
     }
 
@@ -173,11 +174,11 @@ export const Home = ({ gameResults }) => {
                             29 Hands
                         </div>
                         <div className="stat">
-                            <span>{calculateLongestGame(gameResults) / 1000 / 60}m</span>
+                            <span>{Math.round(calculateLongestGame(gameResults) / 1000 / 60)}m</span>
                             Longest Game
                         </div>
                         <div className="stat">
-                            <span>{calculateShortestGame(gameResults) / 1000 / 60}m</span>
+                            <span>{Math.round((calculateShortestGame(gameResults) / 1000 / 60))}m</span>
                             Shortest Game
                         </div>
                     </div>
