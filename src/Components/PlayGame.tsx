@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "../../App";
+import { User } from "../App";
 
 export const PlayGame = ({ 
     addGameResult,

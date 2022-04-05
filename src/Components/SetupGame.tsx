@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { CurrentGame, User } from "../../App";
+import { CurrentGame, User } from "../App";
 // import { Message } from "../Messages/Messages";
 
 interface SetupGameProps {

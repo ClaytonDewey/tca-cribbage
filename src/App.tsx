@@ -6,9 +6,9 @@ import { useDarkMode } from "./Components/Theme/useDarkMode"
 import { GlobalStyles } from "./Components/Theme/GlobalStyles"
 import { lightTheme, darkTheme } from "./Components/Theme/Themes"
 import Toggle from "./Components/Theme/Toggler"
-import { Home } from "./Components/Home/Home";
-import { PlayGame } from "./Components/PlayGame/PlayGame";
-import { SetupGame } from "./Components/SetupGame/SetupGame";
+import { Home } from "./Components/Home";
+import { PlayGame } from "./Components/PlayGame";
+import { SetupGame } from "./Components/SetupGame";
 
 export interface Player {
     name: string;
@@ -35,30 +35,27 @@ export interface GameResult {
 
 export const User = "Me"
 
-const game1: GameResult = {
-    start: "2022-02-14T15:14:30",
-    end: "2022-02-14T15:20:00",
-    winner: User,
-    players: [{ name: "Dad", order: 1 }, { name: User, order: 2 }],
-    skunk: true
-    , highHand: 16
-    , highCrib: 12
-}
+// const game1: GameResult = {
+//     start: "2022-02-14T15:14:30",
+//     end: "2022-02-14T15:20:00",
+//     winner: User,
+//     players: [{ name: "Dad", order: 1 }, { name: User, order: 2 }],
+//     skunk: true
+//     , highHand: 16
+//     , highCrib: 12
+// }
 
-const game2: GameResult = {
-    start: "2022-02-14T21:00:30"
-    , end: "2022-02-14T21:30:30"
-    , winner: "William"
-    , players: [{ name: "William", order: 1 }, { name: User, order: 2 }]
-    , dblSkunked: true
-    , highHand: 6
-    , highCrib: 4
-}
+// const game2: GameResult = {
+//     start: "2022-02-14T21:00:30"
+//     , end: "2022-02-14T21:30:30"
+//     , winner: "William"
+//     , players: [{ name: "William", order: 1 }, { name: User, order: 2 }]
+//     , dblSkunked: true
+//     , highHand: 6
+//     , highCrib: 4
+// }
 
-const gameResults = [
-  game1
-  , game2
-];
+const gameResults = [];
 
 const getUniquePlayers = (results) => (
     [...new Set(results.flatMap(x => x.players.map(y => y.name)))].filter(x => x !== User)
