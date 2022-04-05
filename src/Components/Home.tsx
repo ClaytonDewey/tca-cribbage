@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 const cardsIcon = () => {
@@ -66,8 +67,19 @@ const cardsIcon = () => {
     )
 }
 
-export const Home = () => {
+export const Home = ({ gameResults }) => {
     const nav = useNavigate();
+    const [hasStats, setHasStats] = useState(false);
+
+    const showStats = () => {
+        if (gameResults.length) {
+            setHasStats(true)
+        }
+    }
+
+    useEffect(() => {
+        showStats();
+    }, []);
 
     return (
         <>
@@ -76,12 +88,18 @@ export const Home = () => {
                     <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                         New Game <i className="fa-solid fa-circle-play"></i>
                     </button>
-                    <button className="btn btn-info mt-2" onClick={() => nav("/stats")}>
-                        Stats <i className="fa-solid fa-chart-line"></i>
-                    </button>
-                    <button className="btn btn-warning mt-2" onClick={() => nav("/leaderboard")}>
-                        Leaderboards <i className="fa-solid fa-medal"></i>
-                    </button>
+                    {
+                        hasStats && (
+                            <>
+                                <button className="btn btn-info mt-2" onClick={() => nav("/stats")}>
+                                    Stats <i className="fa-solid fa-chart-line"></i>
+                                </button>
+                                <button className="btn btn-warning mt-2" onClick={() => nav("/leaderboard")}>
+                                    Leaderboards <i className="fa-solid fa-medal"></i>
+                                </button>
+                            </>
+                        )
+                    }
                 </div>
         </>
     );
