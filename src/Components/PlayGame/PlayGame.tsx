@@ -142,10 +142,10 @@ export const PlayGame = ({
                 <h1 className="text-center my-2">Play Game</h1>
                 <p className="text-center">Opponent: {opponents.name}</p>
                 <p className="text-center">Score: {score}</p>
-                <p className="text-center">High Hand: {highHand}</p>
+                {/* <p className="text-center">High Hand: {highHand}</p>
                 <p className="text-center">High Crib: {highCrib}</p>
                 <p className="text-center">Winner: {winner}</p>
-                <p className="text-center">skunk: {skunk}</p>
+                <p className="text-center">skunk: {skunk}</p> */}
                 
 
                 {!endGame && (

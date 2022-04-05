@@ -111,11 +111,11 @@ export const Home = ({ gameResults }) => {
                     {/* <button className="btn btn-info mt-2" onClick={() => setDisplayStats(true)}>
                         Stats <i className="fa-solid fa-chart-line"></i>
                     </button> */}
-                    <pre style={{textAlign: "left"}}>
+                    {/* <pre style={{textAlign: "left"}}>
                     {
                         JSON.stringify(gameResults, null, 4)
                     }
-                    </pre>
+                    </pre> */}
                 </div>
 
                 <div className="container">
