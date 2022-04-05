@@ -79,6 +79,9 @@ export const Home = () => {
                     <button className="btn btn-info mt-2" onClick={() => nav("/stats")}>
                         Stats <i className="fa-solid fa-chart-line"></i>
                     </button>
+                    <button className="btn btn-warning mt-2" onClick={() => nav("/stats")}>
+                        Leaderboards <i className="fa-solid fa-medal"></i>
+                    </button>
                 </div>
         </>
     );

@@ -131,7 +131,42 @@
         }
     }
 
-    &:active {
+    &-warning {
+        border-color: $warning-em;
+        background-color: $warning-em;
+        color: $black;
+    
+        &:link,
+        &:visited {
+            color: $black;
+        }
+    
+        &:hover,
+        &:active,
+        &:active:hover,
+        &:focus,
+        &:active:focus,
+        &-inverted {
+            background-color: darken($warning-em, 8%);
+            border-color: darken($warning-em, 10%);
+            color: $black;
+        }
+    
+        &-outline {
+            background-color: transparent;
+            border-color: $warning-em;
+            color: $warning-em;
+    
+            &:hover,
+            &:active,
+            &:active:hover,
+            &:focus,
+            &:active:focus {
+                background-color: $warning-em;
+                color: $black;
+            }
+        }
+    }    &:active {
         transform: scale(0.9);
     }
 
