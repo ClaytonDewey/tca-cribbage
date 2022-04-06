@@ -24,13 +24,28 @@ export const Leaderboard = ({ gameResults, uniquePreviousPlayers }) => {
     return (
         <div className="container">
             <h2 className="text-center my-2">Leaderboard <i className="fa-solid fa-medal"></i></h2>
-            {
-                lb.map(x => (
-                    <>
-                        <p key={x.name}>{x.name} - wins: {x.wins} - losses: {x.losses} - winning %: {x.winningPercent}%</p>
-                    </>
-                ))
-            }
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Player</th>
+                        <th scope="col">Wins</th>
+                        <th scope="col">Losses</th>
+                        <th scope="col">Winning %</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        lb.map(x => (
+                            <tr key={x.name}>
+                                <td>{x.name}</td>
+                                <td>{x.wins}</td>
+                                <td>{x.losses}</td>
+                                <td>{x.winningPercent}%</td>
+                            </tr>
+                        ))
+                    }
+                </tbody>
+            </table>
             <button className="btn btn-success mt-2" onClick={() => nav(-1)}>
                 Home <i className="fa-solid fa-house"></i>
             </button>
