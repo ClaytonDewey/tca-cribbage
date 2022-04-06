@@ -35,6 +35,16 @@ export const Leaderboard = ({ gameResults, uniquePreviousPlayers }) => {
                 </thead>
                 <tbody>
                     {
+                        !gameResults.length && (
+                            <tr>
+                                <td>&nbsp;</td>
+                                <td>0</td>
+                                <td>0</td>
+                                <td>0</td>
+                            </tr>
+                        )
+                    }
+                    {
                         lb.map(x => (
                             <tr key={x.name}>
                                 <td>{x.name}</td>
@@ -46,7 +56,18 @@ export const Leaderboard = ({ gameResults, uniquePreviousPlayers }) => {
                     }
                 </tbody>
             </table>
-            <button className="btn btn-success mt-2" onClick={() => nav(-1)}>
+
+            {
+                !gameResults.length && (
+                    <>
+                        <p>You haven't played any games yet. Why not start a new one?</p>
+                        <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
+                            New Game <i className="fa-solid fa-circle-play"></i>
+                        </button>
+                    </>
+                )
+            }
+            <button className="btn btn-info mt-2" onClick={() => nav(-1)}>
                 Home <i className="fa-solid fa-house"></i>
             </button>
         </div>
