@@ -27,6 +27,8 @@ export const PlayGame = ({
     const [won, setWon] = useState(false);
     const [over, setOver] = useState(false);
     const [gameOver, setGameOver] = useState(false);
+    const [pegging, setPegging] = useState(true);
+    const [pegged, setPegged] = useState(0);
 
     let [pegs, setPegs] = useState(0);
 
@@ -71,6 +73,10 @@ export const PlayGame = ({
         }
     }
 
+    const countHand = () => {
+        setPegging(false);
+    }
+
     const nextTurn = () => {
         if (isCrib) {
             const s = score + hand + crib;
@@ -82,6 +88,7 @@ export const PlayGame = ({
             setHand(0);
             setCrib(0);
             setIsCrib(false);
+            setPegging(true);
 
         } else {
             const s = score + hand;
@@ -91,6 +98,7 @@ export const PlayGame = ({
             // Reset state values
             setHand(0);
             setIsCrib(true);
+            setPegging(true);
         }
     }
 
@@ -160,33 +168,49 @@ export const PlayGame = ({
                 <p className="text-center">Winner: {winner}</p>
                 <p className="text-center">skunk: {skunk}</p> */}
                 
-                <div className="form-control number">
-                    <span className="minus" onClick={() => decrement()}><i className="fa-solid fa-minus"></i></span>
-                    <input type="number" value={pegs} placeholder="Peg Points"/>
-                    <span className="plus" onClick={() => increment()}><i className="fa-solid fa-plus"></i></span>
-                </div>
-
                 {!endGame && (
                     <>
-                        <div className="container-points">
-                            <div className="form-control">
-                                <input id="points-hand" type="number" value={hand} required onChange={e => scoreIsValid("hand", +e.target.value)} />
-                                <label><span>Hand Points</span></label>
-                            </div>
+                        {
+                            pegging && (
+                                <>
+                                    <div className="container-points">
+                                        <div className="form-control number">
+                                            <span className="minus" onClick={() => decrement()}><i className="fa-solid fa-minus"></i></span>
+                                            <input type="number" value={pegs} placeholder="Peg Points" onChange={e => setPegged(+e.target.value)} />
+                                            <span className="plus" onClick={() => increment()}><i className="fa-solid fa-plus"></i></span>
+                                        </div>
+                                    </div>
+                                    <button className="btn btn-info mt-2" onClick={countHand}>
+                                        Count Hand/Crib
+                                    </button>
+                                </>
+                            )
+                        }
+                        {
+                            !pegging && (
+                                <>
+                                    <div className="container-points">
+                                        <div className="form-control">
+                                            <input id="points-hand" type="number" value={hand} required onChange={e => scoreIsValid("hand", +e.target.value)} />
+                                            <label><span>Hand Points</span></label>
+                                        </div>
 
-                            {isCrib && (
-                                <div id="crib" className="form-control">
-                                    <input id="points-crib" type="number" value={crib} required onChange={e => scoreIsValid("crib", +e.target.value)} />
-                                    <label><span>Crib Points</span></label>
-                                </div>
-                            )}
-                        </div>
-                        <button className="btn btn-info mt-2" onClick={nextTurn}>
-                            Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
-                        </button>
-                        <button className="btn btn-success mt-2" onClick={lastTurn}>
-                            End Game <i className="fa-solid fa-circle-stop"></i>
-                        </button>
+                                        {isCrib && (
+                                            <div id="crib" className="form-control">
+                                                <input id="points-crib" type="number" value={crib} required onChange={e => scoreIsValid("crib", +e.target.value)} />
+                                                <label><span>Crib Points</span></label>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <button className="btn btn-info mt-2" onClick={nextTurn}>
+                                        Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
+                                    </button>
+                                    <button className="btn btn-success mt-2" onClick={lastTurn}>
+                                        End Game <i className="fa-solid fa-circle-stop"></i>
+                                    </button>
+                                </>
+                            )
+                        }
                     </>
                 )}
 
