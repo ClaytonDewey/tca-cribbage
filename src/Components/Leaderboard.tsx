@@ -30,7 +30,7 @@ export const Leaderboard = ({ gameResults, uniquePreviousPlayers }) => {
                         <th scope="col">Player</th>
                         <th scope="col">Wins</th>
                         <th scope="col">Losses</th>
-                        <th scope="col">Winning %</th>
+                        <th scope="col">Avg.</th>
                     </tr>
                 </thead>
                 <tbody>
