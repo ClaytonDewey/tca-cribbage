@@ -57,6 +57,16 @@
             text-transform: uppercase;
             cursor: pointer;
         }
+
+        &.number {
+            position: relative;
+            margin: 4rem auto 0;
+            flex: 0 0 100%;
+
+            @media #{$mq-medium} {
+                flex: 0 0 48%;
+            }
+        }
     }
 
     &-check {
@@ -205,15 +215,6 @@
     }
     100% {
         transform: translateX(0);
-    }
-}
-
-.number {
-    position: relative;
-    margin: 4rem auto 0;
-
-    @media #{$mq-medium} {
-        width: 50%;
     }
 }
 
