@@ -101,22 +101,29 @@ export const SetupGame: React.FC<SetupGameProps> = ({ uniquePreviousPlayers, set
                 <button id="addOpp" onClick={addPlayer}>Add</button>
             </div>
 
-            <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
-            <ul className="form-check-control">
-                {players.map(x => (
-                    <li key={x.name}>
-                        <label>
-                            <input
-                                name={x.name}
-                                type="checkbox"
-                                checked={x.checked}
-                                onChange={() => toggleOpponents(x)}
-                            />
-                            {x.name}
-                        </label>
-                    </li>
-                ))}
-            </ul>
+            {
+                players.length > 0 && (
+                    <>
+                        <h2 className="text-center mt-4 mb-2">Select Oppenent</h2>
+                        <ul className="form-check-control">
+                            {players.map(x => (
+                                <li key={x.name}>
+                                    <label>
+                                        <input
+                                            name={x.name}
+                                            type="checkbox"
+                                            checked={x.checked}
+                                            onChange={() => toggleOpponents(x)}
+                                        />
+                                        {x.name}
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
+                    </>
+                )
+            }
+
 
             <button className="btn btn-success mt-4" onClick={startGame}>
                 Start Game <i className="fa-solid fa-circle-play"></i>
