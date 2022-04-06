@@ -26,6 +26,7 @@ export const PlayGame = ({
     const [dblSkunked, setDblSkunked] = useState(false);
     const [won, setWon] = useState(false);
     const [over, setOver] = useState(false);
+    const [gameOver, setGameOver] = useState(false);
 
 
 
@@ -199,7 +200,10 @@ export const PlayGame = ({
                                                     <input
                                                         type="radio"
                                                         name="skunk"
-                                                        onChange={() => skunk || dblSkunk ? setSkunk(false) : setSkunk(false)}
+                                                        onChange={() => {
+                                                            skunk || dblSkunk ? setSkunk(false) : setSkunk(false);
+                                                            setGameOver(true);
+                                                        }}
                                                     />
                                                     No
                                                 </label>
@@ -209,7 +213,10 @@ export const PlayGame = ({
                                                     <input
                                                         type="radio"
                                                         name="skunk"
-                                                        onChange={() => !skunk ? setSkunk(true) : setSkunk(false)}
+                                                        onChange={() => {
+                                                            !skunk ? setSkunk(true) : setSkunk(false);
+                                                            setGameOver(true);
+                                                        }}
                                                     />
                                                     Skunk
                                                 </label>
@@ -219,7 +226,10 @@ export const PlayGame = ({
                                                     <input
                                                         type="radio"
                                                         name="skunk"
-                                                        onChange={() => !dblSkunk ? setDblSkunk(true) : setDblSkunk(false)}
+                                                        onChange={() => {
+                                                            !dblSkunk ? setDblSkunk(true) : setDblSkunk(false);
+                                                            setGameOver(true);
+                                                        }}
                                                     />
                                                     Double Skunk
                                                 </label>
@@ -238,7 +248,10 @@ export const PlayGame = ({
                                                     <input
                                                         type="radio"
                                                         name="skunked"
-                                                        onChange={() => skunked || dblSkunked ? setSkunked(false) : setSkunked(false)}
+                                                        onChange={() => {
+                                                            skunked || dblSkunked ? setSkunked(false) : setSkunked(false);
+                                                            setGameOver(true);
+                                                        }}
                                                     />
                                                     No
                                                 </label>
@@ -248,7 +261,10 @@ export const PlayGame = ({
                                                     <input
                                                         type="radio"
                                                         name="skunked"
-                                                        onChange={() => !skunked ? setSkunked(true) : setSkunked(false)}
+                                                        onChange={() => {
+                                                            !skunked ? setSkunked(true) : setSkunked(false);
+                                                            setGameOver(true);
+                                                        }}
                                                     />
                                                     Skunked
                                                 </label>
@@ -258,7 +274,10 @@ export const PlayGame = ({
                                                     <input
                                                         type="radio"
                                                         name="skunked"
-                                                        onChange={() => !dblSkunked ? setDblSkunked(true) : setDblSkunked(true)}
+                                                        onChange={() => {
+                                                            !dblSkunked ? setDblSkunked(true) : setDblSkunked(true);
+                                                            setGameOver(true);
+                                                        }}
                                                     />
                                                     Double Skunked
                                                 </label>
@@ -269,13 +288,14 @@ export const PlayGame = ({
                             </>
                         )}
 
-                        <button className="btn btn-success mt-2" onClick={() => finishGame(winner)}>
-                            Done <i className="fa-solid fa-circle-stop"></i>
-                        </button>
+                        {
+                            gameOver && (
+                                <button className="btn btn-success mt-2" onClick={() => finishGame(winner)}>
+                                    Done <i className="fa-solid fa-circle-stop"></i>
+                                </button>
+                            )
+                        }
 
-                        {/* <button className="btn btn-primary my-2" onClick={() => nav(-2)}>
-                            HOME
-                        </button> */}
                     </>
                 )}
             </div>
