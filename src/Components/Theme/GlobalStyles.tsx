@@ -34,4 +34,8 @@ body {
 h1 svg {
     fill: ${({ theme }) => theme.text }
 }
+
+.table {
+    color: ${({ theme }) => theme.text }
+}
 `
