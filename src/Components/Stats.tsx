@@ -47,7 +47,13 @@ export const Stats = ({ gameResults }) => {
                         </div>
                         <div className="stat">
                             <span>
-                                {calcPercentage(gameResults, "Me")}%
+                                {
+                                    gameResults.length && (
+                                        <>
+                                            {calcPercentage(gameResults, "Me")}%
+                                        </>
+                                    )
+                                }
                             </span>
                             Win Percentage
                         </div>
@@ -76,11 +82,27 @@ export const Stats = ({ gameResults }) => {
                             Dbl Skunked
                         </div>
                         <div className="stat">
-                            <span>{highPoints(gameResults, "highHand")}</span>
+                            <span>
+                                {
+                                    gameResults.length && (
+                                        <>
+                                            {highPoints(gameResults, "highHand")}
+                                        </>
+                                    )
+                                }
+                            </span>
                             Highest Hand
                         </div>
                         <div className="stat">
-                            <span>{highPoints(gameResults, "highCrib")}</span>
+                            <span>
+                                {
+                                    gameResults.length && (
+                                        <>
+                                            {highPoints(gameResults, "highCrib")}
+                                        </>
+                                    )
+                                }
+                            </span>
                             Highest Crib
                         </div>
                         <div className="stat">
@@ -92,11 +114,27 @@ export const Stats = ({ gameResults }) => {
                             29 Hands
                         </div>
                         <div className="stat">
-                            <span>{Math.round(calculateLongestGame(gameResults) / 1000 / 60)}m</span>
+                            <span>
+                                {
+                                    gameResults.length && (
+                                        <>
+                                            {Math.round(calculateLongestGame(gameResults) / 1000 / 60)}m
+                                        </>
+                                    )
+                                }
+                            </span>
                             Longest Game
                         </div>
                         <div className="stat">
-                            <span>{Math.round((calculateShortestGame(gameResults) / 1000 / 60))}m</span>
+                            <span>
+                                {
+                                    gameResults.length && (
+                                        <>
+                                            {Math.round(calculateShortestGame(gameResults) / 1000 / 60)}m
+                                        </>
+                                    )
+                                }
+                            </span>
                             Shortest Game
                         </div>
                     </div>
