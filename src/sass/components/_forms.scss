@@ -210,7 +210,7 @@
 
 .number {
     position: relative;
-    margin: 4rem auto;
+    margin: 4rem auto 0;
 
     @media #{$mq-medium} {
         width: 50%;
