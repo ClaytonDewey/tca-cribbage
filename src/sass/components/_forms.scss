@@ -207,3 +207,50 @@
         transform: translateX(0);
     }
 }
+
+.number {
+    position: relative;
+    margin: 4rem auto;
+
+    @media #{$mq-medium} {
+        width: 50%;
+    }
+}
+
+.number input {
+    margin: 0px 1rem;
+}
+
+.minus,
+.plus {
+    width: 6rem;
+    height: 6rem;
+    border-radius: 4px;
+    padding: 1rem 0.5rem;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.4rem;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: absolute;
+}
+
+.minus {
+    background-color: $danger;
+    border-color: darken($danger, 2%);
+    color: $white;
+    top: 0;
+    left: 0;
+}
+
+.plus {
+    background-color: $success-color;
+    border-color: darken($success-color, 2%);
+    color: $white;
+    top: 0;
+    right: 0;
+
+}
+
