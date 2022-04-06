@@ -39,7 +39,16 @@ export const Stats = ({ gameResults }) => {
     return (
                 <div className="container">
                     <h2 className="text-center my-2">Game Stats <i className="fa-solid fa-chart-line"></i></h2>
-                    {/* <h2>Total Game Stats</h2> */}
+                    {
+                        gameResults.length === 0 && (
+                            <>
+                                <p>You haven't played any games yet. Why not start a new one?</p>
+                                <button className="btn btn-success my-2" onClick={() => nav("/setup")}>
+                                    New Game <i className="fa-solid fa-circle-play"></i>
+                                </button>
+                            </>
+                        )
+                    }
                     <div className="container-stats">
                         <div className="stat">
                             <span>{gameResults.length}</span>
@@ -138,7 +147,7 @@ export const Stats = ({ gameResults }) => {
                             Shortest Game
                         </div>
                     </div>
-                    <button className="btn btn-success mt-2" onClick={() => nav(-1)}>
+                    <button className="btn btn-info mt-2" onClick={() => nav(-1)}>
                         Home <i className="fa-solid fa-house"></i>
                     </button>
                 </div>
