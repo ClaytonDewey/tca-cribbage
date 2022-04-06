@@ -28,6 +28,18 @@ export const PlayGame = ({
     const [over, setOver] = useState(false);
     const [gameOver, setGameOver] = useState(false);
 
+    let [pegs, setPegs] = useState(0);
+
+    const increment = () => {
+        pegs += 1;
+        setPegs(pegs);
+    }
+
+    const decrement = () => {
+        pegs -= 1;
+        setPegs(pegs);
+    }
+
 
 
     const orderPlayers = (player: string) => {
@@ -148,6 +160,11 @@ export const PlayGame = ({
                 <p className="text-center">Winner: {winner}</p>
                 <p className="text-center">skunk: {skunk}</p> */}
                 
+                <div className="form-control number">
+                    <span className="minus" onClick={() => decrement()}><i className="fa-solid fa-minus"></i></span>
+                    <input type="number" value={pegs} placeholder="Peg Points"/>
+                    <span className="plus" onClick={() => increment()}><i className="fa-solid fa-plus"></i></span>
+                </div>
 
                 {!endGame && (
                     <>
