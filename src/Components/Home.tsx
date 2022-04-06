@@ -76,18 +76,13 @@ export const Home = ({ gameResults }) => {
                     <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                         New Game <i className="fa-solid fa-circle-play"></i>
                     </button>
-                    {
-                        gameResults.length > 0 && (
-                            <>
-                                <button className="btn btn-info mt-2" onClick={() => nav("/stats")}>
-                                    Stats <i className="fa-solid fa-chart-line"></i>
-                                </button>
-                                <button className="btn btn-warning mt-2" onClick={() => nav("/leaderboard")}>
-                                    Leaderboard <i className="fa-solid fa-medal"></i>
-                                </button>
-                            </>
-                        )
-                    }
+
+                    <button className="btn btn-info mt-2" onClick={() => nav("/stats")}>
+                        Stats <i className="fa-solid fa-chart-line"></i>
+                    </button>
+                    <button className="btn btn-warning mt-2" onClick={() => nav("/leaderboard")}>
+                        Leaderboard <i className="fa-solid fa-medal"></i>
+                    </button>
                 </div>
         </>
     );
