@@ -31,6 +31,7 @@ export interface GameResult {
     dblSkunk?: boolean;
     skunked?: boolean;
     dblSkunked?: boolean;
+    highPegg: number;
     highHand: number;
     highCrib: number;
 }
@@ -45,6 +46,7 @@ const game1: GameResult = {
     skunk: true
     , highHand: 16
     , highCrib: 12
+    , highPegg: 4
 }
 
 const game2: GameResult = {
@@ -55,6 +57,7 @@ const game2: GameResult = {
     , dblSkunked: true
     , highHand: 6
     , highCrib: 4
+    , highPegg: 4
 }
 
 const gameResults = [

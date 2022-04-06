@@ -8,16 +8,22 @@ export const PlayGame = ({
 }) => {
 
     const nav = useNavigate();
+    // Error message state handler
     const [message, setMessage] = useState({ type: "", msg: "", show: false });
+
     const { players, start } = currentGame;
-    const [cut, setCut] = useState(false)
+    const [cut, setCut] = useState(false);
     const [isCrib, setIsCrib] = useState(false);
     const [opponents, setOpponents] = useState({ name: "", order: 0 });
+
+    const [pegged, setPegged] = useState(0);
     const [hand, setHand] = useState(0);
     const [crib, setCrib] = useState(0);
+    const [highPegg, setHighPegg] = useState(0);
     const [highHand, setHighHand] = useState(0);
     const [highCrib, setHighCrib] = useState(0);
     const [score, setScore] = useState(0);
+
     const [endGame, setEndGame] = useState(false);
     const [winner, setWinner] = useState("");
     const [skunk, setSkunk] = useState(false);
@@ -28,7 +34,6 @@ export const PlayGame = ({
     const [over, setOver] = useState(false);
     const [gameOver, setGameOver] = useState(false);
     const [pegging, setPegging] = useState(true);
-    const [pegged, setPegged] = useState(0);
 
     let [pegs, setPegs] = useState(0);
 
@@ -41,8 +46,6 @@ export const PlayGame = ({
         pegs -= 1;
         setPegs(pegs);
     }
-
-
 
     const orderPlayers = (player: string) => {
         setCut(true);
@@ -74,28 +77,35 @@ export const PlayGame = ({
     }
 
     const countHand = () => {
+        setPegged(pegs);
         setPegging(false);
     }
 
     const nextTurn = () => {
         if (isCrib) {
-            const s = score + hand + crib;
+            const s = score + pegged + hand + crib;
             setScore(s);
+            if (pegged > highPegg) setHighPegg(pegged)
             if (hand > highHand) setHighHand(hand);
             if (crib > highCrib) setHighCrib(crib);
 
             // Reset state values
+            setPegs(0);
+            setPegged(0)
             setHand(0);
             setCrib(0);
             setIsCrib(false);
             setPegging(true);
 
         } else {
-            const s = score + hand;
+            const s = score + pegged + hand;
             setScore(s);
+            if (pegged > highPegg) setHighPegg(pegged)
             if (hand > highHand) setHighHand(hand);
 
             // Reset state values
+            setPegs(0);
+            setPegged(0)
             setHand(0);
             setIsCrib(true);
             setPegging(true);
@@ -104,14 +114,16 @@ export const PlayGame = ({
 
     const lastTurn = () => {
         if (isCrib) {
-            const s = score + hand + crib;
+            const s = score + pegged + hand + crib;
             setScore(s);
+            if (pegged > highPegg) setHighPegg(pegged)
             if (hand > highHand) setHighHand(hand);
             if (crib > highCrib) setHighCrib(crib);
             setEndGame(true);
         } else {
-            const s = score + hand;
+            const s = score + pegged + hand;
             setScore(s);
+            if (pegged > highPegg) setHighPegg(pegged)
             if (hand > highHand) setHighHand(hand);
             setEndGame(true);
         }
@@ -134,6 +146,7 @@ export const PlayGame = ({
             dblSkunk: dblSkunk,
             skunked: skunked,
             dblSkunked: dblSkunked,
+            highPegg: highPegg,
             highHand: highHand,
             highCrib: highCrib
         })
@@ -205,12 +218,12 @@ export const PlayGame = ({
                                     <button className="btn btn-info mt-2" onClick={nextTurn}>
                                         Next Turn <i className="fa-solid fa-circle-chevron-right"></i>
                                     </button>
-                                    <button className="btn btn-success mt-2" onClick={lastTurn}>
-                                        End Game <i className="fa-solid fa-circle-stop"></i>
-                                    </button>
                                 </>
                             )
                         }
+                        <button className="btn btn-success mt-2" onClick={lastTurn}>
+                            End Game <i className="fa-solid fa-circle-stop"></i>
+                        </button>
                     </>
                 )}
 
