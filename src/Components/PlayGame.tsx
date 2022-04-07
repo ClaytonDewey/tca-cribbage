@@ -113,6 +113,7 @@ export const PlayGame = ({
     }
 
     const lastTurn = () => {
+        setPegged(pegs);
         if (isCrib) {
             const s = score + pegged + hand + crib;
             setScore(s);

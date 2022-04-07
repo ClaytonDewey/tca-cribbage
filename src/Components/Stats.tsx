@@ -115,6 +115,18 @@ export const Stats = ({ gameResults }) => {
                             Highest Crib
                         </div>
                         <div className="stat">
+                            <span>
+                                {
+                                    gameResults.length && (
+                                        <>
+                                            {highPoints(gameResults, "highPegg")}
+                                        </>
+                                    )
+                                }
+                            </span>
+                            Highest Pegged
+                        </div>
+                        <div className="stat">
                             <span>{countHighHand(gameResults, 28)}</span>
                             28 Hands
                         </div>
