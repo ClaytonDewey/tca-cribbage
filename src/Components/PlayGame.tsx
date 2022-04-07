@@ -16,7 +16,6 @@ export const PlayGame = ({
     const [isCrib, setIsCrib] = useState(false);
     const [opponents, setOpponents] = useState({ name: "", order: 0 });
 
-    const [pegged, setPegged] = useState(0);
     const [hand, setHand] = useState(0);
     const [crib, setCrib] = useState(0);
     const [highPegg, setHighPegg] = useState(0);
@@ -35,17 +34,7 @@ export const PlayGame = ({
     const [gameOver, setGameOver] = useState(false);
     const [pegging, setPegging] = useState(true);
 
-    let [pegs, setPegs] = useState(0);
-
-    const increment = () => {
-        pegs += 1;
-        setPegs(pegs);
-    }
-
-    const decrement = () => {
-        pegs -= 1;
-        setPegs(pegs);
-    }
+    const [pegs, setPegs] = useState(0);
 
     const orderPlayers = (player: string) => {
         setCut(true);
@@ -59,6 +48,23 @@ export const PlayGame = ({
             setMessage({ type: "", msg: "", show: false });
         }, 2500)
     };
+
+    const increment = () => {
+        setPegs(pegs + 1);
+        setScore(score + 1);
+    }
+
+    const decrement = () => {
+        if (pegs === 0) return;
+        setPegs(pegs - 1)
+        setScore(score - 1);
+    }
+
+    const countHand = () => {
+        setPegs(0);
+        setPegging(false);
+        if (pegs > highPegg) setHighPegg(pegs);
+    }
 
     const scoreIsValid = (type, num) => {
         if (num === 19 || num >= 30 || num < 0) {
@@ -76,36 +82,25 @@ export const PlayGame = ({
         }
     }
 
-    const countHand = () => {
-        setPegged(pegs);
-        setPegging(false);
-    }
-
     const nextTurn = () => {
         if (isCrib) {
-            const s = score + pegged + hand + crib;
+            const s = score + hand + crib;
             setScore(s);
-            if (pegged > highPegg) setHighPegg(pegged)
             if (hand > highHand) setHighHand(hand);
             if (crib > highCrib) setHighCrib(crib);
 
             // Reset state values
-            setPegs(0);
-            setPegged(0)
             setHand(0);
             setCrib(0);
             setIsCrib(false);
             setPegging(true);
 
         } else {
-            const s = score + pegged + hand;
+            const s = score + hand;
             setScore(s);
-            if (pegged > highPegg) setHighPegg(pegged)
             if (hand > highHand) setHighHand(hand);
 
             // Reset state values
-            setPegs(0);
-            setPegged(0)
             setHand(0);
             setIsCrib(true);
             setPegging(true);
@@ -113,21 +108,37 @@ export const PlayGame = ({
     }
 
     const lastTurn = () => {
-        setPegged(pegs);
-        if (isCrib) {
-            const s = score + pegged + hand + crib;
-            setScore(s);
-            if (pegged > highPegg) setHighPegg(pegged)
-            if (hand > highHand) setHighHand(hand);
-            if (crib > highCrib) setHighCrib(crib);
+        setOver(true)
+        setGameOver(true);
+
+        if (score <= 30) {
             setEndGame(true);
+            setDblSkunked(true);
+            setWon(false)
+        } else if (score <= 60) {
+            setEndGame(true);
+            setSkunked(true);
+            setWon(false)
+        } else if (score <= 120) {
+            setEndGame(true);
+            setWon(false);
         } else {
-            const s = score + pegged + hand;
-            setScore(s);
-            if (pegged > highPegg) setHighPegg(pegged)
-            if (hand > highHand) setHighHand(hand);
             setEndGame(true);
+            setWon(true);
         }
+
+        // if (isCrib) {
+        //     const s = score + hand + crib;
+        //     setScore(s);
+        //     if (hand > highHand) setHighHand(hand);
+        //     if (crib > highCrib) setHighCrib(crib);
+        //     setEndGame(true);
+        // } else {
+        //     const s = score + hand;
+        //     setScore(s);
+        //     if (hand > highHand) setHighHand(hand);
+        //     setEndGame(true);
+        // }
     };
 
     const selectWinner = (player: string) => {
@@ -177,10 +188,7 @@ export const PlayGame = ({
                 <h1 className="text-center my-2">Play Game</h1>
                 <p className="text-center">Opponent: {opponents.name}</p>
                 <p className="text-center">Score: {score}</p>
-                {/* <p className="text-center">High Hand: {highHand}</p>
-                <p className="text-center">High Crib: {highCrib}</p>
-                <p className="text-center">Winner: {winner}</p>
-                <p className="text-center">skunk: {skunk}</p> */}
+                <p className="text-center">Pegged Points: {pegs}</p>
                 
                 {!endGame && (
                     <>
@@ -188,13 +196,13 @@ export const PlayGame = ({
                             pegging && (
                                 <>
                                     <div className="container-points">
-                                        <div className="form-control number">
+                                        <div className="number">
                                             <span className="minus" onClick={() => decrement()}><i className="fa-solid fa-minus"></i></span>
-                                            <input type="number" value={pegs} placeholder="Peg Points" onChange={e => setPegged(+e.target.value)} />
+                                            <span className="peg-points">{pegs}</span>
                                             <span className="plus" onClick={() => increment()}><i className="fa-solid fa-plus"></i></span>
                                         </div>
                                     </div>
-                                    <button className="btn btn-info mt-2" onClick={countHand}>
+                                    <button className="btn btn-info mt-2" onClick={() => countHand()}>
                                         Count Hand/Crib
                                     </button>
                                 </>
@@ -230,7 +238,7 @@ export const PlayGame = ({
 
                 {endGame && (
                     <>
-                        <h2 className="text-center mb-2">Who Won?</h2>
+                        {/* <h2 className="text-center mb-2">Who Won?</h2>
                         {
                             players.map(x => (
                                 <button
@@ -241,7 +249,7 @@ export const PlayGame = ({
                                     {x.name}
                                 </button>
                             ))
-                        }
+                        } */}
 
                         {over && (
                             <>
@@ -296,48 +304,16 @@ export const PlayGame = ({
                                 {!won && (
                                     <>
                                         <h2 className="text-center">You lost. 😢</h2>
-                                        <p className="text-center my-2">Were you skunked?</p>
-                                        <ul className="form-check-control">
-                                            <li>
-                                                <label>
-                                                    <input
-                                                        type="radio"
-                                                        name="skunked"
-                                                        onChange={() => {
-                                                            skunked || dblSkunked ? setSkunked(false) : setSkunked(false);
-                                                            setGameOver(true);
-                                                        }}
-                                                    />
-                                                    No
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label>
-                                                    <input
-                                                        type="radio"
-                                                        name="skunked"
-                                                        onChange={() => {
-                                                            !skunked ? setSkunked(true) : setSkunked(false);
-                                                            setGameOver(true);
-                                                        }}
-                                                    />
-                                                    Skunked
-                                                </label>
-                                            </li>
-                                            <li>
-                                                <label>
-                                                    <input
-                                                        type="radio"
-                                                        name="skunked"
-                                                        onChange={() => {
-                                                            !dblSkunked ? setDblSkunked(true) : setDblSkunked(true);
-                                                            setGameOver(true);
-                                                        }}
-                                                    />
-                                                    Double Skunked
-                                                </label>
-                                            </li>
-                                        </ul>
+                                        {
+                                            skunked && (
+                                                <p className="text-center my-2">You were skunked!</p>
+                                            )
+                                        }
+                                        {
+                                            dblSkunked && (
+                                                <p className="text-center my-2">You were double skunked!</p>
+                                            )
+                                        }
                                     </>
                                 )}
                             </>

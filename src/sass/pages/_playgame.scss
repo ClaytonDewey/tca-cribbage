@@ -38,3 +38,55 @@
         }
     }
 }
+
+.container {
+
+    &-points {
+        .number {
+            margin: 4rem auto 0;
+            height: 6rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        
+        }
+        
+        .peg-points {
+            font-size: 2.4rem;
+            display: flex;
+            height: 6rem;
+            // border-bottom: 2px solid $dark-gray;
+            flex-grow: 1;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .minus,
+        .plus {
+            width: 6rem;
+            height: 6rem;
+            padding: 1rem 0.5rem;
+            border: 1px solid;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.4rem;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        
+        .minus {
+            border-radius: 4px;
+            background-color: $danger;
+            border-color: darken($danger, 2%);
+            color: $white;
+        }
+        
+        .plus {
+            border-radius: 4px;
+            background-color: $success-color;
+            border-color: darken($success-color, 2%);
+            color: $white;
+        }
+    }
+}
