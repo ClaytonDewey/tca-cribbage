@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import prettyMs from "pretty-ms";
 
 export const Stats = ({ gameResults }) => {
     const nav = useNavigate();
@@ -139,7 +140,7 @@ export const Stats = ({ gameResults }) => {
                                 {
                                     gameResults.length && (
                                         <>
-                                            {Math.round(calculateLongestGame(gameResults) / 1000 / 60)}m
+                                            {prettyMs(calculateLongestGame(gameResults))}
                                         </>
                                     )
                                 }
@@ -151,7 +152,7 @@ export const Stats = ({ gameResults }) => {
                                 {
                                     gameResults.length && (
                                         <>
-                                            {Math.round(calculateShortestGame(gameResults) / 1000 / 60)}m
+                                            {prettyMs(calculateShortestGame(gameResults))}
                                         </>
                                     )
                                 }
