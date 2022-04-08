@@ -32,7 +32,8 @@ body {
 }
 
 h1 svg {
-    fill: ${({ theme }) => theme.text }
+    transition: fill 0.5s ease-in;
+    fill: ${({ theme }) => theme.text };
 }
 
 .table {
