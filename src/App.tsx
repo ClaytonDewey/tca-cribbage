@@ -38,34 +38,34 @@ export interface GameResult {
 
 export const User = "Me"
 
-const game1: GameResult = {
-    start: "2022-02-14T15:14:30",
-    end: "2022-02-14T15:20:00",
-    winner: User,
-    players: [{ name: "Dad", order: 1 }, { name: User, order: 2 }],
-    skunk: true
-    , highPegg: 4
-    , highHand: 16
-    , highCrib: 12
-}
+// const game1: GameResult = {
+//     start: "2022-02-14T15:14:30",
+//     end: "2022-02-14T15:20:00",
+//     winner: User,
+//     players: [{ name: "Dad", order: 1 }, { name: User, order: 2 }],
+//     skunk: true
+//     , highPegg: 4
+//     , highHand: 16
+//     , highCrib: 12
+// }
 
-const game2: GameResult = {
-    start: "2022-02-14T21:00:30"
-    , end: "2022-02-14T21:30:30"
-    , winner: "William"
-    , players: [{ name: "William", order: 1 }, { name: User, order: 2 }]
-    , dblSkunked: true
-    , highPegg: 4
-    , highHand: 6
-    , highCrib: 4
-}
+// const game2: GameResult = {
+//     start: "2022-02-14T21:00:30"
+//     , end: "2022-02-14T21:30:30"
+//     , winner: "William"
+//     , players: [{ name: "William", order: 1 }, { name: User, order: 2 }]
+//     , dblSkunked: true
+//     , highPegg: 4
+//     , highHand: 6
+//     , highCrib: 4
+// }
 
-const gameResults = [
-    game1
-    , game2
-];
+// const gameResults = [
+//     game1
+//     , game2
+// ];
 
-// const gameResults = [];
+const gameResults = [];
 
 const getUniquePlayers = (results) => (
     [...new Set(results.flatMap(x => x.players.map(y => y.name)))]
