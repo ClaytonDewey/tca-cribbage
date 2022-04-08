@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { ThemeProvider } from "styled-components";
 import { useDarkMode } from "./Components/Theme/useDarkMode"
@@ -11,6 +11,7 @@ import { PlayGame } from "./Components/PlayGame";
 import { SetupGame } from "./Components/SetupGame";
 import { Stats } from "./Components/Stats";
 import { Leaderboard } from "./Components/Leaderboard";
+import  localforage from "localforage";
 
 export interface Player {
     name: string;
@@ -38,34 +39,6 @@ export interface GameResult {
 
 export const User = "Me"
 
-// const game1: GameResult = {
-//     start: "2022-02-14T15:14:30",
-//     end: "2022-02-14T15:20:00",
-//     winner: User,
-//     players: [{ name: "Dad", order: 1 }, { name: User, order: 2 }],
-//     skunk: true
-//     , highPegg: 4
-//     , highHand: 16
-//     , highCrib: 12
-// }
-
-// const game2: GameResult = {
-//     start: "2022-02-14T21:00:30"
-//     , end: "2022-02-14T21:30:30"
-//     , winner: "William"
-//     , players: [{ name: "William", order: 1 }, { name: User, order: 2 }]
-//     , dblSkunked: true
-//     , highPegg: 4
-//     , highHand: 6
-//     , highCrib: 4
-// }
-
-// const gameResults = [
-//     game1
-//     , game2
-// ];
-
-const gameResults = [];
 
 const getUniquePlayers = (results) => (
     [...new Set(results.flatMap(x => x.players.map(y => y.name)))]
@@ -73,19 +46,30 @@ const getUniquePlayers = (results) => (
 
 const App = () => {
 
-    const [results, setResults] = useState<GameResult[]>(gameResults)
+    const [results, setResults] = useState<GameResult[]>([]);
     const [currentGame, setCurrentGame] = useState<CurrentGame>({
         players: []
         , start: ""
-    })
+    });
 
-    const addGameResult = (gameResult) => {
-        setResults(
-            [
-                ...results
-                , gameResult
-            ]
-        );
+    const loadGameResults = async () => {
+        setResults(await localforage.getItem("gameResults") ?? []);
+    };
+
+    useEffect(() => {
+        loadGameResults();
+    }, []);
+
+    const addGameResult = async (gameResult) => {
+
+        const newResults = [
+            ...results
+            , gameResult
+        ]
+
+        setResults(newResults);
+
+        await localforage.setItem("gameResults", newResults);
     };
 
     const [theme, themeToggler] = useDarkMode();
