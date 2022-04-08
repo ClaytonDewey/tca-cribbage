@@ -95,6 +95,18 @@ export const Stats = ({ gameResults }) => {
                                 {
                                     gameResults.length && (
                                         <>
+                                            {highPoints(gameResults, "highPegg")}
+                                        </>
+                                    )
+                                }
+                            </span>
+                            High Pegg.
+                        </div>
+                        <div className="stat">
+                            <span>
+                                {
+                                    gameResults.length && (
+                                        <>
                                             {highPoints(gameResults, "highHand")}
                                         </>
                                     )
