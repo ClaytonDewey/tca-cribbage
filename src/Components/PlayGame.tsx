@@ -121,26 +121,30 @@ export const PlayGame = ({
         if (score <= 30) {
             setEndGame(true);
             setDblSkunked(true);
-            setWon(false)
+            setWon(false);
+            setWinner(opponents.name);
         } else if (score <= 60) {
             setEndGame(true);
             setSkunked(true);
-            setWon(false)
+            setWon(false);
+            setWinner(opponents.name);
         } else if (score <= 120) {
             setEndGame(true);
             setWon(false);
+            setWinner(opponents.name);
         } else {
             setEndGame(true);
             setWon(true);
+            setWinner(User)
         }
     };
 
-    const finishGame = (name: string) => {
+    const finishGame = () => {
 
         addGameResult({
             start: start,
             end: (new Date()).toISOString(),
-            winner: name,
+            winner: winner,
             players: players,
             skunk: skunk,
             dblSkunk: dblSkunk,
@@ -297,7 +301,7 @@ export const PlayGame = ({
 
                         {
                             gameOver && (
-                                <button className="btn btn-success mt-2" onClick={() => finishGame(winner)}>
+                                <button className="btn btn-success mt-2" onClick={() => finishGame()}>
                                     Done <i className="fa-solid fa-circle-stop"></i>
                                 </button>
                             )
