@@ -83,27 +83,34 @@ export const PlayGame = ({
     }
 
     const nextTurn = () => {
-        if (isCrib) {
-            const s = score + hand + crib;
-            setScore(s);
-            if (hand > highHand) setHighHand(hand);
-            if (crib > highCrib) setHighCrib(crib);
-
-            // Reset state values
-            setHand(0);
-            setCrib(0);
-            setIsCrib(false);
-            setPegging(true);
-
+        if (score >= 121) {
+            setOver(true)
+            setGameOver(true);
+            setEndGame(true);
+            setWon(true);
         } else {
-            const s = score + hand;
-            setScore(s);
-            if (hand > highHand) setHighHand(hand);
+            if (isCrib) {
+                const s = score + hand + crib;
+                setScore(s);
+                if (hand > highHand) setHighHand(hand);
+                if (crib > highCrib) setHighCrib(crib);
 
-            // Reset state values
-            setHand(0);
-            setIsCrib(true);
-            setPegging(true);
+                // Reset state values
+                setHand(0);
+                setCrib(0);
+                setIsCrib(false);
+                setPegging(true);
+
+            } else {
+                const s = score + hand;
+                setScore(s);
+                if (hand > highHand) setHighHand(hand);
+
+                // Reset state values
+                setHand(0);
+                setIsCrib(true);
+                setPegging(true);
+            }
         }
     }
 
@@ -126,26 +133,7 @@ export const PlayGame = ({
             setEndGame(true);
             setWon(true);
         }
-
-        // if (isCrib) {
-        //     const s = score + hand + crib;
-        //     setScore(s);
-        //     if (hand > highHand) setHighHand(hand);
-        //     if (crib > highCrib) setHighCrib(crib);
-        //     setEndGame(true);
-        // } else {
-        //     const s = score + hand;
-        //     setScore(s);
-        //     if (hand > highHand) setHighHand(hand);
-        //     setEndGame(true);
-        // }
     };
-
-    const selectWinner = (player: string) => {
-        setWinner(player);
-        player === User ? setWon(true) : setWon(false);
-        setOver(true);
-    }
 
     const finishGame = (name: string) => {
 
@@ -238,24 +226,12 @@ export const PlayGame = ({
 
                 {endGame && (
                     <>
-                        {/* <h2 className="text-center mb-2">Who Won?</h2>
-                        {
-                            players.map(x => (
-                                <button
-                                    key={x.name} id={x.name}
-                                    className="btn btn-info mb-2"
-                                    onClick={() => selectWinner(x.name)}
-                                >
-                                    {x.name}
-                                </button>
-                            ))
-                        } */}
 
                         {over && (
                             <>
                                 {won && (
                                     <>
-                                        <h2 className="text-center">YOU WON! 🏆</h2>
+                                        <h2 className="text-center mt-3">YOU WON! 🏆</h2>
                                         <p className="text-center my-2">Did you skunk your opponent?</p>
                                         <ul className="form-check-control">
                                             <li>
@@ -303,7 +279,7 @@ export const PlayGame = ({
 
                                 {!won && (
                                     <>
-                                        <h2 className="text-center">You lost. 😢</h2>
+                                        <h2 className="text-center mt-3">You lost. 😢</h2>
                                         {
                                             skunked && (
                                                 <p className="text-center my-2">You were skunked!</p>
