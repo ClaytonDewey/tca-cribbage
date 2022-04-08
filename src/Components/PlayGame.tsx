@@ -197,9 +197,9 @@ export const PlayGame = ({
                                 <>
                                     <div className="container-points">
                                         <div className="number">
-                                            <span className="minus" onClick={() => decrement()}><i className="fa-solid fa-minus"></i></span>
+                                            <button className="minus" onClick={() => decrement()}><i className="fa-solid fa-minus"></i></button>
                                             <span className="peg-points">{pegs}</span>
-                                            <span className="plus" onClick={() => increment()}><i className="fa-solid fa-plus"></i></span>
+                                            <button className="plus" onClick={() => increment()}><i className="fa-solid fa-plus"></i></button>
                                         </div>
                                     </div>
                                     <button className="btn btn-info mt-2" onClick={() => countHand()}>
