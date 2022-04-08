@@ -13,7 +13,8 @@ const calculateLeaderboard = (uniquePlayers, results) => {
             , losses: userGamesPlayed.length - userGamesWon.length
             , winningPercent: (userGamesWon.length / userGamesPlayed.length).toFixed(3)
         };
-    });
+    })
+    .sort((a, b) => `${b.winningPercent}${(b.wins + b.losses).toString().padStart(3, '0')}`.localeCompare(`${a.winningPercent}${(a.wins + a.losses).toString().padStart(3, '0')}`));
 };
 
 export const Leaderboard = ({ gameResults, uniquePreviousPlayers }) => {
