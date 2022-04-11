@@ -52,6 +52,13 @@ export const PlayGame = ({
     const increment = () => {
         setPegs(pegs + 1);
         setScore(score + 1);
+        if (score >= 120) {
+                setOver(true)
+                setGameOver(true);
+                setEndGame(true);
+                setWon(true);
+                setWinner(User)
+        }
     }
 
     const decrement = () => {
@@ -64,6 +71,14 @@ export const PlayGame = ({
         setPegs(0);
         setPegging(false);
         if (pegs > highPegg) setHighPegg(pegs);
+
+        if (score >= 121) {
+                setOver(true)
+                setGameOver(true);
+                setEndGame(true);
+                setWon(true);
+                setWinner(User)
+        }
     }
 
     const scoreIsValid = (type, num) => {
