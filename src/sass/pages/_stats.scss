@@ -18,14 +18,14 @@
         height: 15rem;
         text-align: center;
         font-size: 1.4rem;
-        border-radius: 10px;
+        border-radius: 4px;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
 
         span {
             display: inline-block;
-            font-size: 4rem;
+            font-size: 3rem;
             font-weight: 700;
             margin-bottom: 3px;
         }
@@ -41,7 +41,7 @@
             height: 20rem;
 
             span {
-                font-size: 5rem;
+                font-size: 4rem;
             }
         }
     }
