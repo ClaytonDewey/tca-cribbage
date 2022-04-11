@@ -83,29 +83,38 @@ export const PlayGame = ({
     }
 
     const nextTurn = () => {
-        if (score >= 121) {
-            setOver(true)
-            setGameOver(true);
-            setEndGame(true);
-            setWon(true);
-        } else {
-            if (isCrib) {
-                const s = score + hand + crib;
-                setScore(s);
-                if (hand > highHand) setHighHand(hand);
-                if (crib > highCrib) setHighCrib(crib);
+        if (isCrib) {
+            const s = score + hand + crib;
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+            if (crib > highCrib) setHighCrib(crib);
 
+            if (score >= 121) {
+                setOver(true)
+                setGameOver(true);
+                setEndGame(true);
+                setWon(true);
+                setWinner(User)
+            } else {
                 // Reset state values
                 setHand(0);
                 setCrib(0);
                 setIsCrib(false);
                 setPegging(true);
+            }
 
+        } else {
+            const s = score + hand;
+            setScore(s);
+            if (hand > highHand) setHighHand(hand);
+
+            if (score >= 121) {
+                setOver(true)
+                setGameOver(true);
+                setEndGame(true);
+                setWon(true);
+                setWinner(User)
             } else {
-                const s = score + hand;
-                setScore(s);
-                if (hand > highHand) setHighHand(hand);
-
                 // Reset state values
                 setHand(0);
                 setIsCrib(true);
