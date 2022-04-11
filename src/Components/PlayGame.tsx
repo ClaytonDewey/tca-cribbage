@@ -118,12 +118,12 @@ export const PlayGame = ({
         setOver(true)
         setGameOver(true);
 
-        if (score <= 30) {
+        if (score <= 60) {
             setEndGame(true);
             setDblSkunked(true);
             setWon(false);
             setWinner(opponents.name);
-        } else if (score <= 60) {
+        } else if (score <= 90) {
             setEndGame(true);
             setSkunked(true);
             setWon(false);
