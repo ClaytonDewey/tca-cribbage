@@ -104,12 +104,12 @@ export const PlayGame = ({
             if (hand > highHand) setHighHand(hand);
             if (crib > highCrib) setHighCrib(crib);
 
-            if (score >= 121) {
+            if (score + hand + crib >= 121) {
                 setOver(true)
                 setGameOver(true);
                 setEndGame(true);
                 setWon(true);
-                setWinner(User)
+                setWinner(User);
             } else {
                 // Reset state values
                 setHand(0);
