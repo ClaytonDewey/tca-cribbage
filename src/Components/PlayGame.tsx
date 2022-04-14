@@ -317,9 +317,23 @@ export const PlayGame = ({
 
                         {
                             gameOver && (
-                                <button className="btn btn-success mt-2" onClick={() => finishGame()}>
-                                    Done <i className="fa-solid fa-circle-stop"></i>
-                                </button>
+                                <>
+                                    {
+                                        won && (
+                                            <button className="btn btn-success mt-2" onClick={() => finishGame()}>
+                                                You Won! <i className="fa-solid fa-crown"></i>
+                                            </button>
+                                        )
+                                    }
+
+                                    {
+                                        !won && (
+                                            <button className="btn btn-danger mt-2" onClick={() => finishGame()}>
+                                                You Lost <i className="fa-solid fa-face-frown"></i>
+                                            </button>
+                                        )
+                                    }
+                                </>
                             )
                         }
 
