@@ -67,18 +67,10 @@ export const PlayGame = ({
         setScore(score - 1);
     }
 
-    const countHand = () => {
+    const endPegging = () => {
         setPegs(0);
         setPegging(false);
         if (pegs > highPegg) setHighPegg(pegs);
-
-        if (score >= 121) {
-                setOver(true)
-                setGameOver(true);
-                setEndGame(true);
-                setWon(true);
-                setWinner(User)
-        }
     }
 
     const scoreIsValid = (type, num) => {
@@ -218,7 +210,7 @@ export const PlayGame = ({
                                             <button className="plus" onClick={() => increment()}><i className="fa-solid fa-plus"></i></button>
                                         </div>
                                     </div>
-                                    <button className="btn btn-info mt-2" onClick={() => countHand()}>
+                                    <button className="btn btn-info mt-2" onClick={() => endPegging()}>
                                         Count Hand/Crib
                                     </button>
                                 </>
