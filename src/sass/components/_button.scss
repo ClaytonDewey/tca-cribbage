@@ -57,6 +57,42 @@
         }
     }
 
+    &-danger {
+        background-color: $danger;
+        border-color: $danger;
+        color: $white;
+    
+        &:hover {
+            background-color: darken($danger, 8%);
+            border-color: darken($danger, 10%);
+            color: $white;
+        }
+    
+        &:active,
+        &:active:hover,
+        &:focus,
+        &:active:focus {
+            background-color: darken($danger, 4%);
+            border-color: darken($danger, 5%);
+            color: $white;
+        }
+    
+        &-outline {
+            background-color: transparent;
+            border-color: $danger;
+            color: $danger;
+    
+            &:hover,
+            &:active,
+            &:active:hover,
+            &:focus,
+            &:active:focus {
+                background-color: $danger;
+                color: $white;
+            }
+        }
+    }
+    
     &-success {
         border-color: $success-color;
         background-color: $success-color;
