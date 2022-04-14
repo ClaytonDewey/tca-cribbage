@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../App";
+import KeepAwake from 'react-native-keep-awake';
 
 export const PlayGame = ({ 
     addGameResult,
