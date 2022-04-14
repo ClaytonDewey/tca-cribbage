@@ -37,6 +37,14 @@ export const PlayGame = ({
 
     const [pegs, setPegs] = useState(0);
 
+    const changeKeepAwake = (shouldBeAwake) => {
+        if (shouldBeAwake) {
+            KeepAwake.activate();
+        } else {
+            KeepAwake.deactivate();
+        }
+    };
+    
     const orderPlayers = (player: string) => {
         setCut(true);
         player === User ? setIsCrib(true) : setIsCrib(false);
