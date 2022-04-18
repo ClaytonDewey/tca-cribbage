@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { User } from "../App";
-import KeepAwake from 'react-native-keep-awake';
+// import KeepAwake from 'react-native-keep-awake';
 
 export const PlayGame = ({ 
     addGameResult,
@@ -37,13 +37,13 @@ export const PlayGame = ({
 
     const [pegs, setPegs] = useState(0);
 
-    const changeKeepAwake = (shouldBeAwake) => {
-        if (shouldBeAwake) {
-            KeepAwake.activate();
-        } else {
-            KeepAwake.deactivate();
-        }
-    };
+    // const changeKeepAwake = (shouldBeAwake) => {
+    //     if (shouldBeAwake) {
+    //         KeepAwake.activate();
+    //     } else {
+    //         KeepAwake.deactivate();
+    //     }
+    // };
     
     const orderPlayers = (player: string) => {
         setCut(true);
