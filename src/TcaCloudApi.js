@@ -15,14 +15,14 @@ export const saveGameToCloud = async (email, appName, timestamp, gameResult) => 
         game: gameResult,
     };
 
-    console.log("Unmarshalled Game", dynamoGame);
+    // console.log("Unmarshalled Game", dynamoGame);
 
     const marshalledGame = marshall(dynamoGame, {
         removeUndefinedValues: true,
         convertClassInstanceToMap: true,
     });
 
-    console.log("MarshalledGame", marshalledGame);
+    // console.log("MarshalledGame", marshalledGame);
 
     const options = {
         method: "POST",
@@ -38,16 +38,16 @@ export const saveGameToCloud = async (email, appName, timestamp, gameResult) => 
 export const loadGamesFromCloud = async (email, appName) => {
     const url = `https://32wop75hhc.execute-api.us-east-1.amazonaws.com/prod/data/?user=${email}&game=${appName}`;
 
-    console.log("url", url);
+    // console.log("url", url);
 
     const response = await fetch(url);
     const data = await response.json();
 
-    console.log("Marshalled Response", data);
+    // console.log("Marshalled Response", data);
 
     const unmarshalledData = data.Items.map((x) => unmarshall(x, { convertEmptyValues: true }));
 
-    console.log("Unarshalled Response", unmarshalledData);
+    // console.log("Unarshalled Response", unmarshalledData);
 
     const gameResults = unmarshalledData.map((x) => x.game);
     return gameResults;
