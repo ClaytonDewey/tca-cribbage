@@ -11,7 +11,8 @@ import { PlayGame } from "./Components/PlayGame";
 import { SetupGame } from "./Components/SetupGame";
 import { Stats } from "./Components/Stats";
 import { Leaderboard } from "./Components/Leaderboard";
-import  localforage from "localforage";
+// import  localforage from "localforage";
+import { saveGameToCloud, loadGamesFromCloud } from './TcaCloudApi';
 
 export interface Player {
     name: string;
@@ -53,7 +54,8 @@ const App = () => {
     });
 
     const loadGameResults = async () => {
-        setResults(await localforage.getItem("gameResults") ?? []);
+        // setResults(await localforage.getItem("gameResults") ?? []);
+        setResults(await loadGamesFromCloud("clay@dryadmedia.com", "tca-cribbage") ?? []);
     };
 
     useEffect(() => {
@@ -69,7 +71,13 @@ const App = () => {
 
         setResults(newResults);
 
-        await localforage.setItem("gameResults", newResults);
+        // await localforage.setItem("gameResults", newResults);
+        await saveGameToCloud(
+            'clay@dryadmedia.com'
+            , 'tca-cribbage'
+            , gameResult.end   // new Date().toISOString()
+            , gameResult
+            );
     };
 
     const [theme, themeToggler] = useDarkMode();
