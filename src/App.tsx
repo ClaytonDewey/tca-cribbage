@@ -13,6 +13,7 @@ import { Stats } from "./Components/Stats";
 import { Leaderboard } from "./Components/Leaderboard";
 // import  localforage from "localforage";
 import { saveGameToCloud, loadGamesFromCloud } from './TcaCloudApi';
+import localforage from "localforage";
 
 export interface Player {
     name: string;
@@ -55,6 +56,12 @@ const App = () => {
 
     const [emailAddress, setEmailAddress] = useState("");
 
+    const updateEmailAddress = async (newEmailAddress) => {
+
+        // Update the state, after saving the email in local storage.
+        setEmailAddress(await localforage.setItem('email', newEmailAddress));
+    }
+
     const loadGameResults = async () => {
         // setResults(await localforage.getItem("gameResults") ?? []);
         setResults(await loadGamesFromCloud("clay@dryadmedia.com", "tca-cribbage") ?? []);
@@ -95,8 +102,8 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={
                         <Home
-                            gameResults={results}
                             emailAddress={emailAddress}
+                            updateEmailAddress={updateEmailAddress}
                          />
                     } />
                     <Route path="setup" element={

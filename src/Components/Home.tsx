@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { cardsIcon } from "./Icons";
 
-export const Home = ({ gameResults, emailAddress }) => {
+export const Home = ({ emailAddress, updateEmailAddress }) => {
     const nav = useNavigate();
+    const [emailForEditing, setEmailForEditing] = useState(emailAddress);
 
     return (
         <>
@@ -11,6 +13,7 @@ export const Home = ({ gameResults, emailAddress }) => {
 
                     { emailAddress.length > 0 ?
                         <>
+                            <h3>{emailAddress}</h3>
                             <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                                 New Game <i className="fa-solid fa-circle-play"></i>
                             </button>
@@ -26,11 +29,15 @@ export const Home = ({ gameResults, emailAddress }) => {
                         :
                         <>
                             <div className="form-control">
-                                <input />
+                                <input
+                                    required
+                                    value={emailForEditing}
+                                    onChange={(e) => setEmailForEditing(e.target.value)}
+                                />
                                 <label>
                                     <span>Email Address</span>
                                 </label>
-                                <button>Save</button>
+                                <button onClick={() => updateEmailAddress(emailForEditing)}>Save</button>
                             </div>
                         </>
                     }
