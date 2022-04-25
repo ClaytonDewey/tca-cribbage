@@ -53,6 +53,8 @@ const App = () => {
         , start: ""
     });
 
+    const [emailAddress, setEmailAddress] = useState("");
+
     const loadGameResults = async () => {
         // setResults(await localforage.getItem("gameResults") ?? []);
         setResults(await loadGamesFromCloud("clay@dryadmedia.com", "tca-cribbage") ?? []);
@@ -94,6 +96,7 @@ const App = () => {
                     <Route path="/" element={
                         <Home
                             gameResults={results}
+                            emailAddress={emailAddress}
                          />
                     } />
                     <Route path="setup" element={
