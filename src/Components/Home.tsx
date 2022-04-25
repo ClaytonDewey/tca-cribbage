@@ -14,6 +14,11 @@ export const Home = ({ emailAddress, updateEmailAddress }) => {
                     { emailAddress.length > 0 ?
                         <>
                             <h3>{emailAddress}</h3>
+                            <button
+                                onClick={() => updateEmailAddress("")}
+                            >
+                                Reset
+                            </button>
                             <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                                 New Game <i className="fa-solid fa-circle-play"></i>
                             </button>
