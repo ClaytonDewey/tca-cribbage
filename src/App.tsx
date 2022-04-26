@@ -61,19 +61,21 @@ const App = () => {
         setEmailAddress(await localforage.setItem('email', newEmailAddress));
     }
 
-    const loadGameResults = async () => {
-
-        // Update the emailAddress state, after loading the email from local storage.
-        setEmailAddress(await localforage.getItem("email") ?? "");
-
-        // Then, if we have an email, load the game results.
-        if (emailAddress.length > 0) {
-            setResults(await loadGamesFromCloud(emailAddress, "tca-cribbage") ?? []);
-        }
-    };
-
     useEffect(() => {
+        
+        const loadGameResults = async () => {
+
+            // Update the emailAddress state, after loading the email from local storage.
+            setEmailAddress(await localforage.getItem("email") ?? "");
+
+            // Then, if we have an email, load the game results.
+            if (emailAddress.length > 0) {
+                setResults(await loadGamesFromCloud(emailAddress, "tca-cribbage") ?? []);
+            }
+        };
+        
         loadGameResults();
+
     }, [emailAddress]);
 
     const addGameResult = async (gameResult) => {
