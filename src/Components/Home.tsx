@@ -44,8 +44,13 @@ export const Home = ({ emailAddress, updateEmailAddress }) => {
                                 <label>
                                     <span>Email Address</span>
                                 </label>
-                                <button onClick={() => updateEmailAddress(emailForEditing)}>Save</button>
                             </div>
+                            <button
+                                className="btn btn-success"
+                                onClick={() => updateEmailAddress(emailForEditing)}
+                            >
+                                Sign In <i className="fa-solid fa-right-to-bracket"></i>
+                            </button>
                         </>
                     }
                 </div>
