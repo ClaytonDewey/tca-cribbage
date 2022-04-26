@@ -11,7 +11,6 @@ import { PlayGame } from "./Components/PlayGame";
 import { SetupGame } from "./Components/SetupGame";
 import { Stats } from "./Components/Stats";
 import { Leaderboard } from "./Components/Leaderboard";
-// import  localforage from "localforage";
 import { saveGameToCloud, loadGamesFromCloud } from './TcaCloudApi';
 import localforage from "localforage";
 
