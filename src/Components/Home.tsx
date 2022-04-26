@@ -14,11 +14,6 @@ export const Home = ({ emailAddress, updateEmailAddress }) => {
                     { emailAddress.length > 0 ?
                         <>
                             <h3>{emailAddress}</h3>
-                            <button
-                                onClick={() => updateEmailAddress("")}
-                            >
-                                Reset
-                            </button>
                             <button className="btn btn-success mt-2" onClick={() => nav("/setup")}>
                                 New Game <i className="fa-solid fa-circle-play"></i>
                             </button>
@@ -29,6 +24,13 @@ export const Home = ({ emailAddress, updateEmailAddress }) => {
                             
                             <button className="btn btn-warning mt-2" onClick={() => nav("/leaderboard")}>
                                 Leaderboard <i className="fa-solid fa-medal"></i>
+                            </button>
+
+                            <button
+                                className="btn btn-danger mt-2"
+                                onClick={() => updateEmailAddress("")}
+                            >
+                                Sign Out <i className="fa-solid fa-right-from-bracket"></i>
                             </button>
                         </>
                         :
