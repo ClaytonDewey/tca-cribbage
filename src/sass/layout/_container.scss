@@ -7,10 +7,7 @@
     &-points {
         display: flex;
         justify-content: space-between;
-
-        div {
-            flex: 0 0 48%;
-        }
+        flex-direction: column;
     }
 
     @media #{$mq-medium} {

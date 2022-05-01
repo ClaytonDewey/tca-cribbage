@@ -198,7 +198,7 @@ export const PlayGame = ({
                 <p className="text-center">Score: {score}</p>
                 <p className="text-center">Pegged Points: {pegs}</p>
                 
-                {!endGame && (
+                {!endGame ?
                     <>
                         {
                             pegging && (
@@ -242,9 +242,7 @@ export const PlayGame = ({
                             End Game <i className="fa-solid fa-circle-stop"></i>
                         </button>
                     </>
-                )}
-
-                {endGame && (
+                    :
                     <>
 
                         {over && (
@@ -338,7 +336,7 @@ export const PlayGame = ({
                         }
 
                     </>
-                )}
+                }
             </div>
         </>
     );
