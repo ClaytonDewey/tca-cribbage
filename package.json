@@ -2,7 +2,7 @@
     "name": "tca-cribbage",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://2022-spring-adv-fe-mowe.github.io/tca-cribbage",
+    "homepage": "https://ClaytonDewey.github.io/tca-cribbage",
     "dependencies": {
         "@aws-sdk/util-dynamodb": "^3.75.0",
         "@testing-library/jest-dom": "^5.16.2",
