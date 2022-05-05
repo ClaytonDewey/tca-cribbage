@@ -115,7 +115,7 @@ export const PlayGame = ({
             setScore(s);
             if (hand > highHand) setHighHand(hand);
 
-            if (score >= 121) {
+            if (score + hand >= 121) {
                 setOver(true)
                 setGameOver(true);
                 setEndGame(true);
