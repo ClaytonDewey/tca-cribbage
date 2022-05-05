@@ -51,7 +51,7 @@ export const Leaderboard = ({ gameResults, uniquePreviousPlayers }) => {
                                 <td>{x.name}</td>
                                 <td>{x.wins}</td>
                                 <td>{x.losses}</td>
-                                <td>{x.winningPercent}</td>
+                                <td>{x.winningPercent}%</td>
                             </tr>
                         ))
                     }

@@ -73,6 +73,22 @@ export const PlayGame = ({
         if (pegs > highPegg) setHighPegg(pegs);
     }
 
+    const goBack = () => {
+        setGameOver(false);
+        setEndGame(false);
+        setWon(false);
+
+        if (!pegging && score > 121) {
+            if (isCrib) {
+                const s = score - hand - crib;
+                setScore(s);
+            } else {
+                const s = score - hand;
+                setScore(s);
+            }
+        }
+    }
+
     const scoreIsValid = (type, num) => {
         if (num === 19 || num >= 30 || num < 0) {
             setMessage({ type: "danger", msg: "Invalid score entered.", show: true });
@@ -247,6 +263,9 @@ export const PlayGame = ({
 
                         {over && (
                             <>
+                                <button className="btn btn-info my-2" onClick={goBack}>
+                                    <i className="fa-solid fa-circle-chevron-left"></i><span className="ml-1">Whoops! Go Back!</span>
+                                </button>
                                 {won && (
                                     <>
                                         <h2 className="text-center mt-3">YOU WON! 🏆</h2>
