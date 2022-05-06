@@ -264,7 +264,7 @@ export const PlayGame = ({
                         {over && (
                             <>
                                 <button className="btn btn-info my-2" onClick={goBack}>
-                                    <i className="fa-solid fa-circle-chevron-left"></i><span className="ml-1">Whoops! Go Back!</span>
+                                    <i className="fa-solid fa-circle-chevron-left"></i><span className="ml-1">Go Back</span>
                                 </button>
                                 {won && (
                                     <>
