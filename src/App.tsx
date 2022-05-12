@@ -39,7 +39,8 @@ export interface GameResult {
 }
 
 export const User = "Me"
-
+const d = new Date();
+const year = d.getFullYear();
 
 const getUniquePlayers = (results) => (
     [...new Set(results.flatMap(x => x.players.map(y => y.name)))]
@@ -133,6 +134,9 @@ const App = () => {
                             gameResults={results}
                         /> } />
                 </Routes>
+                <footer className="footer">
+                    <p>&copy; Copyright 2022-{year}<br />Clayton Dewey</p>
+                </footer>
             </main>
         </ThemeProvider>
     );
