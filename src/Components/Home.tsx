@@ -37,9 +37,10 @@ export const Home = ({ emailAddress, updateEmailAddress }) => {
                         <>
                             <div className="form-control">
                                 <input
+                                    type="email"
                                     required
                                     value={emailForEditing}
-                                    onChange={(e) => setEmailForEditing(e.target.value)}
+                                    onChange={(e) => setEmailForEditing(e.target.value.toLowerCase())}
                                 />
                                 <label>
                                     <span>Email Address</span>
